@@ -8,20 +8,6 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        include:
-        - os: windows-latest
-          cmake-args: -A x64
-          package-file: teeworlds-*-win64.zip
-          env:
-            CFLAGS: /WX
-            CXXFLAGS: /WX
-            LDFLAGS: /WX
-
-  build-bam:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
 
     steps:
     - uses: actions/checkout@v2

@@ -3,7 +3,7 @@ name: Windows Build
 on: [push, pull_request]
 
 jobs:
-  build-cmake:
+  build-bam:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

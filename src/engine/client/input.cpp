@@ -189,7 +189,7 @@ bool CInput::GamepadMoved()
 	if (!m_UsingGamepad)
 		return false;
 
-	if (m_GamepadOldAimX != m_GamepadAimX || m_GamepadOldAimY != m_GamepadAimY || abs(m_GamepadAimX) + abs(m_GamepadAimY) > 10000)
+	if (m_GamepadOldAimX != m_GamepadAimX || m_GamepadOldAimY != m_GamepadAimY || fabs(m_GamepadAimX) + fabs(m_GamepadAimY) > 10000)
 	{
 		m_GamepadOldAimX = m_GamepadAimX;
 		m_GamepadOldAimY = m_GamepadAimY;

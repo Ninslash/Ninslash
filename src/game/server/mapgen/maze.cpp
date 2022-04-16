@@ -385,7 +385,7 @@ void CMaze::GenerateRoom(bool AutoConnect, bool MirrorMode)
 					rp = m_aRoom[r];
 				}
 
-			if (abs(p.x - rp.x) > 8 && abs(p.y - rp.y) > 8)
+			if (fabs(p.x - rp.x) > 8 && fabs(p.y - rp.y) > 8)
 				Valid = false;
 			
 			if (d < 20.0f || d > 60.0f) // || d > 40.0f)

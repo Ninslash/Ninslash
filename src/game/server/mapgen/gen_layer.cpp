@@ -331,7 +331,7 @@ void CGenLayer::GenerateMoreForeground()
 		bool *apTiles = new bool[m_Width*m_Height];
 		for (int x = 0; x < m_Width; x++)
 			for (int y = 0; y < m_Height; y++)
-				if (abs(sin(x*a1)*cos(y*a2)) > 0.5f)
+				if (fabs(sin(x*a1)*cos(y*a2)) > 0.5f)
 					apTiles[x + y*m_Width] = AddForegroundTile(x, y);
 			
 		for (int x = 0; x < m_Width; x++)
@@ -416,7 +416,7 @@ void CGenLayer::GenerateFences()
 					
 					// avoid door
 					if (x - (x1+1) < m_EndPos.x && m_EndPos.x < x + x2+1 &&
-						abs(m_EndPos.y - y) < 2)
+						fabs(m_EndPos.y - y) < 2)
 						Valid = false;
 						
 					if (Valid)
@@ -463,7 +463,7 @@ void CGenLayer::GenerateAirPlatforms(int Num)
 		x = b+rand()%(m_Width-b*2);
 		y = b+rand()%(m_Height-b*2);
 		
-		if (!Used(x, y) && (abs(m_EndPos.x - x) > 10 || x+10 < m_EndPos.y))
+		if (!Used(x, y) && (fabs(m_EndPos.x - x) > 10 || x+10 < m_EndPos.y))
 		{
 			bool Valid = true;
 			for (int xx = -7; xx < 7; xx++)
@@ -859,7 +859,7 @@ void CGenLayer::Scan()
 				}
 				*/
 				
-				if (abs(x-px) < 2 || abs(y-py) < 1)
+				if (fabs(x-px) < 2 || fabs(y-py) < 1)
 					Valid = false;
 				
 				if (Valid && m_NumPits < GEN_MAX)
@@ -1625,36 +1625,36 @@ void CGenLayer::Use(int x, int y)
 			m_aPit[i] = ivec4(0, 0, 0, 0);
 		
 	for (int i = 0; i < m_NumPlatforms; i++)
-		if (abs(m_aPlatform[i].x - x) < 2 && m_aPlatform[i].y == y)
+		if (fabs(m_aPlatform[i].x - x) < 2 && m_aPlatform[i].y == y)
 			m_aPlatform[i] = ivec2(0, 0);
 		
 	for (int i = 0; i < m_NumMedPlatforms; i++)
-		if (abs(m_aMedPlatform[i].x - x) < 3 && m_aMedPlatform[i].y == y)
+		if (fabs(m_aMedPlatform[i].x - x) < 3 && m_aMedPlatform[i].y == y)
 			m_aMedPlatform[i] = ivec2(0, 0);
 		
 	for (int i = 0; i < m_NumCeilings; i++)
-		if (abs(m_aCeiling[i].x - x) < 2 && m_aCeiling[i].y == y)
+		if (fabs(m_aCeiling[i].x - x) < 2 && m_aCeiling[i].y == y)
 			m_aCeiling[i] = ivec2(0, 0);
 		
 	for (int i = 0; i < m_NumWalls; i++)
-		if (abs(m_aWall[i].y - y) < 2 && m_aWall[i].x == x)
+		if (fabs(m_aWall[i].y - y) < 2 && m_aWall[i].x == x)
 			m_aWall[i] = ivec2(0, 0);
 		
 	for (int i = 0; i < m_NumCorners; i++)
-		if (abs(m_aCorner[i].x - x) < 2 && abs(m_aCorner[i].y - y) < 2)
+		if (fabs(m_aCorner[i].x - x) < 2 && fabs(m_aCorner[i].y - y) < 2)
 			m_aCorner[i] = ivec2(0, 0);
 		
 	for (int i = 0; i < m_NumTopCorners; i++)
-		if (abs(m_aTopCorner[i].x - x) < 2 && abs(m_aTopCorner[i].y - y) < 2)
+		if (fabs(m_aTopCorner[i].x - x) < 2 && fabs(m_aTopCorner[i].y - y) < 2)
 			m_aTopCorner[i] = ivec2(0, 0);
 		
 		/*
 	for (int i = 0; i < m_NumLongPlatforms; i++)
-		if (m_aLongPlatform[i].x <= x && m_aLongPlatform[i].z >= x && abs(m_aLongPlatform[i].y - y) < 2)
+		if (m_aLongPlatform[i].x <= x && m_aLongPlatform[i].z >= x && fabs(m_aLongPlatform[i].y - y) < 2)
 			m_aLongPlatform[i] = ivec3(0, 0, 0);
 		
 	for (int i = 0; i < m_NumLongCeilings; i++)
-		if (m_aLongCeiling[i].x <= x && m_aLongCeiling[i].z >= x && abs(m_aLongCeiling[i].y - y) < 2)
+		if (m_aLongCeiling[i].x <= x && m_aLongCeiling[i].z >= x && fabs(m_aLongCeiling[i].y - y) < 2)
 			m_aLongCeiling[i] = ivec3(0, 0, 0);
 		*/
 		

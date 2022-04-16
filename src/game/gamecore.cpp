@@ -132,7 +132,7 @@ bool CCharacterCore::PlatformState()
 	float PhysSize = 28.0f;
 	
 	if (m_pCollision->IsPlatform(m_Pos.x-PhysSize/2, m_Pos.y+PhysSize/2+32) || m_pCollision->IsPlatform(m_Pos.x+PhysSize/2, m_Pos.y+PhysSize/2+32))
-		return m_Slide == 0 && m_Roll == 0 && abs(m_Vel.x) < 5.0f && m_Down;
+		return m_Slide == 0 && m_Roll == 0 && fabs(m_Vel.x) < 5.0f && m_Down;
 	
 	return true;
 }
@@ -1184,7 +1184,7 @@ void CCharacterCore::Tick(bool UseInput)
 					m_Vel *= 0.85f;
 				}
 				
-				if (abs(m_Vel.x) < 1.0f && abs(m_Vel.y) < 1.0f && Distance < PhysSize && m_Pos.y <= pCharCore->m_Pos.y)
+				if (fabs(m_Vel.x) < 1.0f && fabs(m_Vel.y) < 1.0f && Distance < PhysSize && m_Pos.y <= pCharCore->m_Pos.y)
 				{
 					if (!m_pCollision->CheckPoint(m_Pos.x-28.0f*0.5f, m_Pos.y-64.0f*0.5f) && !m_pCollision->CheckPoint(m_Pos.x+28.0f*0.5f, m_Pos.y-64.0f*0.5f))
 					{
@@ -1232,7 +1232,7 @@ void CCharacterCore::Tick(bool UseInput)
 	}
 
 	// fix to slope bug (standing near wall)
-	if (IsGrounded() && !m_Sliding && abs(m_Vel.y) < 1.5f && abs(m_Vel.x) < 0.2f)
+	if (IsGrounded() && !m_Sliding && fabs(m_Vel.y) < 1.5f && fabs(m_Vel.x) < 0.2f)
 	{
 		if (!m_pCollision->IsTileSolid(m_Pos.x-PhysSize, m_Pos.y+PhysSize*0.7) || !m_pCollision->IsTileSolid(m_Pos.x+PhysSize, m_Pos.y+PhysSize*0.7))
 		{
@@ -1251,7 +1251,7 @@ void CCharacterCore::Tick(bool UseInput)
 
 	if (m_Action == COREACTION_SLIDEKICK)
 	{
-		if (m_ActionState == 1 && abs(m_Vel.x) < 22.0f)
+		if (m_ActionState == 1 && fabs(m_Vel.x) < 22.0f)
 			m_Vel.x *= 1.05f;
 		
 		if (m_ActionState < 0)
@@ -1370,9 +1370,9 @@ void CCharacterCore::Slide()
 			(TargetDirection.x < 0 && !m_pCollision->CheckPoint(m_Pos.x-(PhysSize+32), m_Pos.y+PhysSize/2) && m_pCollision->CheckPoint(m_Pos.x-(PhysSize+32), m_Pos.y-64)))
 		{
 			m_Slide++;
-			if (TargetDirection.x > 0 && abs(m_Vel.x) < 4.0f)
+			if (TargetDirection.x > 0 && fabs(m_Vel.x) < 4.0f)
 				m_Vel.x = 4;
-			else if (TargetDirection.x < 0 && abs(m_Vel.x) < 4.0f)
+			else if (TargetDirection.x < 0 && fabs(m_Vel.x) < 4.0f)
 				m_Vel.x = -4;
 		}
 	}
@@ -1434,7 +1434,7 @@ void CCharacterCore::Slide()
 		((m_pCollision->CheckPoint(m_Pos.x+PhysSize, m_Pos.y-64) && !m_pCollision->CheckPoint(m_Pos.x+PhysSize, m_Pos.y+PhysSize/2)) || 
 		(m_pCollision->CheckPoint(m_Pos.x-PhysSize, m_Pos.y-64) && !m_pCollision->CheckPoint(m_Pos.x-PhysSize, m_Pos.y+PhysSize/2))))
 	{
-		if (abs(m_Vel.x) < 5.0f)
+		if (fabs(m_Vel.x) < 5.0f)
 			m_Vel.x /= 0.98f;
 			
 		if (m_Vel.x < 0)
@@ -1496,7 +1496,7 @@ void CCharacterCore::Move()
 		NewPos.y += 10;
 	}
 	
-	if (VelY > 13.0f && abs(m_Vel.y) < 2.0f && m_Input.m_Down)
+	if (VelY > 13.0f && fabs(m_Vel.y) < 2.0f && m_Input.m_Down)
 		Roll();
 	
 	m_Vel.x = m_Vel.x*(1.0f/RampValue);
@@ -1680,15 +1680,15 @@ void CCharacterCore::Move()
 								m_KickDamage = pCharCore->m_ClientID;
 								pCharCore->m_ActionState *= -1;
 								
-								vec2 CCv = vec2(m_Vel.x*1.5f, -abs(m_Vel.x*0.5f));
+								vec2 CCv = vec2(m_Vel.x*1.5f, -fabs(m_Vel.x*0.5f));
 								
-								m_Vel = vec2(pCharCore->m_Vel.x*1.5f, -abs(pCharCore->m_Vel.x*0.5f));
+								m_Vel = vec2(pCharCore->m_Vel.x*1.5f, -fabs(pCharCore->m_Vel.x*0.5f));
 								pCharCore->m_Vel = CCv;
 							}
 							// just this hitting
 							else
 							{
-								pCharCore->m_Vel = vec2(m_Vel.x*1.5f, -abs(m_Vel.x*0.5f));
+								pCharCore->m_Vel = vec2(m_Vel.x*1.5f, -fabs(m_Vel.x*0.5f));
 								m_Vel *= 0.3f;
 							}
 						}
@@ -1935,8 +1935,8 @@ void CBallCore::Move()
 	m_pCollision->MoveBox(&NewPos, &m_Vel, vec2(BallSize, BallSize), Elastic, false, Down);
 	
 
-	if ((((OldVel.x < 0 && m_Vel.x > 0) || (OldVel.x > 0 && m_Vel.x < 0)) && abs(m_Vel.x) > 3.0f) ||
-		(((OldVel.y < 0 && m_Vel.y > 0) || (OldVel.y > 0 && m_Vel.y < 0)) && abs(m_Vel.y) > 3.0f))
+	if ((((OldVel.x < 0 && m_Vel.x > 0) || (OldVel.x > 0 && m_Vel.x < 0)) && fabs(m_Vel.x) > 3.0f) ||
+		(((OldVel.y < 0 && m_Vel.y > 0) || (OldVel.y > 0 && m_Vel.y < 0)) && fabs(m_Vel.y) > 3.0f))
 		m_TriggeredEvents |= COREEVENT_BALL_BOUNCE;
 	
 	m_Angle += clamp(m_AngleForce*0.04f, -0.3f, 0.3f);

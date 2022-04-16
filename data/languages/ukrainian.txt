@@ -61,9 +61,6 @@ Connect
 Connecting to
 == Підключення до
 
-Connection Problems...
-== Проблеми зі з'єднанням...
-
 Console
 == Консоль
 
@@ -75,9 +72,6 @@ Current
 
 Current version: %s
 == Поточна версія: %s
-
-Custom colors
-== Особистий колір
 
 Delete
 == Видалити
@@ -256,6 +250,9 @@ Next weapon
 Nickname
 == Нік
 
+Ninslash %s is out! Download it at www.ninslash.com!
+== Вийшла Ninslash %s! Завантажуйте на www.ninslash.com!
+
 No
 == Ні
 
@@ -424,9 +421,6 @@ Team
 Team chat
 == Командний чат
 
-Ninslash %s is out! Download it at www.ninslash.com!
-== Вийшла Ninslash %s! Завантажуйте на www.ninslash.com!
-
 Texture Compression
 == Стиснення текстур
 
@@ -469,9 +463,6 @@ Voting
 Warmup
 == Розминка
 
-Weapon
-== зброя
-
 Welcome to Ninslash
 == Ласкаво просимо в Ninslash!
 
@@ -480,9 +471,6 @@ Yes
 
 You must restart the game for all settings to take effect.
 == Перезапустіть гру для застосування змін.
-
-Your skin
-== Ваш скін
 
 ##### needs translation #####
 
@@ -522,7 +510,31 @@ Automatically record demos
 Automatically take game over screenshot
 == 
 
+Back to main menu
+== 
+
+Black
+== 
+
+Blood color
+== 
+
+Bodies
+== 
+
+Borderless window
+== 
+
+Change color of
+== 
+
 Change settings
+== 
+
+Change skin of
+== 
+
+Chat & Misc.
 == 
 
 Clan
@@ -543,6 +555,9 @@ Crc:
 Created:
 == 
 
+Customize
+== 
+
 Delete demo
 == 
 
@@ -550,6 +565,24 @@ Demo details
 == 
 
 Demofile: %s
+== 
+
+Dynamic lighting
+== 
+
+Editor
+== 
+
+Environmental sounds
+== 
+
+Eyes
+== 
+
+Flip attack & hook
+== 
+
+Flip move & aim axis
 == 
 
 Free-View
@@ -561,10 +594,31 @@ Friends
 Game paused
 == 
 
+Green
+== 
+
+Hair / hat
+== 
+
+Handle rendering async from updates
+== 
+
+Hands
+== 
+
+Head
+== 
+
+Heads
+== 
+
 Kick player
 == 
 
 Length:
+== 
+
+Main menu
 == 
 
 Map:
@@ -577,6 +631,12 @@ Max demos
 == 
 
 Move player to spectators
+== 
+
+Movement & Weapons
+== 
+
+Multi framebuffering (requires restart)
 == 
 
 Name plates size
@@ -604,6 +664,9 @@ Quit anyway?
 == 
 
 REC %3d:%02d
+== 
+
+Red
 == 
 
 Remove
@@ -639,6 +702,9 @@ Show only chat messages from friends
 Size:
 == 
 
+Skin
+== 
+
 Sound error
 == 
 
@@ -654,10 +720,25 @@ Spectator mode
 Strict gametype filter
 == 
 
+Survival mode
+== 
+
+The Dead
+== 
+
+The Living
+== 
+
 The audio device couldn't be initialised.
 == 
 
 There's an unsaved map in the editor, you might want to save it before you quit the game.
+== 
+
+Threaded rendering
+== 
+
+Threaded sound loading
 == 
 
 Type:
@@ -681,8 +762,29 @@ Vote command:
 Vote description:
 == 
 
+Waiting for server...
+== 
+
+Weapons & Items
+== 
+
 no limit
 == 
 
+xbox 360 controller support
+== 
+
 ##### old translations #####
+
+Custom colors
+== Особистий колір
+
+Your skin
+== Ваш скін
+
+Connection Problems...
+== Проблеми зі з'єднанням...
+
+Weapon
+== зброя
 

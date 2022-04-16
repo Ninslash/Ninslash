@@ -1,3 +1,4 @@
+
 ##### translated strings #####
 
 %d Bytes
@@ -105,9 +106,6 @@ Connect
 Connecting to
 == Туташтырылууда
 
-Connection Problems...
-== Байланыш көйгөйлөрү...
-
 Console
 == Консоль
 
@@ -131,9 +129,6 @@ Current
 
 Current version: %s
 == Кезектеги версиясы: %s
-
-Custom colors
-== Өз түстөрүңүз
 
 Delete
 == Өчүрүү
@@ -221,6 +216,9 @@ Game info
 
 Game over
 == Оюн бүттү
+
+Game paused
+== Оюн бир азга токтотулду
 
 Game type
 == Оюн түрү
@@ -354,6 +352,9 @@ Next weapon
 Nickname
 == Такма атыңыз
 
+Ninslash %s is out! Download it at www.ninslash.com!
+== Ninslash %s чыкты! www.ninslash.com сайтынан жүктөп алыңыз!
+
 No
 == Жок
 
@@ -465,6 +466,9 @@ Reset filter
 Reset to defaults
 == Жарыяланбаска түшүрүү
 
+Respawn
+== Кайра жаралуу
+
 Rifle
 == Бластер
 
@@ -525,6 +529,9 @@ Show ingame HUD
 Show name plates
 == Оюнчулардын аттарын көрсөтүү
 
+Show only chat messages from friends
+== Достордун гана маек билдирүүлөрүн көрсөтүү
+
 Show only supported
 == Колдолгонду гана көрсөтүү
 
@@ -581,9 +588,6 @@ Team
 
 Team chat
 == Команда маеги
-
-Ninslash %s is out! Download it at www.ninslash.com!
-== Ninslash %s чыкты! www.ninslash.com сайтынан жүктөп алыңыз!
 
 Texture Compression
 == Текстура кысылышы
@@ -654,9 +658,6 @@ Voting
 Warmup
 == Даярдануу
 
-Weapon
-== Курал
-
 Welcome to Ninslash
 == Ninslash'ко кош келиңиз!
 
@@ -666,21 +667,124 @@ Yes
 You must restart the game for all settings to take effect.
 == Өзгөртүүлөрдү колдонуу үчүн оюнду кайта жүргүзүңүз.
 
-Your skin
-== Териңиз
-
 no limit
 == чексиз
 
-Game paused
-== Оюн бир азга токтотулду
-
-Respawn
-== Кайра жаралуу
-
-Show only chat messages from friends
-== Достордун гана маек билдирүүлөрүн көрсөтүү
-
 ##### needs translation #####
 
+Back to main menu
+== 
+
+Black
+== 
+
+Blood color
+== 
+
+Bodies
+== 
+
+Borderless window
+== 
+
+Change color of
+== 
+
+Change skin of
+== 
+
+Chat & Misc.
+== 
+
+Customize
+== 
+
+Dynamic lighting
+== 
+
+Editor
+== 
+
+Environmental sounds
+== 
+
+Eyes
+== 
+
+Flip attack & hook
+== 
+
+Flip move & aim axis
+== 
+
+Green
+== 
+
+Hair / hat
+== 
+
+Handle rendering async from updates
+== 
+
+Hands
+== 
+
+Head
+== 
+
+Heads
+== 
+
+Main menu
+== 
+
+Movement & Weapons
+== 
+
+Multi framebuffering (requires restart)
+== 
+
+Red
+== 
+
+Skin
+== 
+
+Survival mode
+== 
+
+The Dead
+== 
+
+The Living
+== 
+
+Threaded rendering
+== 
+
+Threaded sound loading
+== 
+
+Waiting for server...
+== 
+
+Weapons & Items
+== 
+
+xbox 360 controller support
+== 
+
 ##### old translations #####
+
+Custom colors
+== Өз түстөрүңүз
+
+Connection Problems...
+== Байланыш көйгөйлөрү...
+
+Your skin
+== Териңиз
+
+Weapon
+== Курал
+

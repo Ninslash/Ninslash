@@ -252,13 +252,13 @@ void CGameVoteDisplay::OnRender()
 				CTextCursor Cursor;
 				TextRender()->SetCursor(&Cursor, (150-102+x*102)*Graphics()->ScreenAspect()-m_aGameVoteDetails[x+y*3].m_NameWidth, 100 + y*100 - 40+3, 10.0f, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
 				Cursor.m_LineWidth = 150;
-				TextRender()->TextEx(&Cursor, m_aGameVoteDetails[x+y*3].m_aName, -1);
+				TextRender()->TextEx(&Cursor, Localize(m_aGameVoteDetails[x+y*3].m_aName), -1);
 			}
 			{ // description
 				CTextCursor Cursor;
 				TextRender()->SetCursor(&Cursor, (150-102+x*102)*Graphics()->ScreenAspect()-m_aGameVoteDetails[x+y*3].m_DescriptionWidth, 100 + y*100 + 31, 6.0f, TEXTFLAG_RENDER|TEXTFLAG_STOP_AT_END);
 				Cursor.m_LineWidth = 150;
-				TextRender()->TextEx(&Cursor, m_aGameVoteDetails[x+y*3].m_aDescription, -1);
+				TextRender()->TextEx(&Cursor, Localize(m_aGameVoteDetails[x+y*3].m_aDescription), -1);
 			}
 			{ // amount of cast votes
 				char aBuf[16];

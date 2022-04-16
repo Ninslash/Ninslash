@@ -106,9 +106,6 @@ Connect
 Connecting to
 == Verbinden met
 
-Connection Problems...
-== Verbindingsproblemen...
-
 Console
 == Console
 
@@ -132,9 +129,6 @@ Current
 
 Current version: %s
 == Huidige versie: %s
-
-Custom colors
-== Aangepaste kleuren
 
 Delete
 == Verwijder
@@ -357,6 +351,9 @@ Next weapon
 
 Nickname
 == Bijnaam
+
+Ninslash %s is out! Download it at www.ninslash.com!
+== Ninslash %s is uit! Download het op www.ninslash.com!
 
 No
 == Nee
@@ -592,9 +589,6 @@ Team
 Team chat
 == Team chat
 
-Ninslash %s is out! Download it at www.ninslash.com!
-== Ninslash %s is uit! Download het op www.ninslash.com!
-
 Texture Compression
 == Structuurscompressie
 
@@ -664,9 +658,6 @@ Voting
 Warmup
 == Opwarmen
 
-Weapon
-== Wapen
-
 Welcome to Ninslash
 == Welkom bij Ninslash
 
@@ -676,12 +667,124 @@ Yes
 You must restart the game for all settings to take effect.
 == U moet het spel herstarten voordat de veranderingen effect hebben.
 
-Your skin
-== Jouw skin
-
 no limit
 == ongelimiteerd
 
 ##### needs translation #####
 
+Back to main menu
+== 
+
+Black
+== 
+
+Blood color
+== 
+
+Bodies
+== 
+
+Borderless window
+== 
+
+Change color of
+== 
+
+Change skin of
+== 
+
+Chat & Misc.
+== 
+
+Customize
+== 
+
+Dynamic lighting
+== 
+
+Editor
+== 
+
+Environmental sounds
+== 
+
+Eyes
+== 
+
+Flip attack & hook
+== 
+
+Flip move & aim axis
+== 
+
+Green
+== 
+
+Hair / hat
+== 
+
+Handle rendering async from updates
+== 
+
+Hands
+== 
+
+Head
+== 
+
+Heads
+== 
+
+Main menu
+== 
+
+Movement & Weapons
+== 
+
+Multi framebuffering (requires restart)
+== 
+
+Red
+== 
+
+Skin
+== 
+
+Survival mode
+== 
+
+The Dead
+== 
+
+The Living
+== 
+
+Threaded rendering
+== 
+
+Threaded sound loading
+== 
+
+Waiting for server...
+== 
+
+Weapons & Items
+== 
+
+xbox 360 controller support
+== 
+
 ##### old translations #####
+
+Custom colors
+== Aangepaste kleuren
+
+Connection Problems...
+== Verbindingsproblemen...
+
+Your skin
+== Jouw skin
+
+Weapon
+== Wapen
+

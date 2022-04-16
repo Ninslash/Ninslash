@@ -1,5 +1,5 @@
-
-
+/* (c) Magnus Auvinen. See licence.txt in the root of the distribution for more information. */
+/* If you are missing that file, acquire a complete release at teeworlds.com.                */
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -9,13 +9,14 @@
 
 #include "system.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+
 #if defined(CONF_FAMILY_UNIX)
 	#include <sys/time.h>
 	#include <unistd.h>
 
 	/* unix net includes */
-	#include <sys/stat.h>
-	#include <sys/types.h>
 	#include <sys/socket.h>
 	#include <sys/ioctl.h>
 	#include <errno.h>
@@ -33,15 +34,22 @@
 
 #elif defined(CONF_FAMILY_WINDOWS)
 	#define WIN32_LEAN_AND_MEAN
-	#define _WIN32_WINNT 0x0501 /* required for mingw to get getaddrinfo to work */
 	#include <windows.h>
 	#include <winsock2.h>
 	#include <ws2tcpip.h>
 	#include <fcntl.h>
 	#include <direct.h>
 	#include <errno.h>
+	#include <process.h>
+	#include <wincrypt.h>
+	#include <share.h>
+	#include <shellapi.h>
 #else
 	#error NOT IMPLEMENTED
+#endif
+
+#if defined(CONF_ARCH_IA32) || defined(CONF_ARCH_AMD64)
+	#include <immintrin.h> //_mm_pause
 #endif
 
 #if defined(CONF_PLATFORM_SOLARIS)

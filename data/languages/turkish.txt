@@ -106,9 +106,6 @@ Connect
 Connecting to
 == Bağlanılıyor
 
-Connection Problems...
-== Bağlantı Hataları...
-
 Console
 == Konsol
 
@@ -132,9 +129,6 @@ Current
 
 Current version: %s
 == Mevcut versiyon: %s
-
-Custom colors
-== Özel renkler
 
 Delete
 == Sil
@@ -354,6 +348,9 @@ Next weapon
 
 Nickname
 == Takma ad
+
+Ninslash %s is out! Download it at www.ninslash.com!
+== Ninslash %s çıktı! www.ninslash.com dan indirin!
 
 No
 == Hayır
@@ -580,9 +577,6 @@ Team
 Team chat
 == Takım sohbeti
 
-Ninslash %s is out! Download it at www.ninslash.com!
-== Ninslash %s çıktı! www.ninslash.com dan indirin!
-
 Texture Compression
 == Dolgu sıkıştırması
 
@@ -652,9 +646,6 @@ Voting
 Warmup
 == Isınma
 
-Weapon
-== Silah
-
 Welcome to Ninslash
 == Ninslash'e hoşgeldiniz
 
@@ -664,18 +655,90 @@ Yes
 You must restart the game for all settings to take effect.
 == Bütün ayarların aktif olması için oyunu yeniden başlatmalısınız.
 
-Your skin
-== Sizin görünüşünüz
-
 no limit
 == limit yok
 
 ##### needs translation #####
 
+Back to main menu
+== 
+
+Black
+== 
+
+Blood color
+== 
+
+Bodies
+== 
+
+Borderless window
+== 
+
+Change color of
+== 
+
+Change skin of
+== 
+
+Chat & Misc.
+== 
+
+Customize
+== 
+
+Dynamic lighting
+== 
+
+Editor
+== 
+
+Environmental sounds
+== 
+
+Eyes
+== 
+
+Flip attack & hook
+== 
+
+Flip move & aim axis
+== 
+
 Game paused
 == 
 
+Green
+== 
+
+Hair / hat
+== 
+
+Handle rendering async from updates
+== 
+
+Hands
+== 
+
+Head
+== 
+
+Heads
+== 
+
+Main menu
+== 
+
+Movement & Weapons
+== 
+
+Multi framebuffering (requires restart)
+== 
+
 Player country:
+== 
+
+Red
 == 
 
 Respawn
@@ -684,8 +747,47 @@ Respawn
 Show only chat messages from friends
 == 
 
+Skin
+== 
+
+Survival mode
+== 
+
+The Dead
+== 
+
+The Living
+== 
+
+Threaded rendering
+== 
+
+Threaded sound loading
+== 
+
+Waiting for server...
+== 
+
+Weapons & Items
+== 
+
+xbox 360 controller support
+== 
+
 ##### old translations #####
 
 ﻿
 == ## translated strings #####
+
+Custom colors
+== Özel renkler
+
+Your skin
+== Sizin görünüşünüz
+
+Connection Problems...
+== Bağlantı Hataları...
+
+Weapon
+== Silah
 

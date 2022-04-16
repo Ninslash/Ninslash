@@ -106,9 +106,6 @@ Connect
 Connecting to
 == Conectando a
 
-Connection Problems...
-== Problemas de conexão...
-
 Console
 == Console
 
@@ -132,9 +129,6 @@ Current
 
 Current version: %s
 == Versão atual: %s
-
-Custom colors
-== Cores personalizadas
 
 Delete
 == Deletar
@@ -354,6 +348,9 @@ Next weapon
 
 Nickname
 == Apelido
+
+Ninslash %s is out! Download it at www.ninslash.com!
+== Ninslash %s foi lançado! Baixe-o em www.ninslash.com!
 
 No
 == Não
@@ -583,9 +580,6 @@ Team
 Team chat
 == Chat do time
 
-Ninslash %s is out! Download it at www.ninslash.com!
-== Ninslash %s foi lançado! Baixe-o em www.ninslash.com!
-
 Texture Compression
 == Compressão de textura
 
@@ -655,9 +649,6 @@ Voting
 Warmup
 == Aquecimento
 
-Weapon
-== Arma
-
 Welcome to Ninslash
 == Bem-vindo ao Ninslash!
 
@@ -667,15 +658,87 @@ Yes
 You must restart the game for all settings to take effect.
 == Você deve reiniciar o jogo para que todas as alterações tenham efeito.
 
-Your skin
-== Sua skin
-
 no limit
 == sem limite
 
 ##### needs translation #####
 
+Back to main menu
+== 
+
+Black
+== 
+
+Blood color
+== 
+
+Bodies
+== 
+
+Borderless window
+== 
+
+Change color of
+== 
+
+Change skin of
+== 
+
+Chat & Misc.
+== 
+
+Customize
+== 
+
+Dynamic lighting
+== 
+
+Editor
+== 
+
+Environmental sounds
+== 
+
+Eyes
+== 
+
+Flip attack & hook
+== 
+
+Flip move & aim axis
+== 
+
 Game paused
+== 
+
+Green
+== 
+
+Hair / hat
+== 
+
+Handle rendering async from updates
+== 
+
+Hands
+== 
+
+Head
+== 
+
+Heads
+== 
+
+Main menu
+== 
+
+Movement & Weapons
+== 
+
+Multi framebuffering (requires restart)
+== 
+
+Red
 == 
 
 Respawn
@@ -684,5 +747,44 @@ Respawn
 Show only chat messages from friends
 == 
 
+Skin
+== 
+
+Survival mode
+== 
+
+The Dead
+== 
+
+The Living
+== 
+
+Threaded rendering
+== 
+
+Threaded sound loading
+== 
+
+Waiting for server...
+== 
+
+Weapons & Items
+== 
+
+xbox 360 controller support
+== 
+
 ##### old translations #####
+
+Custom colors
+== Cores personalizadas
+
+Connection Problems...
+== Problemas de conexão...
+
+Your skin
+== Sua skin
+
+Weapon
+== Arma
 

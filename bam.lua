@@ -207,6 +207,7 @@ function build(settings)
 	wavpack = Compile(settings, Collect("src/engine/external/wavpack/*.c"))
 	pnglite = Compile(settings, Collect("src/engine/external/pnglite/*.c"))
 	json_parser = Compile(settings, Collect("src/engine/external/json-parser/*.c"))
+	md5 = Compile(settings, Collect("src/engine/external/md5/*.c"))
 	
 	-- add the c++11 flag after compiling the c libraries
 	-- TODO: this is just a workaround, better avoid the auto keyword instead :/
@@ -275,11 +276,11 @@ function build(settings)
 
 	-- build client, server, version server and master server
 	client_exe = Link(client_settings, "ninslash", game_shared, game_client,
-		engine, client, game_editor, zlib, pnglite, wavpack, json_parser,
-		client_link_other, client_osxlaunch)
+		engine, client, game_editor, zlib, pnglite, wavpack, json_parser, 
+		md5, client_link_other, client_osxlaunch)
 
 	server_exe = Link(server_settings, "ninslash_srv", engine, server,
-		game_shared, game_server, zlib, server_link_other)
+		game_shared, game_server, zlib, md5, server_link_other)
 
 	serverlaunch = {}
 	if platform == "macosx" then

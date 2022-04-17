@@ -660,6 +660,9 @@ Bodies
 Borderless window
 == 
 
+Bots
+== 
+
 Change color of
 == 
 
@@ -714,7 +717,16 @@ Head
 Heads
 == 
 
+Join server
+== 
+
+Local server
+== 
+
 Main menu
+== 
+
+Maps directory
 == 
 
 Movement & Weapons
@@ -735,6 +747,18 @@ Red
 Respawn
 == 
 
+Server
+== 
+
+Server is running
+== 
+
+Server is starting
+== 
+
+Server stopped
+== 
+
 Show only chat messages from friends
 == 
 
@@ -745,6 +769,9 @@ Spectate next
 == 
 
 Spectate previous
+== 
+
+Stop server
 == 
 
 Strict gametype filter

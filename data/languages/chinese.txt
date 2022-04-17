@@ -681,6 +681,9 @@ Bodies
 Borderless window
 == 
 
+Bots
+== 
+
 Change color of
 == 
 
@@ -729,7 +732,16 @@ Head
 Heads
 == 
 
+Join server
+== 
+
+Local server
+== 
+
 Main menu
+== 
+
+Maps directory
 == 
 
 Movement & Weapons
@@ -744,7 +756,22 @@ Ninslash %s is out! Download it at www.ninslash.com!
 Red
 == 
 
+Server
+== 
+
+Server is running
+== 
+
+Server is starting
+== 
+
+Server stopped
+== 
+
 Skin
+== 
+
+Stop server
 == 
 
 Survival mode
@@ -785,11 +812,11 @@ Teeworlds %s is out! Download it at www.teeworlds.com!
 Custom colors
 == 自定义颜色
 
-Connection Problems...
-== 连接出现问题...
-
 Your skin
 == 你的皮肤
+
+Connection Problems...
+== 连接出现问题...
 
 Weapon
 == 武器

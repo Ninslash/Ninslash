@@ -182,14 +182,18 @@ int mem_check_imp();
 #define mem_check() dbg_assert_imp(__FILE__, __LINE__, mem_check_imp(), "Memory check failed")
 
 /* Group: File IO */
-enum {
+enum
+{
 	IOFLAG_READ = 1,
 	IOFLAG_WRITE = 2,
-	IOFLAG_RANDOM = 4,
+	IOFLAG_APPEND = 4,
+	IOFLAG_SKIP_BOM = 8,
 
 	IOSEEK_START = 0,
 	IOSEEK_CUR = 1,
-	IOSEEK_END = 2
+	IOSEEK_END = 2,
+
+	IO_MAX_PATH_LENGTH = 512,
 };
 
 typedef struct IOINTERNAL *IOHANDLE;
@@ -1172,6 +1176,36 @@ int net_errno();
 int net_would_block();
 
 int net_socket_read_wait(NETSOCKET sock, int time);
+
+/*
+	Function: open_link
+		Opens a link in the browser.
+
+	Parameters:
+		link - The link to open in a browser.
+
+	Returns:
+		Returns 1 on success, 0 on failure.
+
+	Remarks:
+		This may not be called with untrusted input or it'll result in arbitrary code execution, especially on Windows.
+*/
+int open_link(const char *link);
+
+/*
+	Function: open_file
+		Opens a file or directory with default program.
+
+	Parameters:
+		path - The path to open.
+
+	Returns:
+		Returns 1 on success, 0 on failure.
+
+	Remarks:
+		This may not be called with untrusted input or it'll result in arbitrary code execution, especially on Windows.
+*/
+int open_file(const char *path);
 
 void mem_debug_dump(IOHANDLE file);
 

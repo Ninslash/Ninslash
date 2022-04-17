@@ -14,7 +14,7 @@
 
 CGameControllerCS::CGameControllerCS(class CGameContext *pGameServer) : IGameController(pGameServer)
 {
-	m_pGameType = "DEF";
+	m_pGameType = "Def";
 	m_GameFlags = GAMEFLAG_TEAMS;
 	
 

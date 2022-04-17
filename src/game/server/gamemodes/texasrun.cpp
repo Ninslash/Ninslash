@@ -14,7 +14,7 @@
 
 CGameControllerTexasRun::CGameControllerTexasRun(class CGameContext *pGameServer) : IGameController(pGameServer)
 {
-	m_pGameType = "INF";
+	m_pGameType = "Inf";
 	m_GameFlags = GAMEFLAG_TEAMS|GAMEFLAG_INFECTION;
 	m_GameState = TEXAS_STARTING;
 	m_EndTick = 0;

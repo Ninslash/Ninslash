@@ -525,6 +525,9 @@ Bodies
 Borderless window
 == 
 
+Bots
+== 
+
 Change color of
 == 
 
@@ -612,16 +615,25 @@ Head
 Heads
 == 
 
+Join server
+== 
+
 Kick player
 == 
 
 Length:
 == 
 
+Local server
+== 
+
 Main menu
 == 
 
 Map:
+== 
+
+Maps directory
 == 
 
 Max Screenshots
@@ -684,10 +696,22 @@ Rename demo
 Respawn
 == 
 
+Server
+== 
+
 Server address:
 == 
 
 Server filter
+== 
+
+Server is running
+== 
+
+Server is starting
+== 
+
+Server stopped
 == 
 
 Show friends only
@@ -715,6 +739,9 @@ Spectate previous
 == 
 
 Spectator mode
+== 
+
+Stop server
 == 
 
 Strict gametype filter

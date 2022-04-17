@@ -577,6 +577,16 @@ int CMenus::RenderMenubar(CUIRect r)
 				ServerBrowser()->Refresh(IServerBrowser::TYPE_FAVORITES);
 				NewPage = PAGE_FAVORITES;
 			}
+/*
+			Box.VSplitLeft(10.0f, 0, &Box);
+			Box.VSplitLeft(100.0f, &Button, &Box);
+			static int s_ServerButton=0;
+			if(DoButton_MenuTab(&s_ServerButton, Localize("Server"), m_ActivePage==PAGE_SERVER, &Button, CUI::CORNER_T))
+			{
+				NewPage = PAGE_SERVER;
+			}
+
+		Box.VSplitLeft(10.0f, 0, &Box);*/
 		}
 
 		/*
@@ -970,6 +980,8 @@ int CMenus::Render()
 			RenderServerbrowser(MainView);
 		else if(g_Config.m_UiPage == PAGE_LAN)
 			RenderServerbrowser(MainView);
+		/*else if(g_Config.m_UiPage == PAGE_SERVER)
+			ServerCreatorProcess(MainView);*/
 		else if(g_Config.m_UiPage == PAGE_DEMOS)
 			RenderDemoList(MainView);
 		else if(g_Config.m_UiPage == PAGE_FAVORITES)

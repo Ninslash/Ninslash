@@ -122,6 +122,7 @@ class CMenus : public CComponent
 		PAGE_INTERNET,
 		PAGE_LAN,
 		PAGE_FAVORITES,
+		PAGE_SERVER,
 		PAGE_DEMOS,
 		PAGE_SETTINGS,
 		PAGE_CUSTOMIZE,
@@ -247,6 +248,10 @@ class CMenus : public CComponent
 	void RenderDemoPlayer(CUIRect MainView);
 	void RenderDemoList(CUIRect MainView);
 
+	// found in menus_server.cpp
+	void ServerCreatorInit();
+	void ServerCreatorProcess(CUIRect MainView);
+	
 	// found in menus_ingame.cpp
 	void RenderGame(CUIRect MainView);
 	void RenderPlayers(CUIRect MainView);

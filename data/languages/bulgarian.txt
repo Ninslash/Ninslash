@@ -675,6 +675,9 @@ Bodies
 Borderless window
 == 
 
+Bots
+== 
+
 Change color of
 == 
 
@@ -726,7 +729,16 @@ Head
 Heads
 == 
 
+Join server
+== 
+
+Local server
+== 
+
 Main menu
+== 
+
+Maps directory
 == 
 
 Movement & Weapons
@@ -741,6 +753,18 @@ Red
 Respawn
 == 
 
+Server
+== 
+
+Server is running
+== 
+
+Server is starting
+== 
+
+Server stopped
+== 
+
 Show only chat messages from friends
 == 
 
@@ -748,6 +772,9 @@ Skin
 == 
 
 Spectate previous
+== 
+
+Stop server
 == 
 
 Survival mode
@@ -779,11 +806,11 @@ xbox 360 controller support
 Custom colors
 == Произволни цветове
 
-Connection Problems...
-== Проблеми с Връзката...
-
 Your skin
 == Твоят модел
+
+Connection Problems...
+== Проблеми с Връзката...
 
 Weapon
 == Оръжия

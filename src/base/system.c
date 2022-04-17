@@ -1767,6 +1767,36 @@ void str_timestamp(char *buffer, int buffer_size)
 	buffer[buffer_size-1] = 0;	/* assure null termination */
 }
 
+int open_link(const char *link)
+{
+#if defined(CONF_FAMILY_WINDOWS)
+	WCHAR wBuffer[512];
+	MultiByteToWideChar(CP_UTF8, 0, link, -1, wBuffer, std::size(wBuffer));
+	return (uintptr_t)ShellExecuteW(NULL, L"open", wBuffer, NULL, NULL, SW_SHOWDEFAULT) > 32;
+#elif defined(CONF_PLATFORM_LINUX)
+	const int pid = fork();
+	if(pid == 0)
+		execlp("xdg-open", "xdg-open", link, NULL);
+	return pid > 0;
+#elif defined(CONF_FAMILY_UNIX)
+	const int pid = fork();
+	if(pid == 0)
+		execlp("open", "open", link, nullptr);
+	return pid > 0;
+#endif
+}
+
+int open_file(const char *path)
+{
+#if defined(CONF_PLATFORM_MACOS)
+	return open_link(path);
+#else
+	char buf[512];
+	str_format(buf, sizeof(buf), "file://%s", path);
+	return open_link(buf);
+#endif
+}
+
 int mem_comp(const void *a, const void *b, int size)
 {
 	return memcmp(a,b,size);

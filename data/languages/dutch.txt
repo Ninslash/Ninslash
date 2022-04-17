@@ -687,6 +687,9 @@ Bodies
 Borderless window
 == 
 
+Bots
+== 
+
 Change color of
 == 
 
@@ -735,7 +738,16 @@ Head
 Heads
 == 
 
+Join server
+== 
+
+Local server
+== 
+
 Main menu
+== 
+
+Maps directory
 == 
 
 Movement & Weapons
@@ -747,7 +759,22 @@ Multi framebuffering (requires restart)
 Red
 == 
 
+Server
+== 
+
+Server is running
+== 
+
+Server is starting
+== 
+
+Server stopped
+== 
+
 Skin
+== 
+
+Stop server
 == 
 
 Survival mode
@@ -779,11 +806,11 @@ xbox 360 controller support
 Custom colors
 == Aangepaste kleuren
 
-Connection Problems...
-== Verbindingsproblemen...
-
 Your skin
 == Jouw skin
+
+Connection Problems...
+== Verbindingsproblemen...
 
 Weapon
 == Wapen

@@ -13,7 +13,7 @@
 
 CGameControllerBall::CGameControllerBall(class CGameContext *pGameServer) : IGameController(pGameServer)
 {
-	m_pGameType = "BALL";
+	m_pGameType = "Ball";
 	m_GameFlags = GAMEFLAG_TEAMS;
 	
 	//g_Config.m_SvDisablePVP = 1;

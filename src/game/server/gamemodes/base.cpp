@@ -26,7 +26,7 @@
 
 CGameControllerBase::CGameControllerBase(class CGameContext *pGameServer) : IGameController(pGameServer)
 {
-	m_pGameType = "DEF";
+	m_pGameType = "Def";
 	m_GameFlags = GAMEFLAG_COOP;
 	m_GameState = STATE_STARTING;
 	

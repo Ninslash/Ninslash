@@ -13,12 +13,7 @@
 #include <game/layers.h>
 #include <game/collision.h>
 
-
-
 using namespace std;
-
-
-
 	
 bool CCollision::AStar(vec2 Start, vec2 End)
 {

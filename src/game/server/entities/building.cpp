@@ -605,7 +605,7 @@ void CBuilding::Destroy()
 		GameServer()->m_World.DestroyEntity(this);
 		
 		
-		//GameServer()->SendBroadcast("Reactor lost", -1);
+		//GameServer()->SendBroadcast(-1, _("Reactor lost", -1);
 		//GameServer()->CreateSoundGlobal(SOUND_CTF_DROP);
 	}
 	else if (m_Type == BUILDING_FLAMETRAP)

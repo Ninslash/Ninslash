@@ -111,9 +111,42 @@ AddDependency(server_content_source, server_content_header)
 
 nethash = CHash("src/game/generated/nethash.cpp", "src/engine/shared/protocol.h", "src/game/generated/protocol.h", "src/game/tuning.h", "src/game/gamecore.cpp", network_header)
 
+icu_depends = {}
 client_link_other = {}
 client_depends = {}
 server_link_other = {}
+
+if family == "windows" then
+	if platform == "win32" then
+		-- Add ICU because its a HAVE to
+		if config.compiler.driver == "cl" then
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/vc/lib32/icudt53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/vc/lib32/icuin53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/vc/lib32/icuuc53.dll"))
+		elseif config.compiler.driver == "gcc" then
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/gcc/lib32/icudt53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/gcc/lib32/icuin53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/gcc/lib32/icuuc53.dll"))
+		end
+	else
+		-- Add ICU because its a HAVE to
+		if config.compiler.driver == "cl" then
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/vc/lib64/icudt53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/vc/lib64/icuin53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/vc/lib64/icuuc53.dll"))
+		elseif config.compiler.driver == "gcc" then
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/gcc/lib64/icudt53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/gcc/lib64/icuin53.dll"))
+			table.insert(icu_depends, CopyToDirectory(".", "other/icu/gcc/lib64/icuuc53.dll"))
+		end
+	end
+
+	if config.compiler.driver == "cl" then
+		server_link_other = {ResCompile("other/icons/teeworlds_srv_cl.rc")}
+	elseif config.compiler.driver == "gcc" then
+		server_link_other = {ResCompile("other/icons/teeworlds_srv_gcc.rc")}
+	end
+end
 
 if family == "windows" then
 	if platform == "win32" then
@@ -175,8 +208,20 @@ function build(settings)
 		if platform == "macosx" then
 			settings.link.frameworks:Add("Carbon")
 			settings.link.frameworks:Add("AppKit")
+			settings.cc.includes:Add("/usr/local/opt/icu4c/include")
+			settings.link.libs:Add("icui18n")
+			settings.link.libs:Add("icuuc")
+			settings.link.libs:Add("c++")
+			settings.link.libpath:Add("/usr/local/opt/icu4c/lib")
+			settings.cc.flags_cxx:Add("-stdlib=libc++")
 		else
 			settings.link.libs:Add("pthread")
+			-- add ICU for linux
+			if ExecuteSilent("pkg-config icu-uc icu-i18n") == 0 then
+			end
+
+			settings.cc.flags:Add("`pkg-config --cflags icu-uc icu-i18n`")
+			settings.link.flags:Add("`pkg-config --libs icu-uc icu-i18n`")
 		end
 		
 		if platform == "solaris" then
@@ -189,6 +234,9 @@ function build(settings)
 		settings.link.libs:Add("ws2_32")
 		settings.link.libs:Add("ole32")
 		settings.link.libs:Add("shell32")
+
+		-- add ICU also here
+		settings.cc.includes:Add("other\\icu\\include")
 	end
 
 	-- compile zlib if needed
@@ -238,6 +286,26 @@ function build(settings)
 		client_settings.link.libs:Add("opengl32")
 		client_settings.link.libs:Add("glu32")
 		client_settings.link.libs:Add("winmm")
+		-- Add ICU because its a HAVE to
+		if platform == "win32" then
+			if config.compiler.driver == "cl" then
+				server_settings.link.libpath:Add("other/icu/vc/lib32")
+			elseif config.compiler.driver == "gcc" then
+				server_settings.link.libpath:Add("other/icu/gcc/lib32")
+			end
+			server_settings.link.libs:Add("icudt")
+			server_settings.link.libs:Add("icuin")
+			server_settings.link.libs:Add("icuuc")
+		else
+			if config.compiler.driver == "cl" then
+				server_settings.link.libpath:Add("other/icu/vc/lib64")
+			elseif config.compiler.driver == "gcc" then
+				server_settings.link.libpath:Add("other/icu/gcc/lib64")
+			end
+			server_settings.link.libs:Add("icudt")
+			server_settings.link.libs:Add("icuin")
+			server_settings.link.libs:Add("icuuc")
+		end
 	end
 
 	-- apply sdl settings
@@ -250,6 +318,7 @@ function build(settings)
 	engine = Compile(engine_settings, Collect("src/engine/shared/*.cpp", "src/base/*.c"))
 	client = Compile(client_settings, Collect("src/engine/client/*.cpp"))
 	server = Compile(server_settings, Collect("src/engine/server/*.cpp"))
+	teeuniverses = Compile(server_settings, Collect("src/teeuniverses/*.cpp", "src/teeuniverses/components/*.cpp", "src/teeuniverses/system/*.cpp"))
 
 	versionserver = Compile(settings, Collect("src/versionsrv/*.cpp"))
 	masterserver = Compile(settings, Collect("src/mastersrv/*.cpp"))
@@ -280,7 +349,8 @@ function build(settings)
 		md5, client_link_other, client_osxlaunch)
 
 	server_exe = Link(server_settings, "ninslash_srv", engine, server,
-		game_shared, game_server, zlib, md5, server_link_other)
+		game_shared, game_server, zlib, md5, server_link_other, teeuniverses, 
+		json_parser, icu_depends)
 
 	serverlaunch = {}
 	if platform == "macosx" then

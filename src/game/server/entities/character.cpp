@@ -334,7 +334,8 @@ void CCharacter::SaveData()
 	}
 	
 	char aBuf[256];
-	str_format(aBuf, sizeof(aBuf), "Data save - color=%d", GetPlayer()->GetColorID());
+
+	str_format(aBuf, sizeof(aBuf), "Data save - color={%d}", GetPlayer()->GetColorID());
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "Character", aBuf);
 }
 
@@ -1247,7 +1248,7 @@ void CCharacter::GiveStartWeapon()
 		GetPlayer()->m_Gold = pData->m_Gold;
 		
 		char aBuf[256];
-		str_format(aBuf, sizeof(aBuf), "Data load - color=%d", GetPlayer()->GetColorID());
+		str_format(aBuf, sizeof(aBuf), "Data load - color={%d}", GetPlayer()->GetColorID());
 		GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "Character", aBuf);
 		
 		return;
@@ -1690,8 +1691,8 @@ void CCharacter::Tick()
 	if(m_pPlayer->m_ForceBalanced)
 	{
 		char Buf[128];
-		str_format(Buf, sizeof(Buf), "You were moved to %s due to team balancing", GameServer()->m_pController->GetTeamName(m_pPlayer->GetTeam()));
-		GameServer()->SendBroadcast(Buf, m_pPlayer->GetCID());
+		str_format(Buf, sizeof(Buf), "You were moved to {%s} due to team balancing", GameServer()->m_pController->GetTeamName(m_pPlayer->GetTeam()));
+		GameServer()->SendBroadcast(-1, _(Buf, m_pPlayer->GetCID());
 
 		m_pPlayer->m_ForceBalanced = false;
 	}
@@ -1850,7 +1851,7 @@ void CCharacter::TickDefered()
 		StartVelY.f = StartVel.y;
 
 		char aBuf[256];
-		str_format(aBuf, sizeof(aBuf), "STUCK!!! %d %d %d %f %f %f %f %x %x %x %x",
+		str_format(aBuf, sizeof(aBuf), "STUCK!!! {%d} {%d} {%d} %f %f %f %f %x %x %x %x",
 			StuckBefore,
 			StuckAfterMove,
 			StuckAfterQuant,
@@ -2082,7 +2083,7 @@ void CCharacter::Die(int Killer, int Weapon, bool SkipKillMessage, bool IsTurret
 		int ModeSpecial = GameServer()->m_pController->OnCharacterDeath(this, GameServer()->m_apPlayers[Killer], Weapon);
 		
 		char aBuf[256];
-		str_format(aBuf, sizeof(aBuf), "kill killer='%d:%s' victim='%d:%s' weapon=%d special=%d",
+		str_format(aBuf, sizeof(aBuf), "kill killer='{%d}:{%s}' victim='{%d}:{%s}' weapon={%d} special={%d}",
 			Killer, Server()->ClientName(Killer),
 			m_pPlayer->GetCID(), Server()->ClientName(m_pPlayer->GetCID()), Weapon, ModeSpecial);
 		GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);

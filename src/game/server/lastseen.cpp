@@ -26,7 +26,7 @@ void CLastSeen::SendLastSeenMsg(CGameContext *GameServer, int ClientID)
 		i = !i;
 
 	char Msg[256];
-	str_format(Msg, sizeof(Msg), "%s was here %d min ago", m_aName[i], int((time_get() / time_freq() - m_aSeen[i]) / 60));
+	str_format(Msg, sizeof(Msg), "{%s} was here {%d} min ago", m_aName[i], int((time_get() / time_freq() - m_aSeen[i]) / 60));
 	GameServer->SendChatTarget(ClientID, Msg);
 }
 
@@ -48,5 +48,5 @@ void CLastSeen::OnClientDrop(CGameContext *GameServer, int ClientID)
 	m_aSeen[i] = time_get() / time_freq();
 	str_copy(m_aName[i], ClientName, sizeof(m_aName[i]));
 
-	//dbg_msg("CLastSeen", "OnClientDrop: i %d seen[0]: %s %lld seen[1]: %s %lld", i, m_aName[0], m_aSeen[0], m_aName[1], m_aSeen[1]);
+	//dbg_msg("CLastSeen", "OnClientDrop: i {%d} seen[0]: {%s} %lld seen[1]: {%s} %lld", i, m_aName[0], m_aSeen[0], m_aName[1], m_aSeen[1]);
 }

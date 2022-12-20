@@ -60,7 +60,7 @@ static void WriteStr(const char *pStr)
 static void WriteInt(int i)
 {
 	char aBuf[64];
-	str_format(aBuf, sizeof(aBuf), "%d", i);
+	str_format(aBuf, sizeof(aBuf), "{%d}", i);
 	WriteStr(aBuf);
 }
 

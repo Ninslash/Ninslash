@@ -290,7 +290,7 @@ void CGameControllerCoop::SpawnNewGroup(bool AddBots)
 	m_EnemiesLeft = 20;
 	m_GroupSpawnTick = 0;
 	
-	GameServer()->SendBroadcast("Wave incoming!", -1);
+	GameServer()->SendBroadcast(-1, _("Wave incoming!", -1);
 	
 	g_Config.m_SvInvBosses = 1;
 	
@@ -334,13 +334,13 @@ int CGameControllerCoop::OnCharacterDeath(class CCharacter *pVictim, class CPlay
 			if (m_GroupsLeft <= 0)
 			{
 				TriggerEscape();
-				GameServer()->SendBroadcast("Level cleared!", -1);
+				GameServer()->SendBroadcast(-1, _("Level cleared!", -1);
 			}
 			else if (!m_GroupSpawnTick)
 			{
 				m_GroupSpawnTick = Server()->Tick() + Server()->TickSpeed()*7;
 				if (m_Group > 1)
-					GameServer()->SendBroadcast("Wave cleared!", -1);
+					GameServer()->SendBroadcast(-1, _("Wave cleared!", -1);
 			}
 		}
 			
@@ -381,7 +381,7 @@ void CGameControllerCoop::NextLevel(int CID)
 		{
 			char aBuf[256];
 			str_format(aBuf, sizeof(aBuf), "%s reached the door", Server()->ClientName(CID));
-			GameServer()->SendBroadcast(aBuf, -1);
+			GameServer()->SendBroadcast(-1, _(aBuf, -1);
 		}
 	}
 	

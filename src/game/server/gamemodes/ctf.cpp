@@ -248,7 +248,7 @@ void CGameControllerCTF::Tick()
 					F->m_pCarryingCharacter->GetPlayer()->m_Score += 5;
 
 					char aBuf[512];
-					str_format(aBuf, sizeof(aBuf), "flag_capture player='%d:%s'",
+					str_format(aBuf, sizeof(aBuf), "flag_capture player='{%d}:{%s}'",
 						F->m_pCarryingCharacter->GetPlayer()->GetCID(),
 						Server()->ClientName(F->m_pCarryingCharacter->GetPlayer()->GetCID()));
 					GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
@@ -256,13 +256,13 @@ void CGameControllerCTF::Tick()
 					float CaptureTime = (Server()->Tick() - F->m_GrabTick)/(float)Server()->TickSpeed();
 					if(CaptureTime <= 60)
 					{
-						str_format(aBuf, sizeof(aBuf), "The %s flag was captured by '%s' (%d.%s%d seconds)", fi ? "blue" : "red", Server()->ClientName(F->m_pCarryingCharacter->GetPlayer()->GetCID()), (int)CaptureTime%60, ((int)(CaptureTime*100)%100)<10?"0":"", (int)(CaptureTime*100)%100);
+						str_format(aBuf, sizeof(aBuf), "The {%s} flag was captured by '{%s}' ({%d}.{%s}{%d} seconds)", fi ? "blue" : "red", Server()->ClientName(F->m_pCarryingCharacter->GetPlayer()->GetCID()), (int)CaptureTime%60, ((int)(CaptureTime*100)%100)<10?"0":"", (int)(CaptureTime*100)%100);
 					}
 					else
 					{
-						str_format(aBuf, sizeof(aBuf), "The %s flag was captured by '%s'", fi ? "blue" : "red", Server()->ClientName(F->m_pCarryingCharacter->GetPlayer()->GetCID()));
+						str_format(aBuf, sizeof(aBuf), "The {%s} flag was captured by '{%s}'", fi ? "blue" : "red", Server()->ClientName(F->m_pCarryingCharacter->GetPlayer()->GetCID()));
 					}
-					GameServer()->SendChat(-1, -2, aBuf);
+					GameServer()->SendChatTarget(-1, aBuf);
 					for(int i = 0; i < 2; i++)
 						m_apFlags[i]->Reset();
 
@@ -291,7 +291,7 @@ void CGameControllerCTF::Tick()
 						pChr->GetPlayer()->m_Score += 1;
 
 						char aBuf[256];
-						str_format(aBuf, sizeof(aBuf), "flag_return player='%d:%s'",
+						str_format(aBuf, sizeof(aBuf), "flag_return player='{%d}:%s'",
 							pChr->GetPlayer()->GetCID(),
 							Server()->ClientName(pChr->GetPlayer()->GetCID()));
 						GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
@@ -314,7 +314,7 @@ void CGameControllerCTF::Tick()
 					F->m_pCarryingCharacter->GetPlayer()->m_Score += 1;
 
 					char aBuf[256];
-					str_format(aBuf, sizeof(aBuf), "flag_grab player='%d:%s'",
+					str_format(aBuf, sizeof(aBuf), "flag_grab player='{%d}:{%s}'",
 						F->m_pCarryingCharacter->GetPlayer()->GetCID(),
 						Server()->ClientName(F->m_pCarryingCharacter->GetPlayer()->GetCID()));
 					GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);

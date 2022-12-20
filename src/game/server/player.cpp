@@ -180,7 +180,7 @@ void CPlayer::Tick()
 			m_Latency.m_AccumMin = min(m_Latency.m_AccumMin, Info.m_Latency);
 		}
 		// each second
-		if(Server()->Tick()%Server()->TickSpeed() == 0)
+		if(Server()->Tick(){%s}erver()->TickSpeed() == 0)
 		{
 			m_Latency.m_Avg = m_Latency.m_Accum/Server()->TickSpeed();
 			m_Latency.m_Max = m_Latency.m_AccumMax;
@@ -269,7 +269,7 @@ void CPlayer::Tick()
 		if(g_Config.m_SvBroadcastLock && m_BroadcastLockTick && m_aBroadcast[0] != '\0')
 		{
 			if(Server()->Tick() > m_BroadcastLockTick + Server()->TickSpeed() * g_Config.m_SvBroadcastLock)
-				GameServer()->SendBroadcast(m_aBroadcast, GetCID(), true);
+				GameServer()->SendBroadcast(-1, true, _(m_aBroadcast));
 		}
 	}
 	else
@@ -409,13 +409,13 @@ void CPlayer::OnDisconnect(const char *pReason)
 		if (!m_IsBot)
 		{
 			if(pReason && *pReason)
-				str_format(aBuf, sizeof(aBuf), "'%s' has left the game (%s)", Server()->ClientName(m_ClientID), pReason);
+				str_format(aBuf, sizeof(aBuf), "'{%s}' has left the game ({%s})", Server()->ClientName(m_ClientID), pReason);
 			else
-				str_format(aBuf, sizeof(aBuf), "'%s' has left the game", Server()->ClientName(m_ClientID));
-			GameServer()->SendChat(-1, CGameContext::CHAT_ALL, aBuf);
+				str_format(aBuf, sizeof(aBuf), "'{%s}' has left the game", Server()->ClientName(m_ClientID));
+			GameServer()->SendChatTarget(-1,  aBuf);
 		}
 
-		str_format(aBuf, sizeof(aBuf), "leave player='%d:%s'", m_ClientID, Server()->ClientName(m_ClientID));
+		str_format(aBuf, sizeof(aBuf), "leave player='{%d}:{%s}'", m_ClientID, Server()->ClientName(m_ClientID));
 		GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "game", aBuf);
 	}
 	
@@ -535,8 +535,8 @@ void CPlayer::SetTeam(int Team, bool DoChatMsg)
 	/* skip this
 	if(DoChatMsg)
 	{
-		str_format(aBuf, sizeof(aBuf), "'%s' joined the %s", Server()->ClientName(m_ClientID), GameServer()->m_pController->GetTeamName(Team));
-		GameServer()->SendChat(-1, CGameContext::CHAT_ALL, aBuf);
+		str_format(aBuf, sizeof(aBuf), "'{%s}' joined the {%s}", Server()->ClientName(m_ClientID), GameServer()->m_pController->GetTeamName(Team));
+		GameServer()->SendChatTarget(-1,  aBuf);
 	}
 	*/
 
@@ -551,7 +551,7 @@ void CPlayer::SetTeam(int Team, bool DoChatMsg)
 	if (!(GameServer()->m_pController->IsInfection() && Team == TEAM_BLUE))
 		m_RespawnTick = Server()->Tick();
 	
-	str_format(aBuf, sizeof(aBuf), "team_join player='%d:%s' m_Team=%d", m_ClientID, Server()->ClientName(m_ClientID), m_Team);
+	str_format(aBuf, sizeof(aBuf), "team_join player='{%d}:{%s}' m_Team={%d}", m_ClientID, Server()->ClientName(m_ClientID), m_Team);
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 
 	GameServer()->m_pController->OnPlayerInfoChange(GameServer()->m_apPlayers[m_ClientID]);

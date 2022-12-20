@@ -420,7 +420,7 @@ int main(int argc, const char **argv) // ignore_convention
 			else if(Packet.m_DataSize == sizeof(SERVERBROWSE_GETCOUNT) &&
 				mem_comp(Packet.m_pData, SERVERBROWSE_GETCOUNT, sizeof(SERVERBROWSE_GETCOUNT)) == 0)
 			{
-				dbg_msg("mastersrv", "count requested, responding with %d", m_NumServers);
+				dbg_msg("mastersrv", "count requested, responding with {%d}", m_NumServers);
 
 				CNetChunk p;
 				p.m_ClientID = -1;
@@ -435,7 +435,7 @@ int main(int argc, const char **argv) // ignore_convention
 			else if(Packet.m_DataSize == sizeof(SERVERBROWSE_GETCOUNT_LEGACY) &&
 				mem_comp(Packet.m_pData, SERVERBROWSE_GETCOUNT_LEGACY, sizeof(SERVERBROWSE_GETCOUNT_LEGACY)) == 0)
 			{
-				dbg_msg("mastersrv", "count requested, responding with %d", m_NumServers);
+				dbg_msg("mastersrv", "count requested, responding with {%d}", m_NumServers);
 
 				CNetChunk p;
 				p.m_ClientID = -1;
@@ -451,7 +451,7 @@ int main(int argc, const char **argv) // ignore_convention
 				mem_comp(Packet.m_pData, SERVERBROWSE_GETLIST, sizeof(SERVERBROWSE_GETLIST)) == 0)
 			{
 				// someone requested the list
-				dbg_msg("mastersrv", "requested, responding with %d m_aServers", m_NumServers);
+				dbg_msg("mastersrv", "requested, responding with {%d} m_aServers", m_NumServers);
 
 				CNetChunk p;
 				p.m_ClientID = -1;
@@ -469,7 +469,7 @@ int main(int argc, const char **argv) // ignore_convention
 				mem_comp(Packet.m_pData, SERVERBROWSE_GETLIST_LEGACY, sizeof(SERVERBROWSE_GETLIST_LEGACY)) == 0)
 			{
 				// someone requested the list
-				dbg_msg("mastersrv", "requested, responding with %d m_aServers", m_NumServers);
+				dbg_msg("mastersrv", "requested, responding with {%d} m_aServers", m_NumServers);
 
 				CNetChunk p;
 				p.m_ClientID = -1;

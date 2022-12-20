@@ -62,7 +62,7 @@ IGameController::IGameController(class CGameContext *pGameServer)
 	
 	GameServer()->Collision()->GenerateWaypoints();
 	
-	char aBuf[128]; str_format(aBuf, sizeof(aBuf), "%d waypoints generated, %d connections created", GameServer()->Collision()->WaypointCount(), GameServer()->Collision()->ConnectionCount());
+	char aBuf[128]; str_format(aBuf, sizeof(aBuf), "{%d} waypoints generated, {%d} connections created", GameServer()->Collision()->WaypointCount(), GameServer()->Collision()->ConnectionCount());
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "ai", aBuf);
 }
 
@@ -519,15 +519,15 @@ void IGameController::DeathMessage()
 	switch (rand()%5)
 	{
 		case 0:
-			GameServer()->SendBroadcast("All hope is lost", -1); break;
+			GameServer()->SendBroadcast(-1, false, _("All hope is lost")); break;
 		case 1:
-			GameServer()->SendBroadcast("Slaughter", -1); break;
+			GameServer()->SendBroadcast(-1, false, _("Slaughter")); break;
 		case 2:
-			GameServer()->SendBroadcast("Ocean of blood", -1); break;
+			GameServer()->SendBroadcast(-1, false, _("Ocean of blood")); break;
 		case 3:
-			GameServer()->SendBroadcast("Death takes all", -1); break;
+			GameServer()->SendBroadcast(-1, false, _("Death takes all")); break;
 		default:
-			GameServer()->SendBroadcast("Everybody dies", -1); break;
+			GameServer()->SendBroadcast(-1, false, _("Everybody dies")); break;
 	};
 }
 
@@ -1087,7 +1087,7 @@ void IGameController::StartRound()
 	m_ForceBalanced = false;
 	Server()->DemoRecorder_HandleAutoStart();
 	char aBuf[256];
-	str_format(aBuf, sizeof(aBuf), "start round type='%s' teamplay='%d'", m_pGameType, m_GameFlags&GAMEFLAG_TEAMS);
+	str_format(aBuf, sizeof(aBuf), "start round type='{%s}' teamplay='{%d}'", m_pGameType, m_GameFlags&GAMEFLAG_TEAMS);
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 }
 
@@ -1102,7 +1102,7 @@ void IGameController::CycleMap()
 	if(m_aMapWish[0] != 0)
 	{
 		char aBuf[256];
-		str_format(aBuf, sizeof(aBuf), "rotating map to %s", m_aMapWish);
+		str_format(aBuf, sizeof(aBuf), "rotating map to {%s}", m_aMapWish);
 		GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 		str_copy(g_Config.m_SvMap, m_aMapWish, sizeof(g_Config.m_SvMap));
 		m_aMapWish[0] = 0;
@@ -1171,7 +1171,7 @@ void IGameController::CycleMap()
 	m_RoundCount = 0;
 
 	char aBufMsg[256];
-	str_format(aBufMsg, sizeof(aBufMsg), "rotating map to %s", &aBuf[i]);
+	str_format(aBufMsg, sizeof(aBufMsg), "rotating map to {%s}", &aBuf[i]);
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 	str_copy(g_Config.m_SvMap, &aBuf[i], sizeof(g_Config.m_SvMap));
 }
@@ -1185,7 +1185,7 @@ void IGameController::FirstMap()
 	if(m_aMapWish[0] != 0)
 	{
 		char aBuf[256];
-		str_format(aBuf, sizeof(aBuf), "rotating map to %s", m_aMapWish);
+		str_format(aBuf, sizeof(aBuf), "rotating map to {%s}", m_aMapWish);
 		GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 		str_copy(g_Config.m_SvMap, m_aMapWish, sizeof(g_Config.m_SvMap));
 		m_aMapWish[0] = 0;
@@ -1251,7 +1251,7 @@ void IGameController::FirstMap()
 	m_RoundCount = 0;
 
 	char aBufMsg[256];
-	str_format(aBufMsg, sizeof(aBufMsg), "restarting map rotating to %s", &aBuf[i]);
+	str_format(aBufMsg, sizeof(aBufMsg), "restarting map rotating to {%s}", &aBuf[i]);
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 	str_copy(g_Config.m_SvMap, &aBuf[i], sizeof(g_Config.m_SvMap));
 }
@@ -1676,7 +1676,7 @@ void IGameController::ReactorDestroyed()
 
 void IGameController::OnSurvivalTimeOut()
 {
-	GameServer()->SendBroadcast("Draw", -1);
+	GameServer()->SendBroadcast(-1, false, _("Draw"));
 	m_SurvivalResetTick = Server()->Tick() + Server()->TickSpeed() * 3.0f;
 }
 	
@@ -1760,7 +1760,7 @@ void IGameController::Tick()
 	if (m_ClearBroadcastTick && m_ClearBroadcastTick < Server()->Tick())
 	{
 		m_ClearBroadcastTick = 0;
-		GameServer()->SendBroadcast("", -1);
+		GameServer()->SendBroadcast(-1, false, _(""));
 	}
 
 	
@@ -1805,14 +1805,14 @@ void IGameController::Tick()
 				// draw
 				if (!CountPlayersAlive(TEAM_BLUE) && !CountPlayersAlive(TEAM_RED))
 				{
-					GameServer()->SendBroadcast("Draw", -1);
+					GameServer()->SendBroadcast(-1, false, _("Draw"));
 					m_SurvivalResetTick = Server()->Tick() + Server()->TickSpeed() * 3.0f;
 					//ResetSurvivalRound();
 				}
 				// red team wins
 				else if (!CountPlayersAlive(TEAM_BLUE) && CountPlayersAlive(TEAM_RED))
 				{
-					GameServer()->SendBroadcast("Red team wins", -1);
+					GameServer()->SendBroadcast(-1, false, _("Red team wins"));
 					m_aTeamscore[TEAM_RED] += g_Config.m_SvSurvivalReward;
 					m_SurvivalResetTick = Server()->Tick() + Server()->TickSpeed() * 3.0f;
 					//ResetSurvivalRound();
@@ -1820,7 +1820,7 @@ void IGameController::Tick()
 				// blue team wins
 				else if (CountPlayersAlive(TEAM_BLUE) && !CountPlayersAlive(TEAM_RED))
 				{
-					GameServer()->SendBroadcast("Blue team wins", -1);
+					GameServer()->SendBroadcast(-1, false, _("Blue team wins"));
 					m_aTeamscore[TEAM_BLUE] += g_Config.m_SvSurvivalReward;
 					m_SurvivalResetTick = Server()->Tick() + Server()->TickSpeed() * 3.0f;
 					//ResetSurvivalRound();
@@ -1832,7 +1832,7 @@ void IGameController::Tick()
 				// no one wins
 				if (!CountPlayersAlive())
 				{
-					GameServer()->SendBroadcast("Draw", -1);
+					GameServer()->SendBroadcast(-1, false, _("Draw"));
 					m_SurvivalResetTick = Server()->Tick() + Server()->TickSpeed() * 3.0f;
 					//ResetSurvivalRound();
 				}
@@ -1844,9 +1844,7 @@ void IGameController::Tick()
 					
 					if (Winner >= 0)
 					{
-						char aBuf[64];
-						str_format(aBuf, sizeof(aBuf), "%s survives", Server()->ClientName(Winner));
-						GameServer()->SendBroadcast(aBuf, -1);
+						GameServer()->SendBroadcast(-1, false, _("{%s} survives"), Server()->ClientName(Winner));
 						
 						GameServer()->m_apPlayers[Winner]->m_Score += g_Config.m_SvSurvivalReward;
 					}
@@ -2087,7 +2085,7 @@ bool IGameController::CheckTeamBalance()
 	char aBuf[256];
 	if(absolute(aT[0]-aT[1]) >= 2)
 	{
-		str_format(aBuf, sizeof(aBuf), "Teams are NOT balanced (red=%d blue=%d)", aT[0], aT[1]);
+		str_format(aBuf, sizeof(aBuf), "Teams are NOT balanced (red={%d} blue={%d})", aT[0], aT[1]);
 		GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 		if(GameServer()->m_pController->m_UnbalancedTick == -1)
 			GameServer()->m_pController->m_UnbalancedTick = Server()->Tick();
@@ -2095,7 +2093,7 @@ bool IGameController::CheckTeamBalance()
 	}
 	else
 	{
-		str_format(aBuf, sizeof(aBuf), "Teams are balanced (red=%d blue=%d)", aT[0], aT[1]);
+		str_format(aBuf, sizeof(aBuf), "Teams are balanced (red={%d} blue={%d})", aT[0], aT[1]);
 		GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 		GameServer()->m_pController->m_UnbalancedTick = -1;
 		return true;

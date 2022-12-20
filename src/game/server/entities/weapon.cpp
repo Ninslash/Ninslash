@@ -191,7 +191,7 @@ bool CWeapon::Activate()
 					{
 						char aBuf[256];
 						str_format(aBuf, sizeof(aBuf), "Arming bomb... {%d}", 4-m_BombCounter/3);
-						GameServer()->SendBroadcast(-1, _(aBuf, m_Owner);
+						GameServer()->SendBroadcast(-1, false, _("Arming bomb... {%d}"), 4-m_BombCounter/3);
 					}
 					
 					if (m_BombCounter++ > 12 && GameServer()->m_pController->TriggerWeapon(this))
@@ -729,11 +729,7 @@ void CWeapon::Tick()
 					if (m_BombCounter-- < 0)
 					{
 						if (m_Owner >= 0 && (m_BombDisarmCounter == 0 || m_BombDisarmCounter%2 == 0))
-						{
-							char aBuf[256];
-							str_format(aBuf, sizeof(aBuf), "Disarming bomb... {%d}", 8-m_BombDisarmCounter/2);
-							GameServer()->SendBroadcast(-1, _(aBuf, pChr->GetPlayer()->GetCID());
-						}
+							GameServer()->SendBroadcast(-1, false, _("Disarming bomb... {%d}"), 8-m_BombDisarmCounter/2);
 						
 						m_BombCounter = 10+frandom()*10;
 						m_BombDisarmCounter++;

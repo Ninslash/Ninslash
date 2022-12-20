@@ -1,0 +1,245 @@
+{
+    "translation": 
+    [
+        {
+            "key": "Go!",
+            "value": "Go!"
+        },
+        {
+            "key": "Bomb armed",
+            "value": "Bomb armed"
+        },
+        {
+            "key": "Time out - Blue team wins",
+            "value": "Time out - Blue team wins"
+        },
+        {
+            "key": "Bomb disarmed - Blue team wins",
+            "value": "Bomb disarmed - Blue team wins"
+        },
+        {
+            "key": "Reactor destroyed - Red team wins",
+            "value": "Reactor destroyed - Red team wins"
+        },
+        {
+            "key": "KILL!",
+            "value": "KILL!"
+        },
+        {
+            "key": "Run",
+            "value": "Run"
+        },
+        {
+            "key": "Hide",
+            "value": "Hide"
+        },
+        {
+            "key": "Escape",
+            "value": "Escape"
+        },
+        {
+            "key": "All hope is lost",
+            "value": "All hope is lost"
+        },
+        {
+            "key": "Slaughter",
+            "value": "Slaughter"
+        },
+        {
+            "key": "Ocean of blood",
+            "value": "Ocean of blood"
+        },
+        {
+            "key": "Death takes all",
+            "value": "Death takes all"
+        },
+        {
+            "key": "Everybody dies",
+            "value": "Everybody dies"
+        },
+        {
+            "key": "{%s} scores for blue team!",
+            "value": "{%s} scores for blue team!"
+        },
+        {
+            "key": "Blue team scores!",
+            "value": "Blue team scores!"
+        },
+        {
+            "key": "{%s} scores for red team!",
+            "value": "{%s} scores for red team!"
+        },
+        {
+            "key": "Red team scores!",
+            "value": "Red team scores!"
+        },
+        {
+            "key": "Wave incoming!",
+            "value": "Wave incoming!"
+        },
+        {
+            "key": "Level cleared!",
+            "value": "Level cleared!"
+        },
+        {
+            "key": "Wave cleared!",
+            "value": "Wave cleared!"
+        },
+        {
+            "key": "Reactor defense",
+            "value": "Reactor defense"
+        },
+        {
+            "key": "Stage completed",
+            "value": "Stage completed"
+        },
+        {
+            "key": "Wave cleared",
+            "value": "Wave cleared"
+        },
+        {
+            "key": "Wave {%d}",
+            "value": "Wave {%d}"
+        },
+        {
+            "key": "All reactors lost",
+            "value": "All reactors lost"
+        },
+        {
+            "key": "Game over on wave {%d}",
+            "value": "Game over on wave {%d}"
+        },
+        {
+            "key": "Arming bomb... {%d}",
+            "value": "Arming bomb... {%d}"
+        },
+        {
+            "key": "Disarming bomb... {%d}",
+            "value": "Disarming bomb... {%d}"
+        },
+        {
+            "key": "You were moved to {%s} due to team balancing",
+            "value": "You were moved to {%s} due to team balancing"
+        },
+        {
+            "key": "Draw",
+            "value": "Draw"
+        },
+        {
+            "key": "Red team wins",
+            "value": "Red team wins"
+        },
+        {
+            "key": "Blue team wins",
+            "value": "Blue team wins"
+        },
+        {
+            "key": "{%s} survives",
+            "value": "{%s} survives"
+        },
+        {
+            "key": "Teams were swapped",
+            "value": "Teams were swapped"
+        },
+        {
+            "key": "Vote aborted",
+            "value": "Vote aborted"
+        },
+        {
+            "key": "Vote passed",
+            "value": "Vote passed"
+        },
+        {
+            "key": "Vote failed",
+            "value": "Vote failed"
+        },
+        {
+            "key": "'{%s}' joined the fun",
+            "value": "'{%s}' joined the fun"
+        },
+        {
+            "key": "Level {%d}",
+            "value": "Level {%d}"
+        },
+        {
+            "key": "Level {%d} - Second try",
+            "value": "Level {%d} - Second try"
+        },
+        {
+            "key": "Level {%d} - Last chance",
+            "value": "Level {%d} - Last chance"
+        },
+        {
+            "key": "Spectators aren't allowed to start a vote.",
+            "value": "Spectators aren't allowed to start a vote."
+        },
+        {
+            "key": "Wait for current vote to end before calling a new one.",
+            "value": "Wait for current vote to end before calling a new one."
+        },
+        {
+            "key": "You must wait {%d} seconds before making another vote",
+            "value": "You must wait {%d} seconds before making another vote"
+        },
+        {
+            "key": "Server does not allow voting to kick players",
+            "value": "Server does not allow voting to kick players"
+        },
+        {
+            "key": "Invalid client id to kick",
+            "value": "Invalid client id to kick"
+        },
+        {
+            "key": "You can't kick yourself",
+            "value": "You can't kick yourself"
+        },
+        {
+            "key": "You can't kick admins",
+            "value": "You can't kick admins"
+        },
+        {
+            "key": "Server does not allow voting to move players to spectators",
+            "value": "Server does not allow voting to move players to spectators"
+        },
+        {
+            "key": "Invalid client id to move",
+            "value": "Invalid client id to move"
+        },
+        {
+            "key": "You can't move yourself",
+            "value": "You can't move yourself"
+        },
+        {
+            "key": "Invalid spectator id used",
+            "value": "Invalid spectator id used"
+        },
+        {
+            "key": "'{%s}' changed name to '{%s}'",
+            "value": "'{%s}' changed name to '{%s}'"
+        },
+        {
+            "key": "Teams were shuffled",
+            "value": "Teams were shuffled"
+        },
+        {
+            "key": "Teams were locked",
+            "value": "Teams were locked"
+        },
+        {
+            "key": "Teams were unlocked",
+            "value": "Teams were unlocked"
+        },
+        {
+            "key": "Teams have been balanced",
+            "value": "Teams have been balanced"
+        },
+        {
+            "key": "'{%s}' has left the game ({%s})",
+            "value": "'{%s}' has left the game ({%s})"
+        },
+        {
+            "key": "'{%s}' has left the game",
+            "value": "'{%s}' has left the game"
+        }
+    ]
+}

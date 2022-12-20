@@ -180,7 +180,7 @@ void CPlayer::Tick()
 			m_Latency.m_AccumMin = min(m_Latency.m_AccumMin, Info.m_Latency);
 		}
 		// each second
-		if(Server()->Tick(){%s}erver()->TickSpeed() == 0)
+		if(Server()->Tick() % Server()->TickSpeed() == 0)
 		{
 			m_Latency.m_Avg = m_Latency.m_Accum/Server()->TickSpeed();
 			m_Latency.m_Max = m_Latency.m_AccumMax;
@@ -409,10 +409,9 @@ void CPlayer::OnDisconnect(const char *pReason)
 		if (!m_IsBot)
 		{
 			if(pReason && *pReason)
-				str_format(aBuf, sizeof(aBuf), "'{%s}' has left the game ({%s})", Server()->ClientName(m_ClientID), pReason);
+				GameServer()->SendChatTarget(-1, _("'{%s}' has left the game ({%s})"), Server()->ClientName(m_ClientID), pReason);
 			else
-				str_format(aBuf, sizeof(aBuf), "'{%s}' has left the game", Server()->ClientName(m_ClientID));
-			GameServer()->SendChatTarget(-1,  aBuf);
+				GameServer()->SendChatTarget(-1, _("'{%s}' has left the game"), Server()->ClientName(m_ClientID));
 		}
 
 		str_format(aBuf, sizeof(aBuf), "leave player='{%d}:{%s}'", m_ClientID, Server()->ClientName(m_ClientID));

@@ -111,7 +111,7 @@ void CGameControllerTexasRun::SelectStartingDead()
 	{
 		pPlayer->SetTeam(TEAM_BLUE, false);
 		
-		GameServer()->SendBroadcast(-1, _("KILL!", pPlayer->GetCID());
+		GameServer()->SendBroadcast(pPlayer->GetCID(), false, _("KILL!"));
 	}
 }
 
@@ -129,7 +129,7 @@ void CGameControllerTexasRun::Tick()
 		if (m_GameState == TEXAS_STARTING && CountPlayers() > 1)
 		{
 			m_GameState = TEXAS_STARTED;
-			GameServer()->SendBroadcast(-1, _("", -1);
+			GameServer()->SendBroadcast(-1, false, _(""));
 		}
 	}
 	
@@ -141,13 +141,13 @@ void CGameControllerTexasRun::Tick()
 			switch (rand()%3)
 			{
 				case 0:
-					GameServer()->SendBroadcast(-1, _("Run", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Run")); break;
 				case 1:
-					GameServer()->SendBroadcast(-1, _("Hide", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Hide")); break;
 				case 2:
-					GameServer()->SendBroadcast(-1, _("Escape", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Escape")); break;
 				default:
-					GameServer()->SendBroadcast(-1, _("Run", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Run")); break;
 			};
 			
 			SelectStartingDead();
@@ -162,15 +162,15 @@ void CGameControllerTexasRun::Tick()
 			switch (rand()%5)
 			{
 				case 0:
-					GameServer()->SendBroadcast(-1, _("All hope is lost", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("All hope is lost")); break;
 				case 1:
-					GameServer()->SendBroadcast(-1, _("Slaughter", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Slaughter")); break;
 				case 2:
-					GameServer()->SendBroadcast(-1, _("Ocean of blood", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Ocean of blood")); break;
 				case 3:
-					GameServer()->SendBroadcast(-1, _("Death takes all", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Death takes all")); break;
 				default:
-					GameServer()->SendBroadcast(-1, _("Everybody dies", -1); break;
+					GameServer()->SendBroadcast(-1, false, _("Everybody dies")); break;
 			};
 			m_GameState = TEXAS_ENDING;
 			m_GameStateLockTick = GameServer()->Server()->Tick() + GameServer()->Server()->TickSpeed() * 5;

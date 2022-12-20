@@ -15,9 +15,9 @@ def check_file(filename):
 		if line[:7] == "#ifndef":
 			hg = "#ifndef " + ("_".join(filename.split(PATH)[1].split("/"))[:-2]).upper() + "_H"
 			if line[:-1] != hg:
-				print "Wrong header guard in " + filename
+				print("Wrong header guard in " + filename)
 		else:
-			print "Missing header guard in " + filename
+			print("Missing header guard in " + filename)
 		break
 	file.close()
 

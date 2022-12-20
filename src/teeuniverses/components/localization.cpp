@@ -279,13 +279,13 @@ void CLocalization::Format_V(dynamic_string& Buffer, const char* pLanguageCode, 
 			}
 
 			// we get data from an argument parsing arguments
-			if(str_comp_num("%s", pText + ParamTypeStart, 3) == 0) // string
+			if(str_comp_num("%s", pText + ParamTypeStart, 2) == 0) // string
 			{
 				const char* pVarArgValue = va_arg(VarArgsIter, const char*);
 				const char* pTranslatedValue = pLanguage->Localize(pVarArgValue);
 				BufferIter = Buffer.append_at(BufferIter, (pTranslatedValue ? pTranslatedValue : pVarArgValue));
 			}
-			else if(str_comp_num("%i", pText + ParamTypeStart, 3) == 0) // integer
+			else if(str_comp_num("%d", pText + ParamTypeStart, 2) == 0) // integer
 			{
 				char aBuf[128];
 				const int pVarArgValue = va_arg(VarArgsIter, int);
@@ -503,11 +503,11 @@ const char *CLocalization::GetLanguageCode(int Country)
 		case 156: //People’s Republic of China
 		case 344: //Hong Kong
 		case 446: //Macau
-			return "zh-Hans";
+			return "cn";
 		case 826: // United Kingdom of Great Britain and Northern Ireland
 		case 840: // United States of America
 			return "en";
 		default:
-			return "";
+			return "en";
 	}
 }

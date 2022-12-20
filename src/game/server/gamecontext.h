@@ -215,7 +215,7 @@ public:
 	};
 
 	// network
-	void SendChatTarget(int To, const char *pText);
+	void SendChatTarget(int To, const char *pText, ...);
 	void SendChat(int ClientID, int Team, const char *pText);
 	void SendEmoticon(int ClientID, int Emoticon);
 	void SendWeaponPickup(int ClientID, int Weapon);

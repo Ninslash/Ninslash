@@ -17,7 +17,6 @@
 #include "gamemodes/ctf.h"
 #include "gamemodes/run.h"
 #include "gamemodes/base.h"
-#include "gamemodes/base-inf.h"
 #include "gamemodes/roam.h"
 #include "gamemodes/texasrun.h"
 
@@ -3078,8 +3077,6 @@ void CGameContext::OnInit(/*class IKernel *pKernel*/)
 		m_pController = new CGameControllerTexasRun(this);
 	else if (str_comp(g_Config.m_SvGametype, "base") == 0)
 		m_pController = new CGameControllerBase(this);
-	else if (str_comp(g_Config.m_SvGametype, "ibase") == 0)
-		m_pController = new CGameControllerBaseInf(this);
 	else if (str_comp(g_Config.m_SvGametype, "coop") == 0)
 		m_pController = new CGameControllerCoop(this);
 	else if (str_comp(g_Config.m_SvGametype, "ball") == 0)

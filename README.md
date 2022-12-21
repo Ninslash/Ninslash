@@ -22,4 +22,4 @@
 5. Run Bam (c:\bam\bam release)<br>
 <br>
 <img alt="Cmd screenshot" src="http://ninslash.com/tools/compile.png" /><br>
-If you're using unix, having a look at <a href="https://github.com/Siile/Ninslash/blob/master/circle.yml">circleci instructions</a> might be helpful.<br>
+If you're using unix, having a look at <a href="https://github.com/NinslashFans/Ninslash/blob/master/.github/workflows/build-ubuntu.yml">circleci instructions</a> might be helpful.<br>

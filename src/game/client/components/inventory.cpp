@@ -743,7 +743,7 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 				vec2 p = Pos-GSize + vec2(x+0.5f, y+0.5f)*GSize/vec2(4, 3)*2;
 				
 				if (x+y*4 < NUM_BUILDABLES && abs(m_SelectorMouse.x - p.x) < s2 && abs(m_SelectorMouse.y - p.y) < s2)
-					TextRender()->Text(0, p.x-s2*0.8f, p.y-s2, s2*0.25f, s_BuildTipText[x+y*4], -1);
+					TextRender()->Text(0, p.x-s2*0.8f, p.y-s2, s2*0.25f, Localize(s_BuildTipText[x+y*4]), -1);
 			}
 		}
 		

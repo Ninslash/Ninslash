@@ -672,16 +672,28 @@ no limit
 
 ##### needs translation #####
 
+Area Shield
+== 
+
 Back to main menu
 == 
 
+Barrel
+== 
+
 Black
+== 
+
+Block
 == 
 
 Blood color
 == 
 
 Bodies
+== 
+
+Bomb (for destroying reactors)
 == 
 
 Borderless window
@@ -708,10 +720,25 @@ Dynamic lighting
 Editor
 == 
 
+Electric grenade
+== 
+
+Electric wall
+== 
+
+Electrowall
+== 
+
+Energy shield
+== 
+
 Environmental sounds
 == 
 
 Eyes
+== 
+
+Flamer
 == 
 
 Flip attack & hook
@@ -732,10 +759,16 @@ Handle rendering async from updates
 Hands
 == 
 
+Hard block
+== 
+
 Head
 == 
 
 Heads
+== 
+
+Invisibility device
 == 
 
 Join server
@@ -750,13 +783,37 @@ Main menu
 Maps directory
 == 
 
+Mask of melee
+== 
+
+Mask of plenty
+== 
+
+Mask of protection
+== 
+
+Mask of regeneration
+== 
+
+Mask of speed
+== 
+
 Movement & Weapons
 == 
 
 Multi framebuffering (requires restart)
 == 
 
+Power barrel
+== 
+
 Red
+== 
+
+Repair tool
+== 
+
+Respawn device
 == 
 
 Server
@@ -771,13 +828,25 @@ Server is starting
 Server stopped
 == 
 
+Shield generator
+== 
+
 Skin
 == 
 
 Stop server
 == 
 
+Supply grenade
+== 
+
 Survival mode
+== 
+
+Teslacoil
+== 
+
+The Cure
 == 
 
 The Dead
@@ -792,10 +861,19 @@ Threaded rendering
 Threaded sound loading
 == 
 
+Turret stand
+== 
+
 Waiting for server...
 == 
 
+Weapon upgrade
+== 
+
 Weapons & Items
+== 
+
+Zombie claw
 == 
 
 xbox 360 controller support

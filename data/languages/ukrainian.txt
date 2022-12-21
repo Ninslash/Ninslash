@@ -504,6 +504,9 @@ Add Friend
 Are you sure that you want to remove the player from your friends list?
 == 
 
+Area Shield
+== 
+
 Automatically record demos
 == 
 
@@ -513,13 +516,22 @@ Automatically take game over screenshot
 Back to main menu
 == 
 
+Barrel
+== 
+
 Black
+== 
+
+Block
 == 
 
 Blood color
 == 
 
 Bodies
+== 
+
+Bomb (for destroying reactors)
 == 
 
 Borderless window
@@ -576,10 +588,25 @@ Dynamic lighting
 Editor
 == 
 
+Electric grenade
+== 
+
+Electric wall
+== 
+
+Electrowall
+== 
+
+Energy shield
+== 
+
 Environmental sounds
 == 
 
 Eyes
+== 
+
+Flamer
 == 
 
 Flip attack & hook
@@ -609,10 +636,16 @@ Handle rendering async from updates
 Hands
 == 
 
+Hard block
+== 
+
 Head
 == 
 
 Heads
+== 
+
+Invisibility device
 == 
 
 Join server
@@ -634,6 +667,21 @@ Map:
 == 
 
 Maps directory
+== 
+
+Mask of melee
+== 
+
+Mask of plenty
+== 
+
+Mask of protection
+== 
+
+Mask of regeneration
+== 
+
+Mask of speed
 == 
 
 Max Screenshots
@@ -672,6 +720,9 @@ Player country:
 Player options
 == 
 
+Power barrel
+== 
+
 Quit anyway?
 == 
 
@@ -693,7 +744,13 @@ Rename
 Rename demo
 == 
 
+Repair tool
+== 
+
 Respawn
+== 
+
+Respawn device
 == 
 
 Server
@@ -712,6 +769,9 @@ Server is starting
 == 
 
 Server stopped
+== 
+
+Shield generator
 == 
 
 Show friends only
@@ -747,7 +807,16 @@ Stop server
 Strict gametype filter
 == 
 
+Supply grenade
+== 
+
 Survival mode
+== 
+
+Teslacoil
+== 
+
+The Cure
 == 
 
 The Dead
@@ -766,6 +835,9 @@ Threaded rendering
 == 
 
 Threaded sound loading
+== 
+
+Turret stand
 == 
 
 Type:
@@ -792,7 +864,13 @@ Vote description:
 Waiting for server...
 == 
 
+Weapon upgrade
+== 
+
 Weapons & Items
+== 
+
+Zombie claw
 == 
 
 no limit

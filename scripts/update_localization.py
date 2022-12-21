@@ -10,7 +10,7 @@ def parse_source():
 	stringtable = {}
 	def process_line(line):
 		if 'Localize("'.encode() in line:
-			fields = line.split('Localize("'.encode(), 1)[1].split('"'.encode(), 1)
+			fields = line.split('Localize("'.encode(), 1)[1].split('")'.encode(), 1)
 			stringtable[fields[0]] = ""
 			process_line(fields[1])
 

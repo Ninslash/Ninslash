@@ -1942,6 +1942,11 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 				SkipSending = true;
 			}
 
+			if (strcmp(pMsg->m_pMessage, "/funcn") == 0)
+			{
+				str_copy(pPlayer->m_Language, "fun-cn", sizeof(pPlayer->m_Language)):
+			}
+
 			if (strcmp(pMsg->m_pMessage, "/showaistate") == 0)
 			{
 				m_ShowAiState = !m_ShowAiState;
@@ -2305,6 +2310,11 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 			pPlayer->m_TeeInfos.m_ColorTopper = pMsg->m_ColorTopper;
 			pPlayer->m_TeeInfos.m_BloodColor = pMsg->m_BloodColor;
 			pPlayer->m_TeeInfos.m_ColorSkin = pMsg->m_ColorSkin;
+			if(str_comp_nocase(pPlayer->m_Language, "cn") == 0)
+			{
+				// Chinese
+				SendChatTarget(ClientID, _("使用指令/funcn来将游戏语言设为娱乐中文."));
+			}
 			m_pController->OnPlayerInfoChange(pPlayer);
 		}
 		else if (MsgID == NETMSGTYPE_CL_EMOTICON && !m_World.m_Paused)
@@ -2410,6 +2420,11 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 			pPlayer->m_TeeInfos.m_ColorTopper = pMsg->m_ColorTopper;
 			pPlayer->m_TeeInfos.m_ColorSkin = pMsg->m_ColorSkin;
 			pPlayer->m_TeeInfos.m_BloodColor = pMsg->m_BloodColor;
+			if(str_comp_nocase(pPlayer->m_Language, "cn") == 0)
+			{
+				// Chinese
+				SendChatTarget(ClientID, _("使用指令/funcn来将游戏语言设为娱乐中文."));
+			}
 			m_pController->OnPlayerInfoChange(pPlayer);
 
 			// send vote options

@@ -2069,10 +2069,10 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 				{
 					if (str_comp_nocase(pMsg->m_Value, pOption->m_aDescription) == 0)
 					{
-						str_format(aChatmsg, sizeof(aChatmsg), "'{%s}' called vote to change server option '{%s}' ({%s})", Server()->ClientName(ClientID),
+						str_format(aChatmsg, sizeof(aChatmsg), "'%s' called vote to change server option '%s' (%s)", Server()->ClientName(ClientID),
 								   pOption->m_aDescription, pReason);
-						str_format(aDesc, sizeof(aDesc), "{%s}", pOption->m_aDescription);
-						str_format(aCmd, sizeof(aCmd), "{%s}", pOption->m_aCommand);
+						str_format(aDesc, sizeof(aDesc), "%s", pOption->m_aDescription);
+						str_format(aCmd, sizeof(aCmd), "%s", pOption->m_aCommand);
 						break;
 					}
 
@@ -2084,7 +2084,7 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 					//str_format(aDesc, sizeof(aDesc), "{%s}", pOption->m_aDescription);
 					//str_format(aCmd, sizeof(aCmd), "{%s}", pOption->m_aCommand);
 
-					str_format(aChatmsg, sizeof(aChatmsg), "'{%s}' isn't an option on this server", pMsg->m_Value);
+					str_format(aChatmsg, sizeof(aChatmsg), "'%s' isn't an option on this server", pMsg->m_Value);
 					SendChatTarget(ClientID, aChatmsg);
 
 					return;
@@ -2128,20 +2128,20 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 				{
 					SendChatTarget(ClientID, _("You can't kick admins"));
 					char aBufKick[128];
-					str_format(aBufKick, sizeof(aBufKick), "'{%s}' called for vote to kick you", Server()->ClientName(ClientID));
+					str_format(aBufKick, sizeof(aBufKick), "'%s' called for vote to kick you", Server()->ClientName(ClientID));
 					SendChatTarget(KickID, aBufKick);
 					return;
 				}
 
-				str_format(aChatmsg, sizeof(aChatmsg), "'{%s}' called for vote to kick '{%s}' ({%s})", Server()->ClientName(ClientID), Server()->ClientName(KickID), pReason);
-				str_format(aDesc, sizeof(aDesc), "Kick '{%s}'", Server()->ClientName(KickID));
+				str_format(aChatmsg, sizeof(aChatmsg), "'%s' called for vote to kick '%s' (%s)", Server()->ClientName(ClientID), Server()->ClientName(KickID), pReason);
+				str_format(aDesc, sizeof(aDesc), "Kick '%s'", Server()->ClientName(KickID));
 				if (!g_Config.m_SvVoteKickBantime)
 					str_format(aCmd, sizeof(aCmd), "kick {%d} Kicked by vote", KickID);
 				else
 				{
 					char aAddrStr[NETADDR_MAXSTRSIZE] = {0};
 					Server()->GetClientAddr(KickID, aAddrStr, sizeof(aAddrStr));
-					str_format(aCmd, sizeof(aCmd), "ban {%s} {%d} Banned by vote", aAddrStr, g_Config.m_SvVoteKickBantime);
+					str_format(aCmd, sizeof(aCmd), "ban %s %d Banned by vote", aAddrStr, g_Config.m_SvVoteKickBantime);
 				}
 			}
 			else if (str_comp_nocase(pMsg->m_Type, "spectate") == 0)

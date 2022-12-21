@@ -3,4 +3,4 @@ description: reactor_def1.map - PvE
 config: cfg/reactor_def1
 image: reactor_def1
 min-players: 0
-max-players: 16
+max-players: 64

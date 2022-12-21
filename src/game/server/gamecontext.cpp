@@ -1944,7 +1944,7 @@ void CGameContext::OnMessage(int MsgID, CUnpacker *pUnpacker, int ClientID)
 
 			if (strcmp(pMsg->m_pMessage, "/funcn") == 0)
 			{
-				str_copy(pPlayer->m_Language, "fun-cn", sizeof(pPlayer->m_Language)):
+				str_copy(pPlayer->m_Language, "fun-cn", sizeof(pPlayer->m_Language));
 			}
 
 			if (strcmp(pMsg->m_pMessage, "/showaistate") == 0)

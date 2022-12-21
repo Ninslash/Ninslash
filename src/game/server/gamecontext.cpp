@@ -17,6 +17,7 @@
 #include "gamemodes/ctf.h"
 #include "gamemodes/run.h"
 #include "gamemodes/base.h"
+#include "gamemodes/base-inf.h"
 #include "gamemodes/roam.h"
 #include "gamemodes/texasrun.h"
 
@@ -1713,7 +1714,7 @@ void CGameContext::OnClientEnter(int ClientID)
 {
 	//world.insert_entity(&players[client_id]);
 	m_apPlayers[ClientID]->Respawn();
-	SendChatTarget(-1, _("'{%s}' joined the fun"), Server()->ClientName(ClientID));
+	SendChatTarget(-1, _("'{%s}' joined the game"), Server()->ClientName(ClientID));
 
 	char aBuf[64];
 	str_format(aBuf, sizeof(aBuf), "team_join player='{%d}:{%s}' team={%d}", ClientID, Server()->ClientName(ClientID), m_apPlayers[ClientID]->GetTeam());
@@ -3077,6 +3078,8 @@ void CGameContext::OnInit(/*class IKernel *pKernel*/)
 		m_pController = new CGameControllerTexasRun(this);
 	else if (str_comp(g_Config.m_SvGametype, "base") == 0)
 		m_pController = new CGameControllerBase(this);
+	else if (str_comp(g_Config.m_SvGametype, "ibase") == 0)
+		m_pController = new CGameControllerBaseInf(this);
 	else if (str_comp(g_Config.m_SvGametype, "coop") == 0)
 		m_pController = new CGameControllerCoop(this);
 	else if (str_comp(g_Config.m_SvGametype, "ball") == 0)

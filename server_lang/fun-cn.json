@@ -23,23 +23,23 @@
         },
         {
             "key": "KILL!",
-            "value": "杀戮!"
+            "value": "他妈的都得死!"
         },
         {
             "key": "Run",
-            "value": "跑"
+            "value": "傻孩子们，快————跑————啊————！"
         },
         {
             "key": "Hide",
-            "value": "捉迷藏"
+            "value": "别让傻子找到你"
         },
         {
             "key": "Escape",
-            "value": "离开"
+            "value": "傻孩子们，快————跑————啊————！"
         },
         {
             "key": "All hope is lost",
-            "value": "毫无希望"
+            "value": "这是人类的落日"
         },
         {
             "key": "Slaughter",
@@ -47,7 +47,7 @@
         },
         {
             "key": "Ocean of blood",
-            "value": "海洋之血"
+            "value": "杀了你，与你何干.."
         },
         {
             "key": "Death takes all",
@@ -55,15 +55,15 @@
         },
         {
             "key": "Everybody dies",
-            "value": "所有人都死了"
+            "value": "古筝计划"
         },
         {
             "key": "{%s} scores for blue team!",
-            "value": "{%s} 为红队得分了!"
+            "value": "{%s} 为蓝队拿下不知道多少分!"
         },
         {
             "key": "Blue team scores!",
-            "value": "蓝队得分了!"
+            "value": "蓝队得分咯!"
         },
         {
             "key": "{%s} scores for red team!",
@@ -83,7 +83,7 @@
         },
         {
             "key": "Wave cleared!",
-            "value": "回合清空!"
+            "value": "暂时休息!"
         },
         {
             "key": "Reactor defense",
@@ -107,7 +107,7 @@
         },
         {
             "key": "Game over on wave {%d}",
-            "value": "游戏在第{%d}波结束"
+            "value": "游戏在第{%d}结束"
         },
         {
             "key": "Arming bomb... {%d}",
@@ -119,7 +119,7 @@
         },
         {
             "key": "You were moved to {%s} due to team balancing",
-            "value": "你被移到{%s}以确保队伍平衡"
+            "value": "哈哈队伍平衡了，你是牺牲品({%s})"
         },
         {
             "key": "Draw",
@@ -163,11 +163,11 @@
         },
         {
             "key": "Level {%d} - Second try",
-            "value": "楼层 {%d} - 第二次尝试"
+            "value": "楼层 {%d} - 梅开二度"
         },
         {
             "key": "Level {%d} - Last chance",
-            "value": "楼层 {%d} - 仅此机会"
+            "value": "楼层 {%d} - 放手一搏"
         },
         {
             "key": "Spectators aren't allowed to start a vote.",
@@ -175,7 +175,7 @@
         },
         {
             "key": "Wait for current vote to end before calling a new one.",
-            "value": "等待当前投票结束发起另一个投票"
+            "value": "他妈的看不见有人还在投票呢啊，妈的等这个投票结束的，傻逼."
         },
         {
             "key": "You must wait {%d} seconds before making another vote",
@@ -187,15 +187,15 @@
         },
         {
             "key": "Invalid client id to kick",
-            "value": "无效的客户端ID"
+            "value": "无效的启动器ID"
         },
         {
             "key": "You can't kick yourself",
-            "value": "你不能踢自己"
+            "value": "你不能踢自己，傻逼"
         },
         {
             "key": "You can't kick admins",
-            "value": "你不能踢出管理员"
+            "value": "你不能踢出管理员，傻X"
         },
         {
             "key": "Server does not allow voting to move players to spectators",
@@ -203,15 +203,15 @@
         },
         {
             "key": "Invalid client id to move",
-            "value": "无效的客户端ID"
+            "value": "无效的启动器ID"
         },
         {
             "key": "You can't move yourself",
-            "value": "你不能移动你自己"
+            "value": "你不能移动你自个儿"
         },
         {
             "key": "Invalid spectator id used",
-            "value": "无效的旁观者ID"
+            "value": "无效旁观者ID"
         },
         {
             "key": "'{%s}' changed name to '{%s}'",

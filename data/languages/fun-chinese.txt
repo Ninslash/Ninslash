@@ -11,7 +11,7 @@
 == 已加载 %d%%
 
 %ds left
-== %ds 秒
+== %ds 离开了
 
 %i minute left
 == 还剩下 %i 分钟
@@ -50,10 +50,10 @@ Alpha
 == 透明度
 
 Always show name plates
-== 显示玩家名称
+== 总是显示名字板
 
 Are you sure that you want to delete the demo?
-== 你确定要删除这个回放吗?
+== 你确定要删除这个录像吗?
 
 Are you sure that you want to quit?
 == 你确定要退出吗?
@@ -86,7 +86,7 @@ Block
 == 方块
 
 Blood color
-== 血液颜色
+== 血液的颜色
 
 Blue team
 == 蓝队
@@ -170,7 +170,7 @@ Current version: %s
 == 当前版本: %s
 
 Customize
-== 自定义
+== 自定义皮肤
 
 Delete
 == 删除
@@ -320,10 +320,10 @@ Hammer
 == 锤子
 
 Handle rendering async from updates
-== 同步更新
+== 处理来自更新的异步呈现
 
 Hands
-== 手
+== 手臂
 
 Hard block
 == 坚硬方块
@@ -344,7 +344,7 @@ Hook
 == 钩子
 
 Host address
-== 连接地址
+== 主机地址
 
 Hue
 == 色调
@@ -353,10 +353,10 @@ Info
 == 信息
 
 Internet
-== 互联网
+== 因特网
 
 Invalid Demo
-== 无效的回放
+== 无效的录像
 
 Invisibility device
 == 隐身科技
@@ -398,7 +398,7 @@ Local server
 == 本地服务器
 
 MOTD
-== 公告
+== 每日通告
 
 Main menu
 == 主菜单
@@ -416,7 +416,7 @@ Mask of melee
 == 混沌面具
 
 Mask of plenty
-== 丰盛面具
+== 烧0之面具
 
 Mask of protection
 == 保护面具
@@ -431,7 +431,7 @@ Max Screenshots
 == 最大截图数
 
 Max demos
-== 最大回放数
+== 最大录像数
 
 Maximum ping:
 == 最高延迟:
@@ -446,7 +446,7 @@ Move left
 == 向左移动
 
 Move player to spectators
-== 移动玩家为旁观
+== 移动玩家为观众
 
 Move right
 == 向右移动
@@ -521,7 +521,7 @@ Pistol
 == 手枪
 
 Play
-== 开始游戏
+== 点我加入F U N
 
 Play background music
 == 播放背景音乐

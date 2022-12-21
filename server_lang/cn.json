@@ -59,7 +59,7 @@
         },
         {
             "key": "{%s} scores for blue team!",
-            "value": "{%s} 为红队得分了!"
+            "value": "{%s} 为蓝队得分了!"
         },
         {
             "key": "Blue team scores!",

@@ -3,7 +3,6 @@
 
 #include <cstring>
 #include <game/generated/protocol.h>
-#include <teeuniverses/components/localization.h>
 
 enum Buildables
 {

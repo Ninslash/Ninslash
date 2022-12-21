@@ -1713,7 +1713,7 @@ void CGameContext::OnClientEnter(int ClientID)
 {
 	//world.insert_entity(&players[client_id]);
 	m_apPlayers[ClientID]->Respawn();
-	SendChatTarget(-1, _("'{%s}' joined the game"), Server()->ClientName(ClientID));
+	SendChatTarget(-1, _("'{%s}' joined the fun"), Server()->ClientName(ClientID));
 
 	char aBuf[64];
 	str_format(aBuf, sizeof(aBuf), "team_join player='{%d}:{%s}' team={%d}", ClientID, Server()->ClientName(ClientID), m_apPlayers[ClientID]->GetTeam());

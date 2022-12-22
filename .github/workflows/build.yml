@@ -14,27 +14,27 @@ jobs:
           cmake-args: -G "Unix Makefiles"
           build-args: --parallel
           package-file: Ninslash-*-linux_x86_64.tar.xz
-          env: |
+          env:
             CFLAGS: -Wdeclaration-after-statement -Werror
             CXXFLAGS: -Werror
         - os: ubuntu-18.04
           cmake-path: /usr/bin/
           cmake-args: -G "Unix Makefiles"
           package-file: Ninslash-*-linux_x86_64.tar.xz
-          env: |
+          env:
             CFLAGS: -Wdeclaration-after-statement -Werror
             CXXFLAGS: -Werror
         - os: macOS-latest
           cmake-args: -G "Unix Makefiles"
           build-args: --parallel
           package-file: Ninslash-*-osx.dmg
-          env: |
+          env:
             CFLAGS: -Wdeclaration-after-statement -Werror
             CXXFLAGS: -Werror
         - os: windows-latest
           cmake-args: -A x64
           package-file: Ninslash-*-win64.zip
-          env: |
+          env:
             CFLAGS: /WX
             CXXFLAGS: /WX
             LDFLAGS: /WX
@@ -71,7 +71,7 @@ jobs:
     - name: Package(Linux)
       if: contains(matrix.os, 'ubuntu')
       run: |
-        tar -cf ${{ matrix.package-full-file }} ninslash_srv ninslash data cfg
+        tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg server_lang
         
     - name: Package(Linux)
       if: contains(matrix.os, 'macOS')

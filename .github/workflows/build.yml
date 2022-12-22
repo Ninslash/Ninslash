@@ -75,11 +75,16 @@ jobs:
       run: ./ninslash_srv_d shutdown
 
     - name: Package(Linux)
-      if: | 
-        contains(matrix.os, 'ubuntu')
-        contains(matrix.os, 'macOS')
+      if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macOS')
       run: |
         tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg
+        
+    - name: Package(Windows)
+      if: contains(matrix.os, 'windows')
+      run: |
+        mkdir Ninslash_Windows
+        mv ninslash_srv_d.exe ninslash_d.exe data cfg server_lang ${{ matrix.package-full-file }}
+        7z Ninslash_Windows ${{ matrix.package-full-file }}
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2-preview

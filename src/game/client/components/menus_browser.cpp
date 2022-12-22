@@ -312,14 +312,14 @@ void CMenus::RenderServerbrowserServerList(CUIRect View)
 			}
 			else if(ID == COL_FLAG_PURE)
 			{
-				if(	str_comp(pItem->m_aGameType, "DM") == 0 ||
-					str_comp(pItem->m_aGameType, "TDM") == 0 ||
-					str_comp(pItem->m_aGameType, "BALL") == 0 ||
-					str_comp(pItem->m_aGameType, "DEF") == 0 ||
-					str_comp(pItem->m_aGameType, "INF") == 0 ||
-					str_comp(pItem->m_aGameType, "INV") == 0 ||
-					str_comp(pItem->m_aGameType, "GUN") == 0 ||
-					str_comp(pItem->m_aGameType, "CTF") == 0)
+				if(	str_comp_nocase(pItem->m_aGameType, "DM") == 0 ||
+					str_comp_nocase(pItem->m_aGameType, "TDM") == 0 ||
+					str_comp_nocase(pItem->m_aGameType, "BALL") == 0 ||
+					str_comp_nocase(pItem->m_aGameType, "DEF") == 0 ||
+					str_comp_nocase(pItem->m_aGameType, "INF") == 0 ||
+					str_comp_nocase(pItem->m_aGameType, "INV") == 0 ||
+					str_comp_nocase(pItem->m_aGameType, "GUN") == 0 ||
+					str_comp_nocase(pItem->m_aGameType, "CTF") == 0)
 				{
 					// pure server
 				}

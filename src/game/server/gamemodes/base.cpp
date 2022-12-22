@@ -229,7 +229,7 @@ int CGameControllerBase::OnCharacterDeath(class CCharacter *pVictim, class CPlay
 		if (--m_Deaths <= 0 && CountPlayersAlive(-1, true) > 0 && !m_WaveStartTick && !m_RoundOverTick)
 		{
 			// next wave
-			if (m_Wave >= 10)
+			if (m_Wave >= 10 && !g_Config.m_SvInfWave)
 			{
 				GameServer()->SendBroadcast(-1, false, _("Stage completed"));
 				m_RoundOverTick = Server()->Tick();

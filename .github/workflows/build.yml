@@ -64,16 +64,12 @@ jobs:
         brew install pkg-config sdl2 bam
         
     - name: Build in debug mode(Linux)
-      if: |
-        contains(matrix.os, 'macOS')
-        contains(matrix.os, 'ubuntu')
-      run: |
-        bam debug
+      if: contains(matrix.os, 'macOS') || contains(matrix.os, 'ubuntu')
+      run: bam debug
         
     - name: Build in debug mode(Windows)
       if: contains(matrix.os, 'windows')
-      run: |
-        ./data/bam.exe
+      run: ./data/bam.exe debug
 
     - name: Test debug
       run: ./ninslash_srv_d shutdown

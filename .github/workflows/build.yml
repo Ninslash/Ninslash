@@ -63,18 +63,25 @@ jobs:
         brew update
         brew install pkg-config sdl2 bam
         
-    - name: Build in debug mode
-      run: bam debug
+    - name: Build in debug mode(Linux)
+      if: |
+        contains(matrix.os, 'macOS')
+        contains(matrix.os, 'ubuntu')
+      run: |
+        bam debug
+        
+    - name: Build in debug mode(Windows)
+      if: contains(matrix.os, 'windows')
+      run: |
+        ./data/bam.exe
+
     - name: Test debug
       run: ./ninslash_srv_d shutdown
 
     - name: Package(Linux)
-      if: contains(matrix.os, 'ubuntu')
-      run: |
-        tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg
-        
-    - name: Package(Linux)
-      if: contains(matrix.os, 'macOS')
+      if: | 
+        contains(matrix.os, 'ubuntu')
+        contains(matrix.os, 'macOS')
       run: |
         tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg
         

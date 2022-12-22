@@ -71,12 +71,12 @@ jobs:
     - name: Package(Linux)
       if: contains(matrix.os, 'ubuntu')
       run: |
-        tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg server_lang
+        tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg
         
     - name: Package(Linux)
       if: contains(matrix.os, 'macOS')
       run: |
-        tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg server_lang
+        tar -cf ${{ matrix.package-full-file }} ninslash_srv_d ninslash_d data cfg
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2-preview

@@ -35,7 +35,7 @@ MACRO_CONFIG_INT(EdShowkeys, ed_showkeys, 0, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVE, 
 MACRO_CONFIG_INT(ClShowWelcome, cl_show_welcome, 1, 0, 1, CFGFLAG_CLIENT|CFGFLAG_SAVE, "")
 MACRO_CONFIG_INT(ClMotdTime, cl_motd_time, 10, 0, 100, CFGFLAG_CLIENT|CFGFLAG_SAVE, "How long to show the server message of the day")
 
-MACRO_CONFIG_STR(ClVersionServer, cl_version_server, 100, "version.ninslash.com", CFGFLAG_CLIENT|CFGFLAG_SAVE, "Server to use to check for new versions")
+MACRO_CONFIG_STR(ClVersionServer, cl_version_server, 100, "version.ninslash.fun", CFGFLAG_CLIENT|CFGFLAG_SAVE, "Server to use to check for new versions")
 
 MACRO_CONFIG_STR(ClLanguagefile, cl_languagefile, 255, "", CFGFLAG_CLIENT|CFGFLAG_SAVE, "What language file to use")
 

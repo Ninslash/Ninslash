@@ -53,7 +53,7 @@ void CInventory::ConKeyBuildmenu(IConsole::IResult *pResult, void *pUserData)
 {
 	CInventory *pSelf = (CInventory *)pUserData;
 
-	if (!pSelf->m_pClient->m_Snap.m_SpecInfo.m_Active && pSelf->Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if (!pSelf->m_pClient->m_Snap.m_SpecInfo.m_Active)
 	{
 		if (!pSelf->m_Render || pSelf->m_Tab == 1)
 		{
@@ -184,7 +184,6 @@ bool CInventory::OnInput(IInput::CEvent Event)
 		m_Mouse1 = Event.m_Flags & IInput::FLAG_PRESS;
 		if (M != m_Mouse1)
 			m_MouseTrigger = true;
-		TextRender()->Text(0, m_SelectorMouse.x, m_SelectorMouse.y, 32.0f, "Press", 64.0f);
 		return true;
 	}
 
@@ -527,7 +526,7 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 					if (Level > 0 && !(IsStaticWeapon(w) && GetStaticType(w) == SW_UPGRADE))
 					{
 						if (Level >= 5)
-							Level -= 1;
+							Level--;
 
 						Graphics()->QuadsBegin();
 						Graphics()->SetColor(1.0f, 1.0f, 1.0f, s_Fade * 1.0f);
@@ -1387,7 +1386,7 @@ void CInventory::DrawBuildMode()
 
 void CInventory::Drop(int Slot)
 {
-	if (Slot < 0 || Slot >= 24)
+	if (Slot < 0 || Slot >= NUM_SLOTS)
 		return;
 
 	// CustomStuff()->m_aItem[Slot] = 0;
@@ -1403,12 +1402,10 @@ void CInventory::Drop(int Slot)
 
 void CInventory::Swap(int Item1, int Item2)
 {
-	if (Item1 < 0 || Item2 < 0 || Item1 >= 24 || Item2 >= 24)
+	if (Item1 < 0 || Item2 < 0 || Item1 >= NUM_SLOTS || Item2 >= NUM_SLOTS)
 		return;
 
-	int i1 = CustomStuff()->m_aItem[Item1];
-	CustomStuff()->m_aItem[Item1] = CustomStuff()->m_aItem[Item2];
-	CustomStuff()->m_aItem[Item2] = i1;
+	std::swap(CustomStuff()->m_aItem[Item1],CustomStuff()->m_aItem[Item2]);
 
 	CNetMsg_Cl_InventoryAction Msg;
 	Msg.m_Type = INVENTORYACTION_SWAP;
@@ -1422,7 +1419,7 @@ void CInventory::Swap(int Item1, int Item2)
 
 void CInventory::TakePart(int Item1, int Slot, int Item2)
 {
-	if (Item1 < 0 || Item2 < 0 || Item1 >= 24 || Item2 >= 24 || Slot < 0 || Slot > 1)
+	if (Item1 < 0 || Item2 < 0 || Item1 >= NUM_SLOTS || Item2 >= NUM_SLOTS || Slot < 0 || Slot > 1)
 		return;
 
 	int w1 = CustomStuff()->m_aItem[Item1];
@@ -1472,7 +1469,7 @@ void CInventory::TakePart(int Item1, int Slot, int Item2)
 
 void CInventory::Combine(int Item1, int Item2)
 {
-	if (Item1 < 0 || Item2 < 0 || Item1 >= 24 || Item2 >= 24)
+	if (Item1 < 0 || Item2 < 0 || Item1 >= NUM_SLOTS || Item2 >= NUM_SLOTS)
 		return;
 
 	int w1 = CustomStuff()->m_aItem[Item1];
@@ -1532,7 +1529,7 @@ void CInventory::Combine(int Item1, int Item2)
 void CInventory::RenderMouse()
 {
 	// drag drop item
-	if (m_DragItem >= 0 && m_DragItem < 24)
+	if (m_DragItem >= 0 && m_DragItem < NUM_SLOTS)
 	{
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
 		// Graphics()->QuadsBegin();
@@ -1576,7 +1573,7 @@ void CInventory::RenderMouse()
 
 void CInventory::Tick()
 {
-	for (int i = 0; i < 24; i++)
+	for (int i = 0; i < NUM_SLOTS; i++)
 	{
 		s_ItemOffset[i] -= s_ItemOffset[i] / 8.0f;
 		s_ItemEffectSelect[i] -= s_ItemEffectSelect[i] / 8.0f;

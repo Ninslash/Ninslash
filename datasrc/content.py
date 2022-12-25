@@ -311,6 +311,7 @@ container.sounds.Add(SoundSet("green_explosion", FileList("audio/sfx_green_explo
 container.sounds.Add(SoundSet("gameover", ["audio/gameover.wv"]))
 
 container.sounds.Add(SoundSet("menu", ["audio/music_menu.wv"]))
+# container.sounds.Add(SoundSet("bgm1", ["audio/music_ingame1.wv"]))
 
 container.sounds.Add(SoundSet("bg1", ["audio/bg1.wv"]))
 container.sounds.Add(SoundSet("bg2", ["audio/bg2.wv"]))

@@ -426,12 +426,12 @@ void CGameConsole::OnRender()
 			if(Client()->State() == IClient::STATE_ONLINE)
 			{
 				if(Client()->RconAuthed())
-					pPrompt = "rcon> ";
+					pPrompt = Localize("rcon> ");
 				else
-					pPrompt = "ENTER PASSWORD> ";
+					pPrompt = Localize("ENTER PASSWORD> ");
 			}
 			else
-				pPrompt = "NOT CONNECTED> ";
+				pPrompt = Localize("NOT CONNECTED> ");
 		}
 		TextRender()->TextEx(&Cursor, pPrompt, -1);
 
@@ -479,10 +479,10 @@ void CGameConsole::OnRender()
 					if(pConsole->m_IsCommand)
 					{
 						char aBuf[512];
-						str_format(aBuf, sizeof(aBuf), "Help: %s ", pConsole->m_aCommandHelp);
+						str_format(aBuf, sizeof(aBuf), Localize("Help: %s "), pConsole->m_aCommandHelp);
 						TextRender()->TextEx(&Info.m_Cursor, aBuf, -1);
 						TextRender()->TextColor(0.75f, 0.75f, 0.75f, 1);
-						str_format(aBuf, sizeof(aBuf), "Syntax: %s %s", pConsole->m_aCommandName, pConsole->m_aCommandParams);
+						str_format(aBuf, sizeof(aBuf), Localize("Syntax: %s %s"), pConsole->m_aCommandName, pConsole->m_aCommandParams);
 						TextRender()->TextEx(&Info.m_Cursor, aBuf, -1);
 					}
 				}

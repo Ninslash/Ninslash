@@ -25,7 +25,7 @@ void CLastSeen::SendLastSeenMsg(CGameContext *GameServer, int ClientID)
 	if (str_comp(m_aName[i], ClientName) == 0)
 		i = !i;
 
-	GameServer->SendChatTarget(ClientID, _("{%s} was here {%d} min ago"), m_aName[i], int((time_get() / time_freq() - m_aSeen[i]) / 60));
+	GameServer->SendChatTarget(ClientID, _("{%s} was here {%d} min ago"), m_aName[i], (int((time_get() / time_freq() - m_aSeen[i]) / 60) + 1));
 }
 
 void CLastSeen::OnClientDrop(CGameContext *GameServer, int ClientID)

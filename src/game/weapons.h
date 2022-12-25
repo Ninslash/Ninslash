@@ -35,32 +35,32 @@ enum WeaponBits
 	WEAPON_ACID = 1<<3,
 	
 	// static / non-modular weapons - needs to have the sprites in same order
-	SW_TOOL = 0,
+	SW_TOOL = 0, // Repair tool
 	SW_GUN1,
 	SW_GUN2,
-	SW_GRENADE1,
-	SW_GRENADE2,
-	SW_GRENADE3,
+	SW_GRENADE1, // Grenade
+	SW_GRENADE2, // Electric grenade
+	SW_GRENADE3, // Supply grenade
 	SW_BAZOOKA,
 	SW_BOUNCER,
-	SW_CHAINSAW,
-	SW_FLAMER,
-	SW_UPGRADE,
-	SW_SHIELD,
-	SW_RESPAWNER,
-	SW_MASK1,
-	SW_MASK2,
-	SW_MASK3,
-	SW_MASK4,
-	SW_MASK5,
-	SW_INVIS,
-	SW_ELECTROWALL,
-	SW_AREASHIELD,
-	SW_SYRINGE,
+	SW_CHAINSAW, // Chainsaw
+	SW_FLAMER, // Fire flamer
+	SW_UPGRADE, // Weapon upgrade
+	SW_SHIELD, // Energy shield
+	SW_RESPAWNER, // Respawner device
+	SW_MASK1, // Mask of regeneration
+	SW_MASK2, // Mask of speed
+	SW_MASK3, // Mask of protection
+	SW_MASK4, // Mask of plenty
+	SW_MASK5, // Mask of melee
+	SW_INVIS, // Invisibility device
+	SW_ELECTROWALL, // Electrowall
+	SW_AREASHIELD, // Area Shield
+	SW_SYRINGE, // The Cure
 	SW_CLUSTER,
 	SW_SHURIKEN,
-	SW_CLAW,
-	SW_BOMB,
+	SW_CLAW, // Zombie claw
+	SW_BOMB, // Bomb (for destroying reactors)
 	SW_BALL,
 	NUM_SW,
 	
@@ -94,8 +94,8 @@ static const char *s_TipText[NUM_SW] = {
 	"Supply grenade",
 	"",
 	"",
-	"",
-	"",
+	"Chainsaw",
+	"Fire flamer",
 	"Weapon upgrade",
 	"Energy shield",
 	"Respawn device",

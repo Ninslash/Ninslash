@@ -251,7 +251,7 @@ bool CCharacter::GiveBomb()
 
 int CCharacter::FreeSlot()
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 6; i++)
 		if (!m_apWeapon[i])
 			return i;
 	
@@ -265,8 +265,8 @@ void CCharacter::RandomizeInventory()
 	
 	for (int x = 0; x < 16; x++)
 	{
-		int i = rand()%4;
-		int j = rand()%12;
+		int i = rand()%6;
+		int j = rand()%24;
 		
 		if (i == j)
 			continue;
@@ -279,7 +279,7 @@ void CCharacter::RandomizeInventory()
 		int wt1 = GetStaticType(GetWeaponType(i));
 		int wt2 = GetStaticType(GetWeaponType(j));
 
-		if ((i > 0 && i <= 3) || (j > 0 && j <= 3))
+		if ((i > 0 && i <= 4) || (j > 0 && j <= 4))
 		{
 			if ((wt1 >= SW_MASK1 && wt1 <= SW_MASK5) || (wt2 >= SW_MASK1 && wt2 <= SW_MASK5))
 				continue;
@@ -486,6 +486,18 @@ void CCharacter::SendInventory()
 	Msg.m_Item10 = GetWeaponType(9);
 	Msg.m_Item11 = GetWeaponType(10);
 	Msg.m_Item12 = GetWeaponType(11);
+	Msg.m_Item13 = GetWeaponType(12);
+	Msg.m_Item14 = GetWeaponType(13);
+	Msg.m_Item15 = GetWeaponType(14);
+	Msg.m_Item16 = GetWeaponType(15);
+	Msg.m_Item17 = GetWeaponType(16);
+	Msg.m_Item18 = GetWeaponType(17);
+	Msg.m_Item19 = GetWeaponType(18);
+	Msg.m_Item20 = GetWeaponType(19);
+	Msg.m_Item21 = GetWeaponType(20);
+	Msg.m_Item22 = GetWeaponType(21);
+	Msg.m_Item23 = GetWeaponType(22);
+	Msg.m_Item24 = GetWeaponType(23);
 	Msg.m_Gold = GetPlayer()->GetGold();
 	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, GetPlayer()->GetCID());
 }
@@ -832,7 +844,7 @@ bool CCharacter::PickWeapon(CWeapon *pWeapon)
 			float Weapons = 0.0f;
 			float WeaponLevel = 0.0f;
 			
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 6; i++)
 			{
 				if (WeaponMaxLevel(GetWeaponType(i)) > 1)
 				{
@@ -864,7 +876,7 @@ bool CCharacter::PickWeapon(CWeapon *pWeapon)
 	
 	if (Valid)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			if (!m_apWeapon[i])
 			{
@@ -1038,7 +1050,7 @@ void CCharacter::HandleWeaponSwitch()
 		while(Next) // Next Weapon selection
 		{
 			//WantedSlot = clamp(WantedSlot+1, 0, 3);
-			if (++WantedSlot > 3)
+			if (++WantedSlot > 5)
 				WantedSlot = 0;
 			Next--;
 		}
@@ -1049,13 +1061,13 @@ void CCharacter::HandleWeaponSwitch()
 		{
 			//WantedSlot = clamp(WantedSlot-1, 0, 3);
 			if (--WantedSlot < 0)
-				WantedSlot = 3;
+				WantedSlot = 5;
 			Prev--;
 		}
 	}
 	
 	if(m_LatestInput.m_WantedWeapon)
-		WantedSlot = clamp(m_Input.m_WantedWeapon-2, 0, 3);
+		WantedSlot = clamp(m_Input.m_WantedWeapon-2, 0, 5);
 	
 	m_WantedSlot = WantedSlot;
 	
@@ -1667,7 +1679,7 @@ void CCharacter::Tick()
 		}
 		else
 		{
-			for (int w = 0; w < 4; w++)
+			for (int w = 0; w < 6; w++)
 			{
 				if (GetStaticType(GetWeaponType(w)) == SW_GRENADE1)
 					GotGrenade = true;

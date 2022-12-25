@@ -1440,6 +1440,8 @@ static CKeyInfo gs_aKeys[] =
 	{ "Item slot 2", "+weapon3", 0 },
 	{ "Item slot 3", "+weapon4", 0 },
 	{ "Item slot 4", "+weapon5", 0 },
+	{ "Item slot 5", "+weapon6", 0 },
+	{ "Item slot 6", "+weapon7", 0 },
 	
 	{ "Inventory", "+inventory", 0 },
 	{ "Build menu", "+buildmenu", 0 },

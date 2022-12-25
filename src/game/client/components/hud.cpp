@@ -806,7 +806,7 @@ void CHud::RenderHealthAndAmmo(const CNetObj_Character *pCharacter)
 	x += 60*Size;
 	y += 18;
 	
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		int w = CustomStuff()->m_aSnapWeapon[i];
 		

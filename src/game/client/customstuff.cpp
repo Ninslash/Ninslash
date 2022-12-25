@@ -62,7 +62,7 @@ void CCustomStuff::Reset()
 	m_SelectedWeapon = 0;
 	
 	m_WeaponSlot = 0;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 6; i++)
 		m_aSnapWeapon[i] = -1;
 	
 	m_LocalKits = 0;

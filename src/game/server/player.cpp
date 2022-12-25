@@ -351,6 +351,8 @@ void CPlayer::Snap(int SnappingClient)
 		pPlayerInfo->m_Weapon2 = GetCharacter()->GetWeaponType(1);
 		pPlayerInfo->m_Weapon3 = GetCharacter()->GetWeaponType(2);
 		pPlayerInfo->m_Weapon4 = GetCharacter()->GetWeaponType(3);
+		pPlayerInfo->m_Weapon5 = GetCharacter()->GetWeaponType(4);
+		pPlayerInfo->m_Weapon6 = GetCharacter()->GetWeaponType(5);
 	}
 
 	if(m_ClientID == SnappingClient)
@@ -383,6 +385,8 @@ void CPlayer::Snap(int SnappingClient)
 			pPlayerInfo->m_Weapon2 = d.m_aWeapon[1];
 			pPlayerInfo->m_Weapon3 = d.m_aWeapon[2];
 			pPlayerInfo->m_Weapon4 = d.m_aWeapon[3];
+			pPlayerInfo->m_Weapon5 = d.m_aWeapon[4];
+			pPlayerInfo->m_Weapon6 = d.m_aWeapon[5];
 		}
 	}
 }

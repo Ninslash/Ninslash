@@ -764,6 +764,18 @@ void CGameClient::OnMessage(int MsgId, CUnpacker *pUnpacker)
 		CustomStuff()->m_aItem[9] = pMsg->m_Item10;
 		CustomStuff()->m_aItem[10] = pMsg->m_Item11;
 		CustomStuff()->m_aItem[11] = pMsg->m_Item12;
+		CustomStuff()->m_aItem[12] = pMsg->m_Item13;
+		CustomStuff()->m_aItem[13] = pMsg->m_Item14;
+		CustomStuff()->m_aItem[14] = pMsg->m_Item15;
+		CustomStuff()->m_aItem[15] = pMsg->m_Item16;
+		CustomStuff()->m_aItem[16] = pMsg->m_Item17;
+		CustomStuff()->m_aItem[17] = pMsg->m_Item18;
+		CustomStuff()->m_aItem[18] = pMsg->m_Item19;
+		CustomStuff()->m_aItem[19] = pMsg->m_Item20;
+		CustomStuff()->m_aItem[20] = pMsg->m_Item11;
+		CustomStuff()->m_aItem[21] = pMsg->m_Item22;
+		CustomStuff()->m_aItem[22] = pMsg->m_Item23;
+		CustomStuff()->m_aItem[23] = pMsg->m_Item24;
 		CustomStuff()->m_Gold = pMsg->m_Gold;
 	}
 	else if(MsgId == NETMSGTYPE_SV_SOUNDGLOBAL)

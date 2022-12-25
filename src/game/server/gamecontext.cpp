@@ -128,7 +128,7 @@ CPlayerSpecData CGameContext::GetPlayerSpecData(int ClientID)
 	data.m_Kits = pCharacter->m_Kits;
 	data.m_WeaponSlot = pCharacter->GetWeaponSlot();
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 6; i++)
 		data.m_aWeapon[i] = pCharacter->GetWeaponType(i);
 
 	return data;

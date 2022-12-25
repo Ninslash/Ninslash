@@ -1536,20 +1536,20 @@ const int GetRandomWeaponType(bool IsSurvival)
 {
 	if (str_comp(g_Config.m_SvGametype, "ball") == 0)
 	{
-		if (rand()%13 < 8)
+		if (rand()%NUM_SLOTS < 8)
 			return GetModularWeapon(4, 1+rand()%4);
-		if (rand()%13 < 5)
+		if (rand()%NUM_SLOTS < 5)
 			return GetModularWeapon(2, 1+rand()%4);
 		else
 			return GetStaticWeapon(SW_BAZOOKA);
 	}
 	
 	
-	if (rand()%13 < 5)
+	if (rand()%NUM_SLOTS < 5)
 		return GetModularWeapon(1+rand()%4, 1+rand()%4);
 	
 	// swords / melee
-	if (rand()%12 < 3)
+	if (rand()%NUM_SLOTS < 3)
 		return GetModularWeapon(5, 6+rand()%4);
 	
 	int w = 0;

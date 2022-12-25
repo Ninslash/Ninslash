@@ -16,7 +16,6 @@ enum GroupTypes
 class CGameControllerCoop : public IGameController
 {
 private:
-	
 	enum Enemies
 	{
 		ENEMY_ALIEN1,
@@ -31,47 +30,47 @@ private:
 	};
 
 	vec2 m_aEnemySpawnPos[MAX_ENEMIES];
-	
+
 	int m_Deaths;
 	bool m_RoundWin;
 	int m_RoundWinTick;
 	int m_RoundOverTick;
-	
+
 	// enemy grouping
 	int m_GroupsLeft;
 	int m_GroupSpawnTick;
 	vec2 m_GroupSpawnPos;
 	int m_GroupType;
 	int m_Group;
-	
+
 	void SpawnNewGroup(bool AddBots = true);
-	
+
 	vec2 GetBotSpawnPos();
 	void RandomGroupSpawnPos();
 	int m_BotSpawnTick;
-	
+
 	// hordes of enemies
 	int m_EnemyCount;
 	int m_EnemiesLeft;
-	
+
 	int m_BossesLeft;
-	
+
 	int m_NumEnemySpawnPos;
 	int m_SpawnPosRotation;
-	
+
 	int m_TriggerLevel;
 	int m_TriggerTick;
-	
+
 	bool m_AutoRestart;
-	
+
 	void Trigger(bool IncreaseLevel);
-	
+
 	class CRadar *m_pDoor;
 	class CRadar *m_pEnemySpawn;
-	
+
 public:
 	CGameControllerCoop(class CGameContext *pGameServer);
-	
+
 	virtual bool OnEntity(int Index, vec2 Pos);
 	void OnCharacterSpawn(class CCharacter *pChr, bool RequestAI = false);
 	int OnCharacterDeath(class CCharacter *pVictim, class CPlayer *pKiller, int Weapon);
@@ -79,9 +78,9 @@ public:
 	void NextLevel(int CID = -1);
 	bool GetSpawnPos(int Team, vec2 *pOutPos);
 	virtual void Tick();
-	
+
 	void DisplayExit(vec2 Pos);
-	
+
 	enum GameState
 	{
 		STATE_STARTING,

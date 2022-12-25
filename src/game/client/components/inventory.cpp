@@ -19,7 +19,6 @@
 #include <game/client/components/sounds.h>
 #include "inventory.h"
 
-
 CInventory::CInventory()
 {
 	OnReset();
@@ -34,8 +33,8 @@ CInventory::CInventory()
 void CInventory::ConKeyInventory(IConsole::IResult *pResult, void *pUserData)
 {
 	CInventory *pSelf = (CInventory *)pUserData;
-	
-	if(!pSelf->m_pClient->m_Snap.m_SpecInfo.m_Active && pSelf->Client()->State() != IClient::STATE_DEMOPLAYBACK)
+
+	if (!pSelf->m_pClient->m_Snap.m_SpecInfo.m_Active && pSelf->Client()->State() != IClient::STATE_DEMOPLAYBACK)
 	{
 		if (!pSelf->m_Render || pSelf->m_Tab == 0)
 		{
@@ -53,14 +52,14 @@ void CInventory::ConKeyInventory(IConsole::IResult *pResult, void *pUserData)
 void CInventory::ConKeyBuildmenu(IConsole::IResult *pResult, void *pUserData)
 {
 	CInventory *pSelf = (CInventory *)pUserData;
-	
-	if(!pSelf->m_pClient->m_Snap.m_SpecInfo.m_Active && pSelf->Client()->State() != IClient::STATE_DEMOPLAYBACK)
+
+	if (!pSelf->m_pClient->m_Snap.m_SpecInfo.m_Active && pSelf->Client()->State() != IClient::STATE_DEMOPLAYBACK)
 	{
 		if (!pSelf->m_Render || pSelf->m_Tab == 1)
 		{
 			pSelf->m_Active = pResult->GetInteger(0) != 0;
 			pSelf->m_Tab = 1;
-			
+
 			if (!pSelf->m_Minimized)
 				pSelf->m_SelectedBuilding = -1;
 		}
@@ -70,7 +69,6 @@ void CInventory::ConKeyBuildmenu(IConsole::IResult *pResult, void *pUserData)
 		}
 	}
 }
-
 
 void CInventory::ConInventoryRoll(IConsole::IResult *pResult, void *pUserData)
 {
@@ -86,7 +84,7 @@ void CInventory::InventoryRoll()
 	}
 	else
 		m_StupidLock = true;
-	
+
 	CNetMsg_Cl_InventoryAction Msg;
 	Msg.m_Type = INVENTORYACTION_ROLL;
 	Msg.m_Slot = 0;
@@ -97,7 +95,7 @@ void CInventory::InventoryRoll()
 
 void CInventory::OnConsoleInit()
 {
-	//Console()->Register("+gamepaditempicker", "", CFGFLAG_CLIENT, ConKeyItemPicker, this, "Open item selector");
+	// Console()->Register("+gamepaditempicker", "", CFGFLAG_CLIENT, ConKeyItemPicker, this, "Open item selector");
 	Console()->Register("+inventory", "", CFGFLAG_CLIENT, ConKeyInventory, this, "Open inventory");
 	Console()->Register("+buildmenu", "", CFGFLAG_CLIENT, ConKeyBuildmenu, this, "Open build menu");
 	Console()->Register("+inventoryroll", "", CFGFLAG_CLIENT, ConInventoryRoll, this, "Roll inventory");
@@ -149,15 +147,14 @@ void CInventory::OnMessage(int MsgType, void *pRawMsg)
 
 bool CInventory::OnMouseMove(float x, float y)
 {
-	if(!m_Render)
+	if (!m_Render)
 		return false;
 
 	Input()->SetMouseModes(IInput::MOUSE_MODE_WARP_CENTER);
-	
+
 	Input()->GetRelativePosition(&x, &y);
-	m_SelectorMouse += vec2(x,y);
-	
-	
+	m_SelectorMouse += vec2(x, y);
+
 	if (!m_Mouse1)
 	{
 		m_MoveStartPos = m_SelectorMouse;
@@ -166,7 +163,7 @@ bool CInventory::OnMouseMove(float x, float y)
 	}
 	else if (!m_Moved)
 	{
-		if (abs(length(m_SelectorMouse-m_MoveStartPos)) > 16.0f)
+		if (abs(length(m_SelectorMouse - m_MoveStartPos)) > 16.0f)
 		{
 			m_Moved = true;
 			m_MoveTrigger = true;
@@ -176,18 +173,18 @@ bool CInventory::OnMouseMove(float x, float y)
 	return true;
 }
 
-
 bool CInventory::OnInput(IInput::CEvent Event)
 {
-	if(!m_Render)
+	if (!m_Render)
 		return false;
-	
-	if(Event.m_Key == KEY_MOUSE_1)
+
+	if (Event.m_Key == KEY_MOUSE_1)
 	{
 		bool M = m_Mouse1;
-		m_Mouse1 = Event.m_Flags&IInput::FLAG_PRESS;
+		m_Mouse1 = Event.m_Flags & IInput::FLAG_PRESS;
 		if (M != m_Mouse1)
 			m_MouseTrigger = true;
+		TextRender()->Text(0, m_SelectorMouse.x, m_SelectorMouse.y, 32.0f, "Press", 64.0f);
 		return true;
 	}
 
@@ -199,11 +196,11 @@ void CInventory::DrawCircle(float x, float y, float r, int Segments)
 	IGraphics::CFreeformItem Array[32];
 	int NumItems = 0;
 	float FSegments = (float)Segments;
-	for(int i = 0; i < Segments; i+=2)
+	for (int i = 0; i < Segments; i += 2)
 	{
-		float a1 = i/FSegments * 2*pi;
-		float a2 = (i+1)/FSegments * 2*pi;
-		float a3 = (i+2)/FSegments * 2*pi;
+		float a1 = i / FSegments * 2 * pi;
+		float a2 = (i + 1) / FSegments * 2 * pi;
+		float a3 = (i + 2) / FSegments * 2 * pi;
 		float Ca1 = cosf(a1);
 		float Ca2 = cosf(a2);
 		float Ca3 = cosf(a3);
@@ -213,192 +210,186 @@ void CInventory::DrawCircle(float x, float y, float r, int Segments)
 
 		Array[NumItems++] = IGraphics::CFreeformItem(
 			x, y,
-			x+Ca1*r, y+Sa1*r,
-			x+Ca3*r, y+Sa3*r,
-			x+Ca2*r, y+Sa2*r);
-		if(NumItems == 32)
+			x + Ca1 * r, y + Sa1 * r,
+			x + Ca3 * r, y + Sa3 * r,
+			x + Ca2 * r, y + Sa2 * r);
+		if (NumItems == 32)
 		{
 			m_pClient->Graphics()->QuadsDrawFreeform(Array, 32);
 			NumItems = 0;
 		}
 	}
-	if(NumItems)
+	if (NumItems)
 		m_pClient->Graphics()->QuadsDrawFreeform(Array, NumItems);
 }
-
-
 
 void CInventory::DrawLayer(vec2 Pos, vec2 Size)
 {
 	vec2 p1 = Pos - Size;
 	vec2 p2 = Pos + Size;
-	
-	vec2 b = vec2(min(32.0f, Size.x / 2.0f), min(32.0f, Size.y / 2.0f));
-	
+
+	vec2 b = vec2(min(32.0f, Size.x / 1.5f), min(32.0f, Size.y / 1.5f));
+
 	vec2 aPos[4];
-	
+
 	aPos[0] = p1;
-	aPos[1] = p1+b;
-	aPos[2] = p2-b;
+	aPos[1] = p1 + b;
+	aPos[2] = p2 - b;
 	aPos[3] = p2;
-	
+
 	for (int x = 1; x < 4; x++)
 		for (int y = 1; y < 4; y++)
 		{
-			p1 = vec2(aPos[x-1].x, aPos[y-1].y);
+			p1 = vec2(aPos[x - 1].x, aPos[y - 1].y);
 			p2 = vec2(aPos[x].x, aPos[y].y);
-			
-			Graphics()->QuadsSetSubsetFree(	(x-1)/4.0f, (y-1)/4.0f,  
-											(x)/4.0f, (y-1)/4.0f, 
-											(x-1)/4.0f, (y)/4.0f, 
-											(x)/4.0f, (y)/4.0f);
-			
+
+			Graphics()->QuadsSetSubsetFree((x - 1) / 4.0f, (y - 1) / 4.0f,
+										   (x) / 4.0f, (y - 1) / 4.0f,
+										   (x - 1) / 4.0f, (y) / 4.0f,
+										   (x) / 4.0f, (y) / 4.0f);
+
 			IGraphics::CFreeformItem Freeform(
 				p1.x, p1.y,
 				p2.x, p1.y,
 				p1.x, p2.y,
 				p2.x, p2.y);
-						
+
 			Graphics()->QuadsDrawFreeform(&Freeform, 1);
 		}
 }
-
-
 
 void CInventory::DrawCrafting(int Type, vec2 Pos, float Size)
 {
 	//
 	return;
 	//
-	
+
 	if (!IsModularWeapon(Type))
-		return;	int Part1 = GetPart(Type, 0)-1;
-	
-	int Part2 = GetPart(Type, 1)-1;
-	
+		return;
+	int Part1 = GetPart(Type, 0) - 1;
+
+	int Part2 = GetPart(Type, 1) - 1;
+
 	Pos.x -= Size / 4;
-	
+
 	if (Part1 >= 0)
 	{
-		RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_BG_0+Part1);
+		RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_BG_0 + Part1);
 		RenderTools()->DrawSprite(Pos.x, Pos.y, Size);
 	}
-	
+
 	if (Part2 >= 0)
 	{
-		RenderTools()->SelectSprite(SPRITE_WEAPON_PART2_0+Part2);
-		RenderTools()->DrawSprite(Pos.x+Size*(5.0f/8.4f), Pos.y, Size);
+		RenderTools()->SelectSprite(SPRITE_WEAPON_PART2_0 + Part2);
+		RenderTools()->DrawSprite(Pos.x + Size * (5.0f / 8.4f), Pos.y, Size);
 	}
-	
+
 	if (Part1 >= 0)
 	{
-		RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_0+Part1);
+		RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_0 + Part1);
 		RenderTools()->DrawSprite(Pos.x, Pos.y, Size);
 	}
 }
 
 static float s_Fade = 0.0f;
-static float s_ItemEffectSelect[12];
-static float s_ItemEffectPick[12];
-static vec2 s_ItemOffset[12];
+static float s_ItemEffectSelect[NUM_SLOTS];
+static float s_ItemEffectPick[NUM_SLOTS];
+static vec2 s_ItemOffset[NUM_SLOTS];
 static vec2 s_DragOffset;
 
 void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 {
-	Size *= (m_Scale*0.75f + 0.25f);
-	
-	//CUIRect Screen = *UI()->Screen();
-	//Pos += vec2(-Screen.w/5, Screen.h/5)*(1.0f - m_Scale);
-	
+	Size *= (m_Scale * 0.75f + 0.25f);
+
+	// CUIRect Screen = *UI()->Screen();
+	// Pos += vec2(-Screen.w/5, Screen.h/5)*(1.0f - m_Scale);
 
 	float ScreenX0, ScreenY0, ScreenX1, ScreenY1;
 	Graphics()->GetScreen(&ScreenX0, &ScreenY0, &ScreenX1, &ScreenY1);
-	
-	int ScreenX = int(ScreenX1-ScreenX0);
-	int ScreenY = int(ScreenY1-ScreenY0);
-	
-	Pos += vec2(-ScreenX/8, ScreenY/4)*(1.0f - m_Scale);
-	
-	vec2 Tab1Pos = Pos + vec2(-Size.x*0.8f, -Size.y*1.125f);
-	vec2 Tab2Pos = Pos + vec2(-Size.x*0.47f, -Size.y*1.125f);
-	
-	
+
+	int ScreenX = int(ScreenX1 - ScreenX0);
+	int ScreenY = int(ScreenY1 - ScreenY0);
+
+	Pos += vec2(-ScreenX / 8, ScreenY / 4) * (1.0f - m_Scale);
+
+	vec2 Tab1Pos = Pos + vec2(-Size.x * 0.8f, -Size.y * 1.125f);
+	vec2 Tab2Pos = Pos + vec2(-Size.x * 0.47f, -Size.y * 1.125f);
+
 	// tab icons (first one behind the frame)
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
-	
+
 	if (m_Tab == 1)
 	{
-		float s = 16 * s_Fade * (m_Scale*0.75f + 0.25f);
+		float s = 16 * s_Fade * (m_Scale * 0.75f + 0.25f);
 		int w = GetModularWeapon(1, 4);
 		RenderTools()->SetShadersForWeapon(w);
 		RenderTools()->RenderWeapon(w, Tab1Pos, vec2(1, 0), s, true);
 		Graphics()->ShaderEnd();
 	}
-	
+
 	if (m_Tab == 0)
 	{
-		float s = 16 * s_Fade * (m_Scale*0.75f + 0.25f);
+		float s = 16 * s_Fade * (m_Scale * 0.75f + 0.25f);
 		int w = GetStaticWeapon(SW_TOOL);
 		RenderTools()->SetShadersForWeapon(w);
 		RenderTools()->RenderWeapon(w, Tab2Pos, vec2(1, 0), s, true);
 		Graphics()->ShaderEnd();
 	}
-	
+
 	// main frame
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUI_WINDOW1].m_Id);
 	Graphics()->ShaderBegin(SHADER_ELECTRIC, 0.2f);
 	Graphics()->QuadsBegin();
 	vec3 c = vec3(0.0f, 1.0f, 1.0f);
-	Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
+	Graphics()->SetColor(c.r, c.g, c.b, s_Fade * 0.5f);
 	DrawLayer(Pos, Size);
-	
+
 	// inventory tab frame
 	if (m_Tab == 0)
-		Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
+		Graphics()->SetColor(c.r, c.g, c.b, s_Fade * 0.5f);
 	else
-		Graphics()->SetColor(c.r*0.5f, c.g*0.5f, c.b*0.5f, s_Fade*0.5f);
-	
-	DrawLayer(Tab1Pos, Size/6.0f);
-	
+		Graphics()->SetColor(c.r * 0.5f, c.g * 0.5f, c.b * 0.5f, s_Fade * 0.5f);
+
+	DrawLayer(Tab1Pos, Size / 6.0f);
+
 	// building tab frame
 	if (m_Tab == 1)
-		Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
+		Graphics()->SetColor(c.r, c.g, c.b, s_Fade * 0.5f);
 	else
-		Graphics()->SetColor(c.r*0.5f, c.g*0.5f, c.b*0.5f, s_Fade*0.5f);
-	
-	DrawLayer(Tab2Pos, Size/6.0f);
-	
+		Graphics()->SetColor(c.r * 0.5f, c.g * 0.5f, c.b * 0.5f, s_Fade * 0.5f);
+
+	DrawLayer(Tab2Pos, Size / 6.0f);
+
 	Graphics()->QuadsEnd();
 	Graphics()->ShaderEnd();
-	
+
 	// tab icon over the frame
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
-	
+
 	if (m_Tab == 0)
 	{
-		float s = 16 * s_Fade * (m_Scale*0.75f + 0.25f);
+		float s = 16 * s_Fade * (m_Scale * 0.75f + 0.25f);
 		int w = GetModularWeapon(1, 4);
 		RenderTools()->SetShadersForWeapon(w);
 		RenderTools()->RenderWeapon(w, Tab1Pos, vec2(1, 0), s, true);
 		Graphics()->ShaderEnd();
 	}
-	
+
 	if (m_Tab == 1)
 	{
-		float s = 16 * s_Fade * (m_Scale*0.75f + 0.25f);
+		float s = 16 * s_Fade * (m_Scale * 0.75f + 0.25f);
 		int w = GetStaticWeapon(SW_TOOL);
 		RenderTools()->SetShadersForWeapon(w);
 		RenderTools()->RenderWeapon(w, Tab2Pos, vec2(1, 0), s, true);
 		Graphics()->ShaderEnd();
 	}
-	
-	
+
 	// frame continues...
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUI_WINDOW1].m_Id);
 	Graphics()->ShaderBegin(SHADER_ELECTRIC, 0.2f);
 	Graphics()->QuadsBegin();
-	Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
-	
+	Graphics()->SetColor(c.r, c.g, c.b, s_Fade * 0.5f);
+
 	if (m_Minimized && m_Scale < 0.2f)
 	{
 		if (abs(m_SelectorMouse.x - Pos.x) < Size.x && abs(m_SelectorMouse.y - Pos.y) < Size.y)
@@ -409,40 +400,39 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 				m_pClient->m_pControls->m_SelectedBuilding = 0;
 				m_SelectedBuilding = -1;
 			}
-		
+
 			// gui open sound
 		}
 		else
 			m_MinimizedReleased = true;
 	}
-	
+
 	if (abs(m_SelectorMouse.x - Pos.x) < Size.x && abs(m_SelectorMouse.y - Pos.y) < Size.y)
 		m_CanShop = false;
 	else
 		m_CanShop = true;
 
-	
 	int Selected = -1;
 	int SelectedPart = -1;
-	
+
 	// grid
-	for (int x = 0; x < 4; x++)
-		for (int y = 0; y < 3; y++)
+	for (int x = 0; x < 6; x++)
+		for (int y = 0; y < 4; y++)
 		{
 			if (y == 0 && x == CustomStuff()->m_WeaponSlot && m_Tab == 0)
-				Graphics()->SetColor(0.3f, 1.0f, 0.3f, s_Fade*0.7f);
+				Graphics()->SetColor(0.3f, 1.0f, 0.3f, s_Fade * 0.7f);
 			else
-				Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
-			
-			float s = 112 * s_Fade * (m_Scale*0.75f + 0.25f);
-			float s2 = s * (1.0f+s_ItemEffectSelect[x+y*4]*0.5f);
+				Graphics()->SetColor(c.r, c.g, c.b, s_Fade * 0.5f);
+
+			float s = 112 * s_Fade * (m_Scale * 0.75f + 0.25f);
+			float s2 = s * (1.0f + s_ItemEffectSelect[x + y * 6] * 0.5f);
 			vec2 GSize = Size - vec2(8, 8);
-			vec2 p = Pos-GSize + vec2(x+0.5f, y+0.5f)*GSize/vec2(4, 3)*2;
+			vec2 p = Pos - GSize + vec2(x + 0.5f, y + 0.5f) * GSize / vec2(6, 4) * 2;
 			RenderTools()->SelectSprite(SPRITE_GUI_SELECT3);
 			RenderTools()->DrawSprite(p.x, p.y, s2);
-			
-			s2 = 0.35f * (1.0f+s_ItemEffectSelect[x+y*4]);
-			
+
+			s2 = 0.35f * (1.0f + s_ItemEffectSelect[x + y * 6]);
+
 			if (y == 0)
 			{
 				/*
@@ -452,104 +442,100 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 				Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
 				*/
 			}
-			
-			if (abs(m_SelectorMouse.x - p.x) < s*0.65f && abs(m_SelectorMouse.y - p.y) < s*0.65f)
-				Selected = x+y*4;
+
+			if (abs(m_SelectorMouse.x - p.x) < s * 0.65f && abs(m_SelectorMouse.y - p.y) < s * 0.65f)
+				Selected = x + y * 6;
 		}
-	
+
 	Graphics()->QuadsEnd();
 	Graphics()->ShaderEnd();
-	
-	
+
 	// coins
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
-	
+
 	Graphics()->QuadsBegin();
-	Graphics()->SetColor(1.0f, 1.0f, 1.0f, s_Fade*m_Scale*1.0f);
+	Graphics()->SetColor(1.0f, 1.0f, 1.0f, s_Fade * m_Scale * 1.0f);
 	RenderTools()->SelectSprite(SPRITE_PICKUP_BIGCOIN);
-	RenderTools()->DrawSprite(Pos.x+Size.x*0.6f, Pos.y-Size.y*1.0f-20, 48);
-	
+	RenderTools()->DrawSprite(Pos.x + Size.x * 0.6f, Pos.y - Size.y * 1.0f - 20, 48);
+
 	int Coins = CustomStuff()->m_Gold;
 	int CoinX = 30;
-	
+
 	if (Coins > 99)
 	{
-		RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+(Coins/100)%10);
-		RenderTools()->DrawSprite(Pos.x+Size.x*0.6f+CoinX, Pos.y-Size.y*1.0f-20, 34);
+		RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + (Coins / 100) % 10);
+		RenderTools()->DrawSprite(Pos.x + Size.x * 0.6f + CoinX, Pos.y - Size.y * 1.0f - 20, 34);
 		CoinX += 20;
 	}
-	
+
 	if (Coins > 9)
 	{
-		RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+(Coins/10)%10);
-		RenderTools()->DrawSprite(Pos.x+Size.x*0.6f+CoinX, Pos.y-Size.y*1.0f-20, 34);
+		RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + (Coins / 10) % 10);
+		RenderTools()->DrawSprite(Pos.x + Size.x * 0.6f + CoinX, Pos.y - Size.y * 1.0f - 20, 34);
 		CoinX += 20;
 	}
-	
-	RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+Coins%10);
-	RenderTools()->DrawSprite(Pos.x+Size.x*0.6f+CoinX, Pos.y-Size.y*1.0f-20, 34);
-	
+
+	RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + Coins % 10);
+	RenderTools()->DrawSprite(Pos.x + Size.x * 0.6f + CoinX, Pos.y - Size.y * 1.0f - 20, 34);
+
 	Graphics()->QuadsEnd();
-	
-	
-	
-	
-	vec2 aPos[12];
-	
+
+	vec2 aPos[NUM_SLOTS];
+
 	// items & weapons
 	if (m_Tab == 0)
 	{
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
-		
-		for (int x = 0; x < 4; x++)
+
+		for (int x = 0; x < 6; x++)
 		{
-			for (int y = 0; y < 3; y++)
+			for (int y = 0; y < 4; y++)
 			{
 				float s = 16 * s_Fade * m_Scale;
 				float s2 = 16 * s_Fade * m_Scale;
-				
-				if (x+y*4 == Selected)
+
+				if (x + y * 6 == Selected)
 					s *= 1.5f;
-				
+
 				vec2 GSize = Size - vec2(8, 8);
-				vec2 p = Pos-GSize + vec2(x+0.5f, y+0.5f)*GSize/vec2(4, 3)*2;
+				vec2 p = Pos - GSize + vec2(x + 0.5f, y + 0.5f) * GSize / vec2(6, 4) * 2;
 				vec2 p2 = p;
-				
-				aPos[x+y*4] = p;
-				
-				p -= s_ItemOffset[x+y*4];
-				
-				int w = CustomStuff()->m_aItem[x+y*4];
-				
+
+				aPos[x + y * 6] = p;
+
+				p -= s_ItemOffset[x + y * 6];
+
+				int w = CustomStuff()->m_aItem[x + y * 6];
+
 				// item slot numbers
 				if (y == 0)
 				{
-					//Graphics()->SetColor(0.0f, 1.0f, 0.5f, s_Fade*0.5f);
+					// Graphics()->SetColor(0.0f, 1.0f, 0.5f, s_Fade*0.5f);
 					Graphics()->QuadsBegin();
-					Graphics()->SetColor(0.0f, 1.0f, 0.5f, s_Fade*0.5f);
-					RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+x+1);
-					RenderTools()->DrawSprite(p2.x-s2*2.5f, p2.y-s2*2.5f, s2*2.8f);
+					Graphics()->SetColor(0.0f, 1.0f, 0.5f, s_Fade * 0.5f);
+					RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + x + 1);
+					RenderTools()->DrawSprite(p2.x - s2 * 2.5f, p2.y - s2 * 2.5f, s2 * 2.8f);
 					Graphics()->QuadsEnd();
-					//Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
+					// Graphics()->SetColor(c.r, c.g, c.b, s_Fade*0.5f);
 				}
-				
-				if (w >= 0 && (m_DragItem != x+y*4))
+
+				if (w >= 0 && (m_DragItem != x + y * 6))
 				{
 					// weapon rank icon
-					int Level = GetWeaponLevelCharge(w)*4;
-					
+					int Level = GetWeaponLevelCharge(w) * 4;
+
 					if (Level > 0 && !(IsStaticWeapon(w) && GetStaticType(w) == SW_UPGRADE))
 					{
 						if (Level >= 5)
 							Level -= 1;
 
 						Graphics()->QuadsBegin();
-						Graphics()->SetColor(1.0f, 1.0f, 1.0f, s_Fade*1.0f);
-						RenderTools()->SelectSprite(SPRITE_WEAPONRANK1+min(Level-1, 5));
-						RenderTools()->DrawSprite(p2.x, p2.y-s2*1.6f, s2*4.0f);
+						Graphics()->SetColor(1.0f, 1.0f, 1.0f, s_Fade * 1.0f);
+						RenderTools()->SelectSprite(SPRITE_WEAPONRANK1 + min(Level - 1, 5));
+						RenderTools()->DrawSprite(p2.x, p2.y - s2 * 1.6f, s2 * 4.0f);
 						Graphics()->QuadsEnd();
 					}
-					
+
 					RenderTools()->SetShadersForWeapon(w);
 					RenderTools()->RenderWeapon(w, p, vec2(1, 0), s, true);
 					Graphics()->ShaderEnd();
@@ -557,121 +543,118 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 			}
 		}
 	}
-	
-	
+
 	// building
 	if (m_Tab == 1)
 	{
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_BUILDINGS].m_Id);
 		Graphics()->QuadsBegin();
-		
-		for (int x = 0; x < 4; x++)
-		{
-			for (int y = 0; y < 3; y++)
-			{
-				float s = 16 * s_Fade * (m_Scale*0.75f + 0.25f);
-				
-				if (x+y*4 == Selected)
-					s *= 1.5f;
-				
-				vec2 GSize = Size - vec2(8, 8);
-				vec2 p = Pos-GSize + vec2(x+0.5f, y+0.5f)*GSize/vec2(4, 3)*2;
-				
 
-				if (x+y*4 < NUM_BUILDABLES)
+		for (int x = 0; x < 6; x++)
+		{
+			for (int y = 0; y < 4; y++)
+			{
+				float s = 16 * s_Fade * (m_Scale * 0.75f + 0.25f);
+
+				if (x + y * 6 == Selected)
+					s *= 1.5f;
+
+				vec2 GSize = Size - vec2(8, 8);
+				vec2 p = Pos - GSize + vec2(x + 0.5f, y + 0.5f) * GSize / vec2(6, 4) * 2;
+
+				if (x + y * 6 < NUM_BUILDABLES)
 				{
-					p.y += BuildableOffset[x+y*4] * 0.01f;
-					
+					p.y += BuildableOffset[x + y * 6] * 0.01f;
+
 					// outlines
-					if (x+y*4 == m_SelectedBuilding)
+					if (x + y * 6 == m_SelectedBuilding)
 					{
 						Graphics()->QuadsEnd();
 						Graphics()->ShaderBegin(SHADER_GRAYSCALE, 0.0f);
 						Graphics()->QuadsBegin();
-						
-						RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1+x+y*4);
-						RenderTools()->DrawSprite(p.x-1, p.y-1, s*5.0f);
-						RenderTools()->DrawSprite(p.x+1, p.y-1, s*5.0f);
-						RenderTools()->DrawSprite(p.x+1, p.y+1, s*5.0f);
-						RenderTools()->DrawSprite(p.x-1, p.y+1, s*5.0f);
-					
+
+						RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1 + x + y * 6);
+						RenderTools()->DrawSprite(p.x - 1, p.y - 1, s * 5.0f);
+						RenderTools()->DrawSprite(p.x + 1, p.y - 1, s * 5.0f);
+						RenderTools()->DrawSprite(p.x + 1, p.y + 1, s * 5.0f);
+						RenderTools()->DrawSprite(p.x - 1, p.y + 1, s * 5.0f);
+
 						Graphics()->QuadsEnd();
 						Graphics()->ShaderEnd();
 						Graphics()->QuadsBegin();
 					}
-					
-					RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1+x+y*4);
-					RenderTools()->DrawSprite(p.x, p.y, s*5.0f);
+
+					RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1 + x + y * 6);
+					RenderTools()->DrawSprite(p.x, p.y, s * 5.0f);
 				}
 			}
 		}
-		
+
 		Graphics()->QuadsEnd();
-		
+
 		// kit costs
-		int LocalKits = clamp(CustomStuff()->m_LocalKits ,0, 99);
+		int LocalKits = clamp(CustomStuff()->m_LocalKits, 0, 499);
 
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
 		Graphics()->QuadsBegin();
-		
-		for (int x = 0; x < 4; x++)
+
+		for (int x = 0; x < 6; x++)
 		{
-			for (int y = 0; y < 3; y++)
+			for (int y = 0; y < 4; y++)
 			{
 				float s = 16 * s_Fade * m_Scale;
-				
-				vec2 GSize = Size - vec2(8, 8);
-				vec2 p = Pos-GSize + vec2(x+0.5f, y+0.5f)*GSize/vec2(4, 3)*2;
-				
 
-				if (x+y*4 < NUM_BUILDABLES)
+				vec2 GSize = Size - vec2(8, 8);
+				vec2 p = Pos - GSize + vec2(x + 0.5f, y + 0.5f) * GSize / vec2(6, 4) * 2;
+
+				if (x + y * 6 < NUM_BUILDABLES)
 				{
-					p += vec2(s*2.0f, s*2.0f);
-					
+					p += vec2(s * 2.0f, s * 2.0f);
+
 					RenderTools()->SelectSprite(SPRITE_PICKUP_KIT);
-					RenderTools()->DrawSprite(p.x, p.y, s*3.0f);
-					
-					int Cost = BuildableCost[x+y*4];
-					
-					if (x+y*4 == Selected)
+					RenderTools()->DrawSprite(p.x, p.y, s * 3.0f);
+
+					int Cost = BuildableCost[x + y * 6];
+
+					if (x + y * 6 == Selected)
 					{
 						Graphics()->QuadsEnd();
 						Graphics()->ShaderBegin(SHADER_GRAYSCALE, 0.0f);
 						Graphics()->QuadsBegin();
-						
+
 						Graphics()->SetColor(0.0f, 0.0f, 0.0f, 1.0f);
-						
+
 						if (Cost < 10)
 						{
-							RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+Cost);
-							RenderTools()->DrawSprite(p.x-1, p.y-1, s*2.0f);
-							RenderTools()->DrawSprite(p.x+1, p.y-1, s*2.0f);
-							RenderTools()->DrawSprite(p.x+1, p.y+1, s*2.0f);
-							RenderTools()->DrawSprite(p.x-1, p.y+1, s*2.0f);
+							RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + Cost);
+							RenderTools()->DrawSprite(p.x - 1, p.y - 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x + 1, p.y - 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x + 1, p.y + 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x - 1, p.y + 1, s * 2.0f);
 						}
 						else
 						{
-							int second = Cost%10;
-							int first = (Cost-second)/10;
-							RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+first);
-							RenderTools()->DrawSprite(p.x-1-s*0.5f, p.y-1, s*2.0f);
-							RenderTools()->DrawSprite(p.x+1-s*0.5f, p.y-1, s*2.0f);
-							RenderTools()->DrawSprite(p.x+1-s*0.5f, p.y+1, s*2.0f);
-							RenderTools()->DrawSprite(p.x-1-s*0.5f, p.y+1, s*2.0f);
-							
-							RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+second);
-							RenderTools()->DrawSprite(p.x-1+s*0.5f, p.y-1, s*2.0f);
-							RenderTools()->DrawSprite(p.x+1+s*0.5f, p.y-1, s*2.0f);
-							RenderTools()->DrawSprite(p.x+1+s*0.5f, p.y+1, s*2.0f);
-							RenderTools()->DrawSprite(p.x-1+s*0.5f, p.y+1, s*2.0f);
+							int second = Cost % 10;
+							int first = (Cost - second) / 10;
+							RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + first);
+							RenderTools()->DrawSprite(p.x - 1 - s * 0.5f, p.y - 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x + 1 - s * 0.5f, p.y - 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x + 1 - s * 0.5f, p.y + 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x - 1 - s * 0.5f, p.y + 1, s * 2.0f);
+
+							RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + second);
+							RenderTools()->DrawSprite(p.x - 1 + s * 0.5f, p.y - 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x + 1 + s * 0.5f, p.y - 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x + 1 + s * 0.5f, p.y + 1, s * 2.0f);
+							RenderTools()->DrawSprite(p.x - 1 + s * 0.5f, p.y + 1, s * 2.0f);
 						}
-					
+
 						Graphics()->QuadsEnd();
 						Graphics()->ShaderEnd();
 						Graphics()->QuadsBegin();
 					}
-					
-					if (x+y*4 == Selected)
+
+					if (x + y * 6 == Selected)
 					{
 						if (LocalKits < Cost)
 							Graphics()->SetColor(0.9f, 0.1f, 0.1f, 1.0f);
@@ -680,85 +663,84 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 					}
 					else
 						Graphics()->SetColor(0.9f, 0.9f, 0.9f, 1.0f);
-					
+
 					if (Cost < 10)
 					{
-						RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+Cost);
-						RenderTools()->DrawSprite(p.x, p.y, s*2.0f);
+						RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + Cost);
+						RenderTools()->DrawSprite(p.x, p.y, s * 2.0f);
 					}
 					else
 					{
-						int second = Cost%10;
-						int first = (Cost-second)/10;
-						RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+first);
-						RenderTools()->DrawSprite(p.x-s*0.5f, p.y, s*2.0f);
-						RenderTools()->SelectSprite(SPRITE_GUINUMBER_0+second);
-						RenderTools()->DrawSprite(p.x+s*0.5f, p.y, s*2.0f);
+						int second = Cost % 10;
+						int first = (Cost - second) / 10;
+						RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + first);
+						RenderTools()->DrawSprite(p.x - s * 0.5f, p.y, s * 2.0f);
+						RenderTools()->SelectSprite(SPRITE_GUINUMBER_0 + second);
+						RenderTools()->DrawSprite(p.x + s * 0.5f, p.y, s * 2.0f);
 					}
 				}
-				
+
 				Graphics()->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 			}
 		}
-		
+
 		Graphics()->QuadsEnd();
 	}
 
-	
 	// hint texts
 	if (m_Tab == 0)
 	{
 		TextRender()->TextColor(0.9f, 0.9f, 0.9f, 1);
-		
-		for (int x = 0; x < 4; x++)
+
+		for (int x = 0; x < 6; x++)
 		{
-			for (int y = 0; y < 3; y++)
+			for (int y = 0; y < 4; y++)
 			{
-				float s = 112 * s_Fade * (m_Scale*0.75f + 0.25f);
-				float s2 = s*0.5f;
+				float s = 112 * s_Fade * (m_Scale * 0.75f + 0.25f);
+				float s2 = s * 0.5f;
 				vec2 GSize = Size - vec2(8, 8);
-				vec2 p = Pos-GSize + vec2(x+0.5f, y+0.5f)*GSize/vec2(4, 3)*2;
-				
-				if (x+y*4 == Selected && CustomStuff()->m_aItem[Selected] > 0 && abs(m_SelectorMouse.x - p.x) < s2 && abs(m_SelectorMouse.y - p.y) < s2)
+				vec2 p = Pos - GSize + vec2(x + 0.5f, y + 0.5f) * GSize / vec2(6, 4) * 2;
+
+				if (x + y * 6 == Selected && CustomStuff()->m_aItem[Selected] > 0 && abs(m_SelectorMouse.x - p.x) < s2 && abs(m_SelectorMouse.y - p.y) < s2)
 				{
 					if (IsStaticWeapon(CustomStuff()->m_aItem[Selected]))
-						TextRender()->Text(0, p.x-s2*0.8f, p.y-s2, s2*0.25f, Localize(s_TipText[GetStaticType(CustomStuff()->m_aItem[Selected])]), -1);
+						TextRender()->Text(0, p.x - s2 * 0.8f, p.y - s2, s2 * 0.25f, Localize(s_TipText[GetStaticType(CustomStuff()->m_aItem[Selected])]), -1);
 				}
 			}
 		}
-		
+
 		TextRender()->TextColor(1, 1, 1, 1);
 	}
 	else if (m_Tab == 1)
 	{
 		TextRender()->TextColor(0.9f, 0.9f, 0.9f, 1);
-		
-		for (int x = 0; x < 4; x++)
+
+		for (int x = 0; x < 6; x++)
 		{
-			for (int y = 0; y < 3; y++)
+			for (int y = 0; y < 4; y++)
 			{
-				float s = 112 * s_Fade * (m_Scale*0.75f + 0.25f);
-				float s2 = s*0.5f;
+				float s = 112 * s_Fade * (m_Scale * 0.75f + 0.25f);
+				float s2 = s * 0.5f;
 				vec2 GSize = Size - vec2(8, 8);
-				vec2 p = Pos-GSize + vec2(x+0.5f, y+0.5f)*GSize/vec2(4, 3)*2;
-				
-				if (x+y*4 < NUM_BUILDABLES && abs(m_SelectorMouse.x - p.x) < s2 && abs(m_SelectorMouse.y - p.y) < s2)
-					TextRender()->Text(0, p.x-s2*0.8f, p.y-s2, s2*0.25f, Localize(s_BuildTipText[x+y*4]), -1);
+				vec2 p = Pos - GSize + vec2(x + 0.5f, y + 0.5f) * GSize / vec2(6, 4) * 2;
+
+				if (x + y * 6 < NUM_BUILDABLES && abs(m_SelectorMouse.x - p.x) < s2 && abs(m_SelectorMouse.y - p.y) < s2)
+					TextRender()->Text(0, p.x - s2 * 0.8f, p.y - s2, s2 * 0.25f, Localize(s_BuildTipText[x + y * 6]), -1);
 			}
 		}
-		
+
 		TextRender()->TextColor(1, 1, 1, 1);
 	}
-	
+
 	// selected weapon / crafting
 	/*
 	int Part1 = 0;
 	int Part2 = 0;
 	*/
-	//int Part = 0;
+	// int Part = 0;
 	vec2 pp1;
 	vec2 pp2;
-	
+
 	// this works, but crafting is kinda useless feature so it's disabled
 	/*
 	if (CustomStuff()->m_WeaponSlot >= 0 && CustomStuff()->m_WeaponSlot < 4 && IsModularWeapon(CustomStuff()->m_aItem[CustomStuff()->m_WeaponSlot]))
@@ -766,45 +748,45 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 		vec2 p = Pos-vec2(0, Size.y*1.35f);
 		float s = Size.x/7.0f;
 		int Type = CustomStuff()->m_aItem[CustomStuff()->m_WeaponSlot];
-		
+
 		RenderTools()->SetShadersForWeapon(Type);
 		Graphics()->QuadsBegin();
-		
+
 		int Drag1 = -1;
 		int Drag2 = -1;
-	
-		// 
+
+		//
 		Part1 = GetPart(Type, 0)-1;
 		Part2 = GetPart(Type, 1)-1;
-		
-		
+
+
 		ivec2 WSize = GetWeaponVisualSize(Type);
 		ivec2 WSize2 = GetWeaponVisualSize2(Type);
-		
+
 		if (Part2 < 5)
 			p.x -= s * (2)/2;
 		else
 			p.x -= s*(8.0f/2.0f)/2;
-		
+
 		pp1 = p;
 		pp2 = p;
-		
+
 		if (Part2 < 5)
 			pp2.x += s*(WSize.x-1);
 		else
 			pp2.x += s*(7.0f/2.0f);
-		
+
 		//IGraphics::CQuadItem QuadItem2(Pos.x+Dir.x*Size*(WSize.x-1), Pos.y+Dir.y*Size*(WSize.x-1), Size*WSize2.x, Size*WSize2.y);
-		
+
 		// get mouse pos
-		
+
 		float ss = 0.35f;
-				
+
 		if (m_DragItem >= 0)
 		{
 			Drag1 = GetPart(CustomStuff()->m_aItem[m_DragItem], 0)-1;
 			Drag2 = GetPart(CustomStuff()->m_aItem[m_DragItem], 1)-1;
-				
+
 			if (Drag1 >= 0 && Drag2 >= 0)
 			{
 				//if (distance(m_SelectorMouse, p+vec2(s/4, 0)) < s/2.5f)
@@ -821,35 +803,35 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 					m_SelectorMouse.y > pp2.y - (s*WSize2.y)*ss && m_SelectorMouse.y < pp2.y + (s*WSize2.y)*ss)
 				Part = 2;
 		}
-		
+
 		// render
-		
+
 		// render weapon parts - drawcrafting(
-		
+
 		// part 1 bg
 		if (Part1 >= 0)
 		{
 			if (m_DragSlot != 0)
 			{
 				RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_BG_0+Part1);
-				
+
 				IGraphics::CQuadItem QuadItem(pp1.x, pp1.y, s*WSize.x, s*WSize.y);
 				Graphics()->QuadsDraw(&QuadItem, 1);
-				
+
 				//RenderTools()->DrawSprite(pp1.x, pp1.y, s);
 			}
 		}
-		
+
 		if (Part2 >= 0)
 		{
 			if (m_DragSlot != 1)
 			{
 				RenderTools()->SelectSprite(SPRITE_WEAPON_PART2_0+Part2);
 				//RenderTools()->DrawSprite(pp2.x, pp2.y, s);
-				
+
 				IGraphics::CQuadItem QuadItem(pp2.x, pp2.y, s*WSize2.x, s*WSize2.y);
 				Graphics()->QuadsDraw(&QuadItem, 1);
-				
+
 				if (m_SelectorMouse.x > pp2.x - (s*WSize2.x)*ss && m_SelectorMouse.x < pp2.x + (s*WSize2.x)*ss &&
 					m_SelectorMouse.y > pp2.y - (s*WSize2.y)*ss && m_SelectorMouse.y < pp2.y + (s*WSize2.y)*ss)
 					SelectedPart = 1;
@@ -861,32 +843,32 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 				Graphics()->QuadsEnd();
 				Graphics()->ShaderBegin(SHADER_ELECTRIC, 0.7f);
 				Graphics()->QuadsBegin();
-				
+
 				RenderTools()->SelectSprite(SPRITE_WEAPON_PART2_0+Part2);
 				//RenderTools()->DrawSprite(pp2.x, pp2.y, s);
 
 				IGraphics::CQuadItem QuadItem(pp2.x, pp2.y, s*WSize2.x, s*WSize2.y);
 				Graphics()->QuadsDraw(&QuadItem, 1);
-				
+
 				Graphics()->QuadsEnd();
 				RenderTools()->SetShadersForWeapon(Type);
 				Graphics()->QuadsBegin();
 			}
 		}
-		
-	
+
+
 		// new part2 ghost
 		if (Drag2 >= 0 || GetPart(m_DragPart, 1)-1 >= 0)
 		{
 			Graphics()->QuadsEnd();
 			Graphics()->ShaderBegin(SHADER_SPAWN, 0.4f);
 			Graphics()->QuadsBegin();
-			
+
 			int DPart = Drag2;
-	
+
 			if (m_DragPart > 0)
 				DPart = GetPart(m_DragPart, 1)-1;
-		
+
 			if (DPart >= 0)
 			{
 				RenderTools()->SelectSprite(SPRITE_WEAPON_PART2_0+DPart);
@@ -894,48 +876,48 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 				IGraphics::CQuadItem QuadItem(pp2.x, pp2.y, s*WSize2.x, s*WSize2.y);
 				Graphics()->QuadsDraw(&QuadItem, 1);
 			}
-			
+
 			Graphics()->QuadsEnd();
 			RenderTools()->SetShadersForWeapon(Type);
 			Graphics()->QuadsBegin();
 		}
-		
-		
+
+
 		if (Part1 >= 0)
 		{
 			if (m_DragSlot != 0)
 			{
 				RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_0+Part1);
 				//RenderTools()->DrawSprite(pp1.x, pp1.y, s);
-				
+
 				IGraphics::CQuadItem QuadItem(pp1.x, pp1.y, s*WSize.x, s*WSize.y);
 				Graphics()->QuadsDraw(&QuadItem, 1);
-				
+
 				if (SelectedPart < 0 && m_SelectorMouse.x > pp1.x - (s*WSize.x)*ss && m_SelectorMouse.x < pp1.x + (s*WSize.x)*ss &&
 					m_SelectorMouse.y > pp1.y - (s*WSize.y)*ss && m_SelectorMouse.y < pp1.y + (s*WSize.y)*ss)
 					SelectedPart = 0;
 			}
 			// dragging the part away
-			
+
 			if (SelectedPart == 0)
 			{
 				Graphics()->QuadsEnd();
 				Graphics()->ShaderBegin(SHADER_ELECTRIC, 0.75f);
 				Graphics()->QuadsBegin();
-				
+
 				RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_0+Part1);
 				//RenderTools()->DrawSprite(pp1.x, pp1.y, s);
-				
+
 				IGraphics::CQuadItem QuadItem(pp1.x, pp1.y, s*WSize.x, s*WSize.y);
 				Graphics()->QuadsDraw(&QuadItem, 1);
-				
+
 				Graphics()->QuadsEnd();
 				Graphics()->ShaderEnd();
 				Graphics()->QuadsBegin();
 			}
 		}
-		
-		
+
+
 		// new part1 ghost
 		if (Drag1 >= 0 || GetPart(m_DragPart, 0)-1 >= 0)
 		{
@@ -943,12 +925,12 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 			Graphics()->ShaderBegin(SHADER_SPAWN, 0.4f);
 			Graphics()->QuadsBegin();
 			int i = GetPart(CustomStuff()->m_aItem[m_DragItem], 0)-1;
-			
+
 			int DPart = Drag1;
-	
+
 			if (m_DragPart > 0)
 				DPart = GetPart(m_DragPart, 0)-1;
-		
+
 			if (DPart >= 0)
 			{
 				RenderTools()->SelectSprite(SPRITE_WEAPON_PART1_0+DPart);
@@ -957,57 +939,55 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 				IGraphics::CQuadItem QuadItem(pp1.x, pp1.y, s*WSize.x*1.1f, s*WSize.y*1.1f);
 				Graphics()->QuadsDraw(&QuadItem, 1);
 			}
-			
+
 			Graphics()->QuadsEnd();
 			Graphics()->ShaderEnd();
 			Graphics()->QuadsBegin();
 		}
-		
+
 		Graphics()->QuadsEnd();
 		Graphics()->ShaderEnd();
 	}
 	*/
-	
-	
+
 	// mouse press
 	/*
 	if (m_MouseTrigger && m_Mouse1 && Selected >= 0)
 	{
 		//if (m_DragItem != Selected)
 		//	s_DragOffset = aPos[Selected] - m_SelectorMouse;
-	
+
 		s_DragOffset = vec2(0, 0);
 		m_DragItem = Selected;
 	}
 	*/
-	
-	//if (!m_Mouse1)
+
+	// if (!m_Mouse1)
 	//	m_Mouse1Loaded = true;
-		
-	
+
 	// auto scale
 	if (m_Minimized && m_Scale > 0.0f)
 		m_Scale = max(0.0f, m_Scale - 0.05f);
-		
+
 	if (!m_Minimized && m_Scale < 1.0f)
 		m_Scale = min(1.0f, m_Scale + 0.05f);
-		
+
 	// building actions
 	if (m_Tab == 1)
 	{
 		// mouse click
 		if (m_MouseTrigger && !m_Moved && !m_Mouse1 && Selected >= 0)
 		{
-			int LocalKits = clamp(CustomStuff()->m_LocalKits ,0, 99);
-			
+			int LocalKits = clamp(CustomStuff()->m_LocalKits, 0, 499);
+
 			if (LocalKits >= BuildableCost[Selected])
 			{
 				m_pClient->m_pSounds->Play(CSounds::CHN_GUI, SOUND_INV4, 0);
-				m_pClient->m_pControls->m_SelectedBuilding = Selected+1;
+				m_pClient->m_pControls->m_SelectedBuilding = Selected + 1;
 				m_SelectedBuilding = Selected;
 				m_Minimized = true;
 				m_MinimizedReleased = false;
-				
+
 				m_pClient->m_pControls->m_BuildMode = true;
 			}
 			else
@@ -1017,19 +997,17 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 			}
 		}
 	}
-	
-	
+
 	// tab actions / switching
 	if (m_Mouse1 && m_Mouse1Loaded)
 	{
-		if (abs(m_SelectorMouse.x - Tab1Pos.x) < Size.x/7.0f && abs(m_SelectorMouse.y - Tab1Pos.y) < Size.y/7.0f)
+		if (abs(m_SelectorMouse.x - Tab1Pos.x) < Size.x / 7.0f && abs(m_SelectorMouse.y - Tab1Pos.y) < Size.y / 7.0f)
 			m_Tab = 0;
-		
-		if (abs(m_SelectorMouse.x - Tab2Pos.x) < Size.x/7.0f && abs(m_SelectorMouse.y - Tab2Pos.y) < Size.y/7.0f)
+
+		if (abs(m_SelectorMouse.x - Tab2Pos.x) < Size.x / 7.0f && abs(m_SelectorMouse.y - Tab2Pos.y) < Size.y / 7.0f)
 			m_Tab = 1;
 	}
-	
-	
+
 	// item & weapon actions
 	if (m_Tab == 0)
 	{
@@ -1037,31 +1015,31 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 		{
 			if (m_DragItem != Selected)
 				s_DragOffset = aPos[Selected] - m_SelectorMouse;
-			
+
 			m_DragItem = Selected;
 			m_MoveTrigger = false;
 		}
-		
+
 		if (m_MoveTrigger && SelectedPart >= 0)
 		{
 			s_DragOffset = (SelectedPart == 0 ? pp1 : vec2(0, 0)) + (SelectedPart == 1 ? pp2 : vec2(0, 0)) - m_SelectorMouse;
-			
+
 			int i = GetPart(CustomStuff()->m_aItem[CustomStuff()->m_WeaponSlot], SelectedPart);
 			m_DragPart = GetModularWeapon(SelectedPart == 0 ? i : 0, SelectedPart == 1 ? i : 0);
 			m_DragSlot = SelectedPart;
 			m_MoveTrigger = false;
 		}
-		
+
 		// mouse release
 		if (m_MouseTrigger && !m_Mouse1 && m_DragItem >= 0)
 		{
 			// drop items by dragging the away from the frame
-			if (abs(m_SelectorMouse.x - Pos.x) > Size.x || abs(m_SelectorMouse.y - Pos.y) > Size.y) 
+			if (abs(m_SelectorMouse.x - Pos.x) > Size.x || abs(m_SelectorMouse.y - Pos.y) > Size.y)
 			{
 				Drop(m_DragItem);
 			}
 			else
-			{			
+			{
 				// item combining not in use
 				/*
 				if (Part)
@@ -1076,10 +1054,10 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 					if (Selected >= 0)
 					{
 						Swap(m_DragItem, Selected);
-						
+
 						s_ItemOffset[Selected] = aPos[Selected] - m_SelectorMouse;
 						s_ItemEffectSelect[Selected] = 0.5f;
-						
+
 						if (m_DragItem != Selected)
 							s_ItemOffset[m_DragItem] = aPos[m_DragItem] - aPos[Selected];
 					}
@@ -1087,10 +1065,10 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 						s_ItemOffset[m_DragItem] = aPos[m_DragItem] - m_SelectorMouse;
 				}
 			}
-				
+
 			m_DragItem = -1;
 		}
-		
+
 		// weapon part to inventory
 		if (m_MouseTrigger && !m_Mouse1 && m_DragPart >= 0)
 		{
@@ -1100,24 +1078,24 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 				TakePart(CustomStuff()->m_WeaponSlot, m_DragSlot, Selected);
 			}
 			*/
-				
+
 			m_DragPart = -1;
 			m_DragSlot = -1;
 		}
-		
+
 		// mouse click
 		if (m_MouseTrigger && !m_Moved && !m_Mouse1 && m_DragItem < 0 && Selected >= 0 && CustomStuff()->m_aItem[Selected] >= 0)
 		{
-			if (Selected < 4)
+			if (Selected < 6)
 			{
-				m_pClient->m_pControls->m_InputData.m_WantedWeapon = Selected+2;
+				m_pClient->m_pControls->m_InputData.m_WantedWeapon = Selected + 2;
 				m_pClient->m_pSounds->Play(CSounds::CHN_GUI, SOUND_INV4, 0);
 			}
 			else
 			{
 				int w = CustomStuff()->m_WeaponSlot;
-				
-				if (w >= 0 && w < 4)
+
+				if (w >= 0 && w < 6)
 				{
 					s_ItemEffectSelect[w] = 1.0f;
 					Swap(Selected, w);
@@ -1125,201 +1103,194 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 					s_ItemOffset[w] = aPos[w] - aPos[Selected];
 				}
 			}
-			
+
 			// effect trigger
 			s_ItemEffectSelect[Selected] = 1.0f;
 		}
 	}
-	
+
 	m_MouseTrigger = false;
-	
-	
-	//if (m_Mouse1)
+
+	// if (m_Mouse1)
 	//	m_Mouse1Loaded = false;
 }
-
 
 void CInventory::DrawBuildMode()
 {
 	if (m_Tab != 1 || m_SelectedBuilding < 0 || m_SelectedBuilding >= NUM_BUILDABLES)
 		return;
-	
-	//RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1+Selected,
+
+	// RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1+Selected,
 	//								(Selected == 2 && CustomStuff()->m_FlipBuilding) ? SPRITE_FLAG_FLIP_X : 0 + (FlipY ? SPRITE_FLAG_FLIP_Y : 0));
 
 	// validity checks, snap & rotate
 	vec2 Pos = m_SelectorMouse + m_pClient->m_pCamera->m_Center;
 
-	
 	int Selected = m_SelectedBuilding;
 	int SnapRange = 128;
-	
+
 	bool Valid = false;
 	bool FlipY = false;
-	int Cost = 0; //BuildableCost[Selected];
+	int Cost = 0; // BuildableCost[Selected];
 
-	
 	if (Selected != BUILDABLE_BLOCK1 && Selected != BUILDABLE_BLOCK2)
 	{
-			if (!Collision()->IsTileSolid(Pos.x, Pos.y))
+		if (!Collision()->IsTileSolid(Pos.x, Pos.y))
+			Valid = true;
+
+		// snap y down
+		if (Valid && Selected != BUILDABLE_FLAMETRAP)
+		{
+			vec2 To = Pos + vec2(0, SnapRange);
+			if (Collision()->IntersectLine(Pos, To, 0x0, &To))
+			{
+				Pos = To;
+				Pos.y += BuildableOffset[Selected];
+			}
+			else
+				Valid = false;
+
+			if (!Collision()->IsTileSolid(To.x - 22, To.y + 2) || !Collision()->IsTileSolid(To.x + 22, To.y + 2))
+				Valid = false;
+
+			if (Collision()->IsTileSolid(To.x, To.y - 64))
+				Valid = false;
+
+			if (Selected != BUILDABLE_POWERBARREL && Selected != BUILDABLE_BARREL && Collision()->IsForceTile(To.x, To.y + 16))
+				Valid = false;
+		}
+
+		// snap y up / turret stand
+		if (!Valid && (Selected == BUILDABLE_TURRET || Selected == BUILDABLE_TESLACOIL))
+		{
+			vec2 To = Pos + vec2(0, -SnapRange);
+			if (Collision()->IntersectLine(Pos, To, 0x0, &To))
+			{
+				Pos = To;
+				Pos.y -= BuildableOffset[Selected];
 				Valid = true;
-	
-			// snap y down
-			if (Valid && Selected != BUILDABLE_FLAMETRAP)
-			{
-				vec2 To = Pos+vec2(0, SnapRange);
-				if (Collision()->IntersectLine(Pos, To, 0x0, &To))
-				{
-					Pos = To;
-					Pos.y += BuildableOffset[Selected];
-				}
-				else
-					Valid = false;
-				
-				if (!Collision()->IsTileSolid(To.x - 22, To.y+2) || !Collision()->IsTileSolid(To.x + 22, To.y+2))
-					Valid = false;
-
-				if (Collision()->IsTileSolid(To.x , To.y-64))
-					Valid = false;
-				
-				if (Selected != BUILDABLE_POWERBARREL && Selected != BUILDABLE_BARREL && Collision()->IsForceTile(To.x, To.y+16))
-					Valid = false;
 			}
-			
-			// snap y up / turret stand
-			if (!Valid && (Selected == BUILDABLE_TURRET || Selected == BUILDABLE_TESLACOIL))
+			else
+				Valid = false;
+
+			if (Valid)
+				FlipY = true;
+
+			if (!Collision()->IsTileSolid(To.x - 22, To.y - 12) || !Collision()->IsTileSolid(To.x + 22, To.y - 12))
+				Valid = false;
+
+			if (Collision()->IsTileSolid(To.x, To.y + 64))
+				Valid = false;
+
+			if (Collision()->IsTileSolid(To.x, To.y + 6))
+				Valid = false;
+		}
+
+		// lightning wall line
+		if (Valid && Selected == BUILDABLE_LIGHTNINGWALL)
+		{
+			vec2 To = Pos + vec2(0, -550);
+			if (Collision()->IntersectLine(Pos, To, 0x0, &To))
 			{
-				vec2 To = Pos+vec2(0, -SnapRange);
+				Graphics()->TextureSet(-1);
+				Graphics()->QuadsBegin();
+				Graphics()->SetColor(0.0f, 1.0f, 0.0f, 0.3f);
+
+				Pos -= m_pClient->m_pCamera->m_Center;
+				To -= m_pClient->m_pCamera->m_Center;
+
+				IGraphics::CFreeformItem FreeFormItem(
+					Pos.x - 4, Pos.y,
+					Pos.x + 4, Pos.y,
+					To.x - 4, To.y,
+					To.x + 4, To.y);
+
+				Graphics()->QuadsDrawFreeform(&FreeFormItem, 1);
+
+				Graphics()->QuadsEnd();
+
+				Pos += m_pClient->m_pCamera->m_Center;
+			}
+			else
+				Valid = false;
+		}
+
+		// snap x
+		if (Valid && Selected == BUILDABLE_FLAMETRAP)
+		{
+			vec2 To = Pos + vec2(SnapRange, 0);
+			if (Collision()->IntersectLine(Pos, To, 0x0, &To))
+			{
+				Pos = To;
+				CustomStuff()->m_FlipBuilding = true;
+				Pos.x -= BuildableOffset[Selected];
+			}
+			else
+				Valid = false;
+
+			if (!Valid)
+			{
+				To = Pos + vec2(-SnapRange, 0);
 				if (Collision()->IntersectLine(Pos, To, 0x0, &To))
 				{
 					Pos = To;
-					Pos.y -= BuildableOffset[Selected];
+					Pos.x += BuildableOffset[Selected];
 					Valid = true;
+					CustomStuff()->m_FlipBuilding = false;
 				}
-				else
-					Valid = false;
-				
-				if (Valid)
-					FlipY = true;
-				
-				if (!Collision()->IsTileSolid(To.x - 22, To.y-12) || !Collision()->IsTileSolid(To.x + 22, To.y-12))
-					Valid = false;
+			}
 
-				if (Collision()->IsTileSolid(To.x , To.y+64))
-					Valid = false;
-				
-				if (Collision()->IsTileSolid(To.x , To.y+6))
-					Valid = false;
-			}
-			
-			// lightning wall line
-			if (Valid && Selected == BUILDABLE_LIGHTNINGWALL)
-			{
-				vec2 To = Pos+vec2(0, -550);
-				if (Collision()->IntersectLine(Pos, To, 0x0, &To))
-				{
-					Graphics()->TextureSet(-1);
-					Graphics()->QuadsBegin();
-					Graphics()->SetColor(0.0f, 1.0f, 0.0f, 0.3f);
-				
-					Pos -= m_pClient->m_pCamera->m_Center;
-					To -= m_pClient->m_pCamera->m_Center;
-				
-					IGraphics::CFreeformItem FreeFormItem(
-						Pos.x-4, Pos.y,
-						Pos.x+4, Pos.y,
-						To.x-4, To.y,
-						To.x+4, To.y);
-										
-					Graphics()->QuadsDrawFreeform(&FreeFormItem, 1);
-				
-					Graphics()->QuadsEnd();
-					
-					Pos += m_pClient->m_pCamera->m_Center;
-				}
-				else
-					Valid = false;
-			}
-			
-			// snap x
-			if (Valid && Selected == BUILDABLE_FLAMETRAP)
-			{
-				vec2 To = Pos+vec2(SnapRange, 0);
-				if (Collision()->IntersectLine(Pos, To, 0x0, &To))
-				{
-					Pos = To;
-					CustomStuff()->m_FlipBuilding = true;
-					Pos.x -= BuildableOffset[Selected];
-				}
-				else
-					Valid = false;
-				
-				if (!Valid)
-				{
-					To = Pos+vec2(-SnapRange, 0);
-					if (Collision()->IntersectLine(Pos, To, 0x0, &To))
-					{
-						Pos = To;
-						Pos.x += BuildableOffset[Selected];
-						Valid = true;
-						CustomStuff()->m_FlipBuilding = false;
-					}
-				}
-				
-				int cx = CustomStuff()->m_FlipBuilding ? 16 : -16;
-				
-				if (!Collision()->IsTileSolid(To.x+cx, To.y-26) || !Collision()->IsTileSolid(To.x+cx, To.y+26))
-					Valid = false;
-				
-				if (Collision()->IsTileSolid(To.x-cx, To.y-26) || Collision()->IsTileSolid(To.x-cx, To.y+26))
-					Valid = false;
-			}
-			
-			
-			// final sanity checks
-			if (Selected != BUILDABLE_FLAMETRAP && Valid)
-			{
-				// ground on both sides
-				if (Collision()->IsTileSolid(Pos.x - 12, Pos.y) || Collision()->IsTileSolid(Pos.x + 12, Pos.y))
-					Valid = false;
-			}
+			int cx = CustomStuff()->m_FlipBuilding ? 16 : -16;
+
+			if (!Collision()->IsTileSolid(To.x + cx, To.y - 26) || !Collision()->IsTileSolid(To.x + cx, To.y + 26))
+				Valid = false;
+
+			if (Collision()->IsTileSolid(To.x - cx, To.y - 26) || Collision()->IsTileSolid(To.x - cx, To.y + 26))
+				Valid = false;
+		}
+
+		// final sanity checks
+		if (Selected != BUILDABLE_FLAMETRAP && Valid)
+		{
+			// ground on both sides
+			if (Collision()->IsTileSolid(Pos.x - 12, Pos.y) || Collision()->IsTileSolid(Pos.x + 12, Pos.y))
+				Valid = false;
+		}
 	}
 	// Selected == BUILDABLE_BLOCK1
 	else
 	{
-		Pos.x = int(Pos.x / 32) * 32+16;
-		Pos.y = int(Pos.y / 32) * 32+16;
-		
-		bool Top = Collision()->IsTileSolid(Pos.x, Pos.y-32);
-		bool Bot = Collision()->IsTileSolid(Pos.x, Pos.y+32);
-		bool Left = Collision()->IsTileSolid(Pos.x-32, Pos.y);
-		bool Right = Collision()->IsTileSolid(Pos.x+32, Pos.y);
-		
+		Pos.x = int(Pos.x / 32) * 32 + 16;
+		Pos.y = int(Pos.y / 32) * 32 + 16;
+
+		bool Top = Collision()->IsTileSolid(Pos.x, Pos.y - 32);
+		bool Bot = Collision()->IsTileSolid(Pos.x, Pos.y + 32);
+		bool Left = Collision()->IsTileSolid(Pos.x - 32, Pos.y);
+		bool Right = Collision()->IsTileSolid(Pos.x + 32, Pos.y);
+
 		if (!Collision()->IsTileSolid(Pos.x, Pos.y) && (Top || Bot || Left || Right))
 			Valid = true;
-		
+
 		if (!Collision()->CanBuildBlock(Pos))
 			Valid = false;
 	}
-					
+
 	// not too close to other buildings
 	float Range = 48.0f;
-			
+
 	if (Selected == BUILDABLE_TESLACOIL)
 		Range = 74.0f;
-	
+
 	if (Selected == BUILDABLE_BLOCK1 || Selected == BUILDABLE_BLOCK2)
 		Range = 32.0f;
-			
+
 	if (m_pClient->BuildingNear(Pos, Range))
 		Valid = false;
-		
+
 	// check for kits
 	if (Cost > CustomStuff()->m_LocalKits)
 		Valid = false;
-	
-	
-	
+
 	//
 	if (Valid)
 	{
@@ -1332,60 +1303,60 @@ void CInventory::DrawBuildMode()
 				CustomStuff()->m_BuildPos.y += BuildableOffset[Selected]-38;
 		}
 		*/
-		
+
 		CustomStuff()->m_BuildPos = Pos;
 		CustomStuff()->m_BuildPosValid = true;
 	}
 	else
 		CustomStuff()->m_BuildPosValid = false;
-	
-	
-	
+
 	// rendering
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_BUILDINGS].m_Id);
-	
+
 	Pos -= m_pClient->m_pCamera->m_Center;
-	
+
 	// outlines
 	Graphics()->ShaderBegin(SHADER_GRAYSCALE, 0.0f);
 	Graphics()->QuadsBegin();
-	if (Valid)	Graphics()->SetColor(0.0f, 1.0f, 0.0f, 1.0f);
-	else		Graphics()->SetColor(1.0f, 0.0f, 0.0f, 1.0f);
-	RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1+Selected,
-		(Selected == BUILDABLE_FLAMETRAP && CustomStuff()->m_FlipBuilding) ? SPRITE_FLAG_FLIP_X : 0 + (FlipY ? SPRITE_FLAG_FLIP_Y : 0));
-	RenderTools()->DrawSprite(Pos.x-1, Pos.y-1, BuildableSize[Selected]);
-	RenderTools()->DrawSprite(Pos.x+1, Pos.y-1, BuildableSize[Selected]);
-	RenderTools()->DrawSprite(Pos.x-1, Pos.y+1, BuildableSize[Selected]);
-	RenderTools()->DrawSprite(Pos.x+1, Pos.y+1, BuildableSize[Selected]);
+	if (Valid)
+		Graphics()->SetColor(0.0f, 1.0f, 0.0f, 1.0f);
+	else
+		Graphics()->SetColor(1.0f, 0.0f, 0.0f, 1.0f);
+	RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1 + Selected,
+								(Selected == BUILDABLE_FLAMETRAP && CustomStuff()->m_FlipBuilding) ? SPRITE_FLAG_FLIP_X : 0 + (FlipY ? SPRITE_FLAG_FLIP_Y : 0));
+	RenderTools()->DrawSprite(Pos.x - 1, Pos.y - 1, BuildableSize[Selected]);
+	RenderTools()->DrawSprite(Pos.x + 1, Pos.y - 1, BuildableSize[Selected]);
+	RenderTools()->DrawSprite(Pos.x - 1, Pos.y + 1, BuildableSize[Selected]);
+	RenderTools()->DrawSprite(Pos.x + 1, Pos.y + 1, BuildableSize[Selected]);
 	Graphics()->QuadsEnd();
 	Graphics()->ShaderEnd();
-	
+
 	// building sprite
 	Graphics()->QuadsBegin();
 	Graphics()->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1+Selected,
-		(Selected == BUILDABLE_FLAMETRAP && CustomStuff()->m_FlipBuilding) ? SPRITE_FLAG_FLIP_X : 0 + (FlipY ? SPRITE_FLAG_FLIP_Y : 0));
+	RenderTools()->SelectSprite(SPRITE_KIT_BLOCK1 + Selected,
+								(Selected == BUILDABLE_FLAMETRAP && CustomStuff()->m_FlipBuilding) ? SPRITE_FLAG_FLIP_X : 0 + (FlipY ? SPRITE_FLAG_FLIP_Y : 0));
 	RenderTools()->DrawSprite(Pos.x, Pos.y, BuildableSize[Selected]);
 	Graphics()->QuadsEnd();
-	
+
 	//
-	
+
 	// building actions / build
 	if (m_Tab == 1)
 	{
 		if (!m_Mouse1)
 			m_LastBlockPos = vec2(0, 0);
-		
+
 		// mouse click
 		if ((Selected == BUILDABLE_BLOCK1 || Selected == BUILDABLE_BLOCK2) && m_Mouse1 && Valid && m_Minimized && m_Scale < 0.3f)
 		{
 			Pos += m_pClient->m_pCamera->m_Center;
-			
+
 			if (m_LastBlockPos == Pos)
 				return;
-			
+
 			m_LastBlockPos = Pos;
-			
+
 			CNetMsg_Cl_UseKit Msg;
 			Msg.m_Kit = m_SelectedBuilding;
 			Msg.m_X = Pos.x;
@@ -1394,35 +1365,34 @@ void CInventory::DrawBuildMode()
 		}
 		else if (m_Mouse1Loaded && m_Mouse1 && Valid && m_Minimized && m_Scale < 0.3f)
 		{
-			//m_Mouse1Loaded = false;
+			// m_Mouse1Loaded = false;
 			Pos += m_pClient->m_pCamera->m_Center;
-			
+
 			if (FlipY)
 			{
 				if (Selected == BUILDABLE_TURRET)
-					Pos.y += BuildableOffset[Selected]-18;
+					Pos.y += BuildableOffset[Selected] - 18;
 				else if (Selected == BUILDABLE_TESLACOIL)
-					Pos.y += BuildableOffset[Selected]-38;
+					Pos.y += BuildableOffset[Selected] - 38;
 			}
-			
+
 			CNetMsg_Cl_UseKit Msg;
 			Msg.m_Kit = m_SelectedBuilding;
 			Msg.m_X = Pos.x;
-			Msg.m_Y = Pos.y+18;
+			Msg.m_Y = Pos.y + 18;
 			Client()->SendPackMsg(&Msg, MSGFLAG_VITAL);
 		}
 	}
 }
 
-
 void CInventory::Drop(int Slot)
 {
-	if (Slot < 0 || Slot >= 12)
+	if (Slot < 0 || Slot >= 24)
 		return;
-	
-	//CustomStuff()->m_aItem[Slot] = 0;
+
+	// CustomStuff()->m_aItem[Slot] = 0;
 	vec2 Pos = m_SelectorMouse + m_pClient->m_pCamera->m_Center;
-	
+
 	CNetMsg_Cl_InventoryAction Msg;
 	Msg.m_Type = INVENTORYACTION_DROP;
 	Msg.m_Slot = Slot;
@@ -1431,45 +1401,41 @@ void CInventory::Drop(int Slot)
 	Client()->SendPackMsg(&Msg, MSGFLAG_VITAL);
 }
 
-
-
-
 void CInventory::Swap(int Item1, int Item2)
 {
-	if (Item1 < 0 || Item2 < 0 || Item1 >= 12 || Item2 >= 12)
+	if (Item1 < 0 || Item2 < 0 || Item1 >= 24 || Item2 >= 24)
 		return;
-	
+
 	int i1 = CustomStuff()->m_aItem[Item1];
 	CustomStuff()->m_aItem[Item1] = CustomStuff()->m_aItem[Item2];
 	CustomStuff()->m_aItem[Item2] = i1;
-	
+
 	CNetMsg_Cl_InventoryAction Msg;
 	Msg.m_Type = INVENTORYACTION_SWAP;
 	Msg.m_Slot = 0;
 	Msg.m_Item1 = Item1;
 	Msg.m_Item2 = Item2;
 	Client()->SendPackMsg(&Msg, MSGFLAG_VITAL);
-	
+
 	m_pClient->m_pSounds->Play(CSounds::CHN_GUI, SOUND_INV1, 0);
 }
 
-
 void CInventory::TakePart(int Item1, int Slot, int Item2)
 {
-	if (Item1 < 0 || Item2 < 0 || Item1 >= 12 || Item2 >= 12 || Slot < 0 || Slot > 1)
+	if (Item1 < 0 || Item2 < 0 || Item1 >= 24 || Item2 >= 24 || Slot < 0 || Slot > 1)
 		return;
-	
+
 	int w1 = CustomStuff()->m_aItem[Item1];
 	int w2 = CustomStuff()->m_aItem[Item2];
-	
+
 	if (IsStaticWeapon(w1) || IsStaticWeapon(w2))
 		return;
-	
+
 	int p1_1 = GetPart(w1, 0);
 	int p1_2 = GetPart(w1, 1);
 	int p2_1 = GetPart(w2, 0);
 	int p2_2 = GetPart(w2, 1);
-	
+
 	if (Slot == 0)
 	{
 		CustomStuff()->m_aItem[Item1] = GetModularWeapon(p2_1, p1_2);
@@ -1480,7 +1446,7 @@ void CInventory::TakePart(int Item1, int Slot, int Item2)
 		CustomStuff()->m_aItem[Item1] = GetModularWeapon(p1_1, p2_2);
 		CustomStuff()->m_aItem[Item2] = GetModularWeapon(p2_1, p1_2);
 	}
-	
+
 	/*
 	{
 		char aBuf[256];
@@ -1493,34 +1459,33 @@ void CInventory::TakePart(int Item1, int Slot, int Item2)
 		Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "Inventory", aBuf);
 	}
 	*/
-	
+
 	CNetMsg_Cl_InventoryAction Msg;
 	Msg.m_Type = INVENTORYACTION_TAKEPART;
 	Msg.m_Slot = Slot;
 	Msg.m_Item1 = Item1;
 	Msg.m_Item2 = Item2;
 	Client()->SendPackMsg(&Msg, MSGFLAG_VITAL);
-	
+
 	m_pClient->m_pSounds->Play(CSounds::CHN_GUI, SOUND_INV3, 0);
 }
 
-
 void CInventory::Combine(int Item1, int Item2)
 {
-	if (Item1 < 0 || Item2 < 0 || Item1 >= 12 || Item2 >= 12)
+	if (Item1 < 0 || Item2 < 0 || Item1 >= 24 || Item2 >= 24)
 		return;
-	
+
 	int w1 = CustomStuff()->m_aItem[Item1];
 	int w2 = CustomStuff()->m_aItem[Item2];
-	
+
 	if (IsStaticWeapon(w1) || IsStaticWeapon(w2))
 		return;
-	
+
 	int p1_1 = GetPart(w1, 0);
 	int p1_2 = GetPart(w1, 1);
 	int p2_1 = GetPart(w2, 0);
 	int p2_2 = GetPart(w2, 1);
-	
+
 	if (!p1_1 || !p1_2)
 	{
 		if (p1_1)
@@ -1543,119 +1508,114 @@ void CInventory::Combine(int Item1, int Item2)
 			p2_1 = p1_1;
 			p1_1 = 0;
 		}
-		
+
 		if (!p2_2 && p1_2)
 		{
 			p2_2 = p1_2;
 			p1_2 = 0;
 		}
 	}
-	
+
 	CustomStuff()->m_aItem[Item1] = GetModularWeapon(p1_1, p1_2);
 	CustomStuff()->m_aItem[Item2] = GetModularWeapon(p2_1, p2_2);
-	
-	
+
 	CNetMsg_Cl_InventoryAction Msg;
 	Msg.m_Type = INVENTORYACTION_COMBINE;
 	Msg.m_Slot = 0;
 	Msg.m_Item1 = Item1;
 	Msg.m_Item2 = Item2;
 	Client()->SendPackMsg(&Msg, MSGFLAG_VITAL);
-	
+
 	m_pClient->m_pSounds->Play(CSounds::CHN_GUI, SOUND_INV2, 0);
 }
-
 
 void CInventory::RenderMouse()
 {
 	// drag drop item
-	if (m_DragItem >= 0 && m_DragItem < 12)
+	if (m_DragItem >= 0 && m_DragItem < 24)
 	{
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
-		//Graphics()->QuadsBegin();
+		// Graphics()->QuadsBegin();
 
 		int w = CustomStuff()->m_aItem[m_DragItem];
-	
+
 		if (w >= 0)
 		{
 			RenderTools()->SetShadersForWeapon(w);
-			RenderTools()->RenderWeapon(w, m_SelectorMouse+s_DragOffset, vec2(1, 0), 10*1.5f, true);
+			RenderTools()->RenderWeapon(w, m_SelectorMouse + s_DragOffset, vec2(1, 0), 10 * 1.5f, true);
 			Graphics()->ShaderEnd();
 		}
-			
-		//Graphics()->QuadsEnd();
+
+		// Graphics()->QuadsEnd();
 	}
 	else if (m_DragPart > 0)
 	{
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
-		//Graphics()->QuadsBegin();
+		// Graphics()->QuadsBegin();
 
 		int w = m_DragPart;
-	
+
 		if (w >= 0)
 		{
 			RenderTools()->SetShadersForWeapon(w);
-			RenderTools()->RenderWeapon(w, m_SelectorMouse+s_DragOffset, vec2(1, 0), 10*1.5f, true);
+			RenderTools()->RenderWeapon(w, m_SelectorMouse + s_DragOffset, vec2(1, 0), 10 * 1.5f, true);
 			Graphics()->ShaderEnd();
 		}
-			
-		//Graphics()->QuadsEnd();
+
+		// Graphics()->QuadsEnd();
 	}
-	
+
 	// cursor
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_CURSOR].m_Id);
 	Graphics()->QuadsBegin();
-	Graphics()->SetColor(1,1,1,1);
+	Graphics()->SetColor(1, 1, 1, 1);
 	IGraphics::CQuadItem QuadItem(m_SelectorMouse.x, m_SelectorMouse.y, 32, 32);
 	Graphics()->QuadsDrawTL(&QuadItem, 1);
 	Graphics()->QuadsEnd();
 }
 
-
 void CInventory::Tick()
 {
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 24; i++)
 	{
-		s_ItemOffset[i] -= s_ItemOffset[i]/8.0f;
+		s_ItemOffset[i] -= s_ItemOffset[i] / 8.0f;
 		s_ItemEffectSelect[i] -= s_ItemEffectSelect[i] / 8.0f;
 		s_ItemEffectPick[i] -= s_ItemEffectPick[i] / 8.0f;
 	}
-	
+
 	s_DragOffset -= s_DragOffset / 8.0f;
 }
-
 
 void CInventory::MapscreenToGroup(float CenterX, float CenterY, CMapItemGroup *pGroup)
 {
 	float Points[4];
-	RenderTools()->MapscreenToWorld(CenterX, CenterY, pGroup->m_ParallaxX/100.0f, pGroup->m_ParallaxY/100.0f,
-		pGroup->m_OffsetX, pGroup->m_OffsetY, Graphics()->ScreenAspect(), 1.0f, Points);
+	RenderTools()->MapscreenToWorld(CenterX, CenterY, pGroup->m_ParallaxX / 100.0f, pGroup->m_ParallaxY / 100.0f,
+									pGroup->m_OffsetX, pGroup->m_OffsetY, Graphics()->ScreenAspect(), 1.0f, Points);
 	Graphics()->MapScreen(Points[0], Points[1], Points[2], Points[3]);
 }
 
-
 void CInventory::RenderShop(const CNetObj_Shop *pCurrent)
 {
-	vec2 p = vec2(pCurrent->m_X, pCurrent->m_Y-170);
+	vec2 p = vec2(pCurrent->m_X, pCurrent->m_Y - 170);
 	vec2 mp = m_SelectorMouse + m_pClient->m_pCamera->m_Center;
 
 	if (abs(CustomStuff()->m_LocalPos.x - pCurrent->m_X) > 100 || abs(CustomStuff()->m_LocalPos.y - pCurrent->m_Y) > 100)
 		return;
-		
-	float Size = WEAPON_GAME_SIZE*0.75f*m_Scale*s_Fade;
+
+	float Size = WEAPON_GAME_SIZE * 0.75f * m_Scale * s_Fade;
 	float ss = 28.0f;
-	
+
 	if (Size < 1.0f)
 		return;
-	
+
 	if (!m_CanShop)
 		ss = 0;
-	
+
 	{
-		vec2 fp = p+vec2(-85, 25);
+		vec2 fp = p + vec2(-85, 25);
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUI_WINDOW1].m_Id);
 		Graphics()->QuadsBegin();
-		
+
 		if (pCurrent->m_Item1 && abs(mp.x - fp.x) < ss && abs(mp.y - fp.y) < ss)
 		{
 			m_SelectedShopItem = 1;
@@ -1663,36 +1623,36 @@ void CInventory::RenderShop(const CNetObj_Shop *pCurrent)
 		}
 		else
 			Graphics()->SetColor(0.0f, 1.0f, 1.0f, 0.5f);
-		
+
 		RenderTools()->SelectSprite(SPRITE_GUI_SELECT3);
-		RenderTools()->DrawSprite(fp.x, fp.y, Size*8);
+		RenderTools()->DrawSprite(fp.x, fp.y, Size * 8);
 		Graphics()->QuadsEnd();
-		
+
 		if (pCurrent->m_Item1)
 		{
 			RenderTools()->SetShadersForWeapon(pCurrent->m_Item1);
-			
+
 			Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
 			Graphics()->QuadsBegin();
 			Graphics()->QuadsSetRotation(0);
-			
+
 			RenderTools()->RenderWeapon(pCurrent->m_Item1, fp, vec2(1, 0), Size);
-			
+
 			Graphics()->QuadsEnd();
 			Graphics()->ShaderEnd();
-			
+
 			Graphics()->QuadsBegin();
 			Graphics()->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 			RenderTools()->SelectSprite(SPRITE_PICKUP_COIN);
-			RenderTools()->DrawSprite(fp.x-18, fp.y-20, 48);
+			RenderTools()->DrawSprite(fp.x - 18, fp.y - 20, 48);
 			Graphics()->QuadsEnd();
 		}
 	}
 	{
-		vec2 fp = p+vec2(-35, -20);
+		vec2 fp = p + vec2(-35, -20);
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUI_WINDOW1].m_Id);
 		Graphics()->QuadsBegin();
-		
+
 		if (pCurrent->m_Item2 && abs(mp.x - fp.x) < ss && abs(mp.y - fp.y) < ss)
 		{
 			m_SelectedShopItem = 2;
@@ -1700,36 +1660,36 @@ void CInventory::RenderShop(const CNetObj_Shop *pCurrent)
 		}
 		else
 			Graphics()->SetColor(0.0f, 1.0f, 1.0f, 0.5f);
-		
+
 		RenderTools()->SelectSprite(SPRITE_GUI_SELECT3);
-		RenderTools()->DrawSprite(fp.x, fp.y, Size*8);
+		RenderTools()->DrawSprite(fp.x, fp.y, Size * 8);
 		Graphics()->QuadsEnd();
-		
+
 		if (pCurrent->m_Item2)
 		{
 			RenderTools()->SetShadersForWeapon(pCurrent->m_Item2);
-			
+
 			Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
 			Graphics()->QuadsBegin();
 			Graphics()->QuadsSetRotation(0);
-			
+
 			RenderTools()->RenderWeapon(pCurrent->m_Item2, fp, vec2(1, 0), Size);
-			
+
 			Graphics()->QuadsEnd();
 			Graphics()->ShaderEnd();
-			
+
 			Graphics()->QuadsBegin();
 			Graphics()->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 			RenderTools()->SelectSprite(SPRITE_PICKUP_COIN);
-			RenderTools()->DrawSprite(fp.x-18, fp.y-20, 48);
+			RenderTools()->DrawSprite(fp.x - 18, fp.y - 20, 48);
 			Graphics()->QuadsEnd();
 		}
 	}
 	{
-		vec2 fp = p+vec2(35, -20);
+		vec2 fp = p + vec2(35, -20);
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUI_WINDOW1].m_Id);
 		Graphics()->QuadsBegin();
-		
+
 		if (pCurrent->m_Item3 && abs(mp.x - fp.x) < ss && abs(mp.y - fp.y) < ss)
 		{
 			m_SelectedShopItem = 3;
@@ -1737,36 +1697,36 @@ void CInventory::RenderShop(const CNetObj_Shop *pCurrent)
 		}
 		else
 			Graphics()->SetColor(0.0f, 1.0f, 1.0f, 0.5f);
-		
+
 		RenderTools()->SelectSprite(SPRITE_GUI_SELECT3);
-		RenderTools()->DrawSprite(fp.x, fp.y, Size*8);
+		RenderTools()->DrawSprite(fp.x, fp.y, Size * 8);
 		Graphics()->QuadsEnd();
-		
+
 		if (pCurrent->m_Item3)
 		{
 			RenderTools()->SetShadersForWeapon(pCurrent->m_Item3);
-			
+
 			Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
 			Graphics()->QuadsBegin();
 			Graphics()->QuadsSetRotation(0);
-			
+
 			RenderTools()->RenderWeapon(pCurrent->m_Item3, fp, vec2(1, 0), Size);
-			
+
 			Graphics()->QuadsEnd();
 			Graphics()->ShaderEnd();
-			
+
 			Graphics()->QuadsBegin();
 			Graphics()->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 			RenderTools()->SelectSprite(SPRITE_PICKUP_COIN);
-			RenderTools()->DrawSprite(fp.x-18, fp.y-20, 48);
+			RenderTools()->DrawSprite(fp.x - 18, fp.y - 20, 48);
 			Graphics()->QuadsEnd();
 		}
 	}
 	{
-		vec2 fp = p+vec2(+85, 25);
+		vec2 fp = p + vec2(+85, 25);
 		Graphics()->TextureSet(g_pData->m_aImages[IMAGE_GUI_WINDOW1].m_Id);
 		Graphics()->QuadsBegin();
-		
+
 		if (pCurrent->m_Item4 && abs(mp.x - fp.x) < ss && abs(mp.y - fp.y) < ss)
 		{
 			m_SelectedShopItem = 4;
@@ -1774,99 +1734,98 @@ void CInventory::RenderShop(const CNetObj_Shop *pCurrent)
 		}
 		else
 			Graphics()->SetColor(0.0f, 1.0f, 1.0f, 0.5f);
-		
+
 		RenderTools()->SelectSprite(SPRITE_GUI_SELECT3);
-		RenderTools()->DrawSprite(fp.x, fp.y, Size*8);
+		RenderTools()->DrawSprite(fp.x, fp.y, Size * 8);
 		Graphics()->QuadsEnd();
-		
+
 		if (pCurrent->m_Item4)
 		{
 			RenderTools()->SetShadersForWeapon(pCurrent->m_Item4);
-			
+
 			Graphics()->TextureSet(g_pData->m_aImages[IMAGE_WEAPONS].m_Id);
 			Graphics()->QuadsBegin();
 			Graphics()->QuadsSetRotation(0);
-			
+
 			RenderTools()->RenderWeapon(pCurrent->m_Item4, fp, vec2(1, 0), Size);
-			
+
 			Graphics()->QuadsEnd();
 			Graphics()->ShaderEnd();
-			
+
 			Graphics()->QuadsBegin();
 			Graphics()->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 			RenderTools()->SelectSprite(SPRITE_PICKUP_COIN);
-			RenderTools()->DrawSprite(fp.x-18, fp.y-20, 48);
+			RenderTools()->DrawSprite(fp.x - 18, fp.y - 20, 48);
 			Graphics()->QuadsEnd();
 		}
 	}
-	
+
 	TextRender()->TextColor(0.7f, 0.7f, 0.7f, 1);
-		
+
 	// item costs
 	if (pCurrent->m_Item1)
 	{
 		char aBuf[64];
 		str_format(aBuf, sizeof(aBuf), "%d", GetWeaponCost(pCurrent->m_Item1));
-	
-		vec2 fp = p+vec2(-85, 25);
-		TextRender()->Text(0, fp.x-10, fp.y-35, 20, aBuf, -1);
+
+		vec2 fp = p + vec2(-85, 25);
+		TextRender()->Text(0, fp.x - 10, fp.y - 35, 20, aBuf, -1);
 	}
 	if (pCurrent->m_Item2)
 	{
 		char aBuf[64];
 		str_format(aBuf, sizeof(aBuf), "%d", GetWeaponCost(pCurrent->m_Item2));
-	
-		vec2 fp = p+vec2(-35, -20);
-		TextRender()->Text(0, fp.x-10, fp.y-35, 20, aBuf, -1);
+
+		vec2 fp = p + vec2(-35, -20);
+		TextRender()->Text(0, fp.x - 10, fp.y - 35, 20, aBuf, -1);
 	}
 	if (pCurrent->m_Item3)
 	{
 		char aBuf[64];
 		str_format(aBuf, sizeof(aBuf), "%d", GetWeaponCost(pCurrent->m_Item3));
-	
-		vec2 fp = p+vec2(35, -20);
-		TextRender()->Text(0, fp.x-10, fp.y-35, 20, aBuf, -1);
+
+		vec2 fp = p + vec2(35, -20);
+		TextRender()->Text(0, fp.x - 10, fp.y - 35, 20, aBuf, -1);
 	}
 	if (pCurrent->m_Item4)
 	{
 		char aBuf[64];
 		str_format(aBuf, sizeof(aBuf), "%d", GetWeaponCost(pCurrent->m_Item4));
-	
-		vec2 fp = p+vec2(+85, 25);
-		TextRender()->Text(0, fp.x-10, fp.y-35, 20, aBuf, -1);
+
+		vec2 fp = p + vec2(+85, 25);
+		TextRender()->Text(0, fp.x - 10, fp.y - 35, 20, aBuf, -1);
 	}
-	
+
 	TextRender()->TextColor(1, 1, 1, 1);
-		
+
 	// shopping
 	if (m_Mouse1Loaded && m_Mouse1 && m_CanShop && m_SelectedShopItem)
 	{
 		CNetMsg_Cl_InventoryAction Msg;
 		Msg.m_Type = INVENTORYACTION_SHOP;
-		Msg.m_Slot = m_SelectedShopItem-1;
+		Msg.m_Slot = m_SelectedShopItem - 1;
 		Msg.m_Item1 = 0;
 		Msg.m_Item2 = 0;
 		Client()->SendPackMsg(&Msg, MSGFLAG_VITAL);
 	}
 }
 
-
 void CInventory::OnRender()
 {
-	if(Client()->State() < IClient::STATE_ONLINE)
+	if (Client()->State() < IClient::STATE_ONLINE)
 		return;
 
 	CustomStuff()->m_Inventory = false;
-	
-	if(m_pClient->m_Snap.m_SpecInfo.m_Active)
+
+	if (m_pClient->m_Snap.m_SpecInfo.m_Active)
 	{
 		m_Active = false;
 		m_WasActive = false;
 		m_Render = false;
 		return;
 	}
-	//m_Render = m_Active;
-	
+	// m_Render = m_Active;
+
 	if (m_WantedTab < 0)
 	{
 		if (m_Active && !m_WasActive)
@@ -1874,7 +1833,7 @@ void CInventory::OnRender()
 			m_Render = !m_Render;
 			m_WasActive = m_Active;
 		}
-		
+
 		if (!m_Active && m_WasActive)
 			m_WasActive = m_Active;
 	}
@@ -1883,7 +1842,7 @@ void CInventory::OnRender()
 	{
 		m_Tab = m_WantedTab;
 		m_WantedTab = -1;
-		
+
 		m_Minimized = false;
 		m_pClient->m_pControls->m_SelectedBuilding = 0;
 		m_SelectedBuilding = -1;
@@ -1891,47 +1850,44 @@ void CInventory::OnRender()
 
 	static int64 LastTime = 0;
 	int64 t = time_get();
-	s_Fade += ((float)((t-LastTime)/(double)time_freq())) * (m_Render ? 1.0f : -1.0f) * 4.0f;
+	s_Fade += ((float)((t - LastTime) / (double)time_freq())) * (m_Render ? 1.0f : -1.0f) * 4.0f;
 	s_Fade = clamp(s_Fade, 0.0f, 1.0f);
 	LastTime = t;
-	
-	
+
 	if (!m_Render && s_Fade < 0.01f)
 		return;
-	
+
 	m_SelectedShopItem = 0;
-	
+
 	// shopping
 	int Num = Client()->SnapNumItems(IClient::SNAP_CURRENT);
-	for(int i = 0; i < Num; i++)
+	for (int i = 0; i < Num; i++)
 	{
 		IClient::CSnapItem Item;
 		const void *pData = Client()->SnapGetItem(IClient::SNAP_CURRENT, i, &Item);
 
-		if(Item.m_Type == NETOBJTYPE_SHOP)
+		if (Item.m_Type == NETOBJTYPE_SHOP)
 			RenderShop((const CNetObj_Shop *)pData);
 	}
-	
-	
-	
+
 	MapscreenToGroup(0, 0, Layers()->GameGroup());
 	Graphics()->BlendNormal();
-	
+
 	float ScreenX0, ScreenY0, ScreenX1, ScreenY1;
 	Graphics()->GetScreen(&ScreenX0, &ScreenY0, &ScreenX1, &ScreenY1);
-	
-	int ScreenX = int(ScreenX1-ScreenX0);
-	int ScreenY = int(ScreenY1-ScreenY0);
-	
-	m_SelectorMouse.x = clamp(m_SelectorMouse.x, -ScreenX1, ScreenX1-20);
-	m_SelectorMouse.y = clamp(m_SelectorMouse.y, -ScreenY1, ScreenY1-20);
+
+	int ScreenX = int(ScreenX1 - ScreenX0);
+	int ScreenY = int(ScreenY1 - ScreenY0);
+
+	m_SelectorMouse.x = clamp(m_SelectorMouse.x, -ScreenX1, ScreenX1 - 20);
+	m_SelectorMouse.y = clamp(m_SelectorMouse.y, -ScreenY1, ScreenY1 - 20);
 
 	if (!m_Mouse1)
 		m_Mouse1Loaded = true;
-	
+
 	// gui
-	//DrawInventory(vec2(-ScreenX1/2, ScreenY1/3), vec2(ScreenX1/3, ScreenY1/2));
-	DrawInventory(vec2(-ScreenX/3.5f, ScreenY/6), vec2(ScreenX/6, ScreenY/4));
+	// DrawInventory(vec2(-ScreenX1/2, ScreenY1/3), vec2(ScreenX1/3, ScreenY1/2));
+	DrawInventory(vec2(ScreenX / 1000, ScreenY / 10), vec2(ScreenX / 2.4, ScreenY / 3));
 	DrawBuildMode();
 
 	/*
@@ -1944,7 +1900,7 @@ void CInventory::OnRender()
 	Graphics()->QuadsEnd();
 	}
 	*/
-	
+
 	if (m_Mouse1)
 		m_Mouse1Loaded = false;
 
@@ -1953,6 +1909,6 @@ void CInventory::OnRender()
 
 	// mouse cursor
 	RenderMouse();
-	
+
 	CustomStuff()->m_Inventory = true;
 }

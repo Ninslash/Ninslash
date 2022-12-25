@@ -175,7 +175,7 @@ public:
 	vec4 m_LocalColor;
 	
 	bool m_Inventory;
-	int m_aItem[12];
+	int m_aItem[24];
 	int m_Gold;
 	
 	bool m_BuildMode;
@@ -196,7 +196,7 @@ public:
 	int m_SelectedGroup;
 	
 	int m_WeaponSlot;
-	int m_aSnapWeapon[4];
+	int m_aSnapWeapon[6];
 	int m_LocalKits;
 	
 	// for weapon pick effect

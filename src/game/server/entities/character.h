@@ -148,7 +148,7 @@ public:
 	
 	bool GiveWeapon(class CWeapon *pWeapon);
 	int GetWeaponType(int Slot = -1);
-	int GetWeaponSlot(){ return clamp(m_WeaponSlot, 0, 3);}
+	int GetWeaponSlot(){ return clamp(m_WeaponSlot, 0, 5);}
 	int GetWeaponPowerLevel(int WeaponSlot = -1);
 	int FreeSlot();
 	
@@ -251,7 +251,7 @@ private:
 	// player controlling this character
 	class CPlayer *m_pPlayer;
 	
-	class CWeapon *m_apWeapon[12];
+	class CWeapon *m_apWeapon[NUM_SLOTS];
 
 	bool m_IgnoreCollision;
 	

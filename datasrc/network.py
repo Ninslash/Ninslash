@@ -134,7 +134,7 @@ enum
 	DEATHTYPE_DROID_STAR,
 	NUM_DEATHTYPES,
 	
-	NUM_SLOTS=12,
+	NUM_SLOTS=24,
 	NUM_BODIES=7,
 	MAX_PLAYERITEMS=2,
 	
@@ -400,8 +400,10 @@ Objects = [
 		NetIntAny("m_Weapon2"),
 		NetIntAny("m_Weapon3"),
 		NetIntAny("m_Weapon4"),
+		NetIntAny("m_Weapon5"),
+		NetIntAny("m_Weapon6"),
 		
-		NetIntRange("m_Kits", 0, 99),
+		NetIntRange("m_Kits", 0, 499),
 	]),
 
 	NetObject("ClientInfo", [
@@ -617,6 +619,18 @@ Messages = [
 		NetIntAny("m_Item10"),
 		NetIntAny("m_Item11"),
 		NetIntAny("m_Item12"),
+		NetIntAny("m_Item13"),
+		NetIntAny("m_Item14"),
+		NetIntAny("m_Item15"),
+		NetIntAny("m_Item16"),
+		NetIntAny("m_Item17"),
+		NetIntAny("m_Item18"),
+		NetIntAny("m_Item19"),
+		NetIntAny("m_Item20"),
+		NetIntAny("m_Item21"),
+		NetIntAny("m_Item22"),
+		NetIntAny("m_Item23"),
+		NetIntAny("m_Item24"),
 		NetIntRange("m_Gold", 0, 999),
 	]),
 

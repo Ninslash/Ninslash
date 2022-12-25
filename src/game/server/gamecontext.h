@@ -52,12 +52,12 @@ struct CPlayerSpecData
 		m_Kits = 0;
 		m_WeaponSlot = 0;
 		
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 6; i++)
 			m_aWeapon[i] = 0;
 	}
 	
 	int m_WeaponSlot;
-	int m_aWeapon[4];
+	int m_aWeapon[6];
 	int m_Kits;
 };
 

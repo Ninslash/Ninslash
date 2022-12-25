@@ -611,7 +611,7 @@ void CPlayers::RenderPlayer(
 		
 		int Group = m_pClient->m_pControls->m_InputData.m_WantedWeapon;
 		
-		if (Group > 0 && Group < 4)
+		if (Group > 0 && Group < 6)
 			CustomStuff()->m_WantedWeapon = m_pClient->m_pControls->m_InputData.m_WantedWeapon;
 		
 		CustomStuff()->m_SelectedWeapon = Player.m_Weapon;
@@ -1743,6 +1743,8 @@ void CPlayers::OnRender()
 				CustomStuff()->m_aSnapWeapon[1] = ((const CNetObj_PlayerInfo *)pInfo)->m_Weapon2;
 				CustomStuff()->m_aSnapWeapon[2] = ((const CNetObj_PlayerInfo *)pInfo)->m_Weapon3;
 				CustomStuff()->m_aSnapWeapon[3] = ((const CNetObj_PlayerInfo *)pInfo)->m_Weapon4;
+				CustomStuff()->m_aSnapWeapon[4] = ((const CNetObj_PlayerInfo *)pInfo)->m_Weapon5;
+				CustomStuff()->m_aSnapWeapon[5] = ((const CNetObj_PlayerInfo *)pInfo)->m_Weapon6;
 			}
 		}
 	}

@@ -45,7 +45,7 @@ void CAIpyro1::OnCharacterSpawn(CCharacter *pChr)
 		if (frandom() < 0.5f)
 			pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_CHAINSAW)));
 		else
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(2, 1)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN2, SW_GUN1)));
 	}
 	else if (m_Skin == SKIN_PYRO2)
 	{
@@ -56,21 +56,21 @@ void CAIpyro1::OnCharacterSpawn(CCharacter *pChr)
 	}
 	else if (m_Skin == SKIN_SKELETON1)
 	{
-		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(1, 4), 3)));
+		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GUN1, SW_GRENADE2), 3)));
 	}
 	else if (m_Skin == SKIN_SKELETON2)
 	{
 		if (frandom() < 0.5f)
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(2, 4), 3)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GUN2, SW_GRENADE2), 3)));
 		else
 			pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_CHAINSAW)));
 	}
 	else if (m_Skin == SKIN_SKELETON3)
 	{
 		if (frandom() < 0.5f)
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(1, 2), 2)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GUN1, SW_GUN2), 2)));
 		else
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(5, 9), 3)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GRENADE3, SW_FLAMER), 3)));
 	}
 	else if (m_Skin == SKIN_PYRO3)
 	{
@@ -78,7 +78,7 @@ void CAIpyro1::OnCharacterSpawn(CCharacter *pChr)
 			pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_FLAMER)));
 		else
 		{
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(6, 7), 4)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_BAZOOKA, SW_BOUNCER), 4)));
 			m_AttackOnDamage = true;
 		}
 		

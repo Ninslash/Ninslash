@@ -39,7 +39,7 @@ void CAIroam::OnCharacterSpawn(CCharacter *pChr)
 	/*
 	if (m_Skin == SKIN_ALIEN3)
 	{
-		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(4, 4), 2)));
+		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GRENADE2, SW_GRENADE2), 2)));
 		pChr->SetHealth(60+min((m_Level-1)*4, 300));
 		pChr->SetArmor(60+min((m_Level-1)*4, 300));
 		m_PowerLevel = 8;
@@ -47,7 +47,7 @@ void CAIroam::OnCharacterSpawn(CCharacter *pChr)
 	}
 	else if (m_Skin == SKIN_ALIEN4)
 	{
-		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(1, 1), 4)));
+		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GUN1, SW_GUN1), 4)));
 		pChr->SetHealth(60+min((m_Level-1)*4, 200));
 		pChr->SetArmor(60+min((m_Level-1)*4, 350));
 		m_PowerLevel = 12;
@@ -72,9 +72,9 @@ void CAIroam::OnCharacterSpawn(CCharacter *pChr)
 	else
 	{
 		if (frandom() < min(m_Level*0.1f, 1.0f))
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 1)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GUN1)));
 		else if (frandom() < min(m_Level*0.1f, 1.0f))
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 4)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GRENADE2)));
 		
 		if (frandom() < 0.6f)
 			pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GUN1)));

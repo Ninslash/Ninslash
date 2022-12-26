@@ -47,8 +47,8 @@ void CProjectile::Reset()
 
 void CProjectile::UpdateStats()
 {
-	m_Part1 = GetPart(m_Weapon, 0);
-	m_Part2 = GetPart(m_Weapon, 1);
+	m_Part1 = GetPart(m_Weapon, GROUP_PART1);
+	m_Part2 = GetPart(m_Weapon, GROUP_PART2);
 	m_Speed = GetProjectileSpeed(m_Weapon);
 	m_Curvature = GetProjectileCurvature(m_Weapon);
 	m_Bounces = IsProjectileBouncy(m_Weapon);

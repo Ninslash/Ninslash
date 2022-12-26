@@ -188,16 +188,16 @@ bool CCharacter::Spawn(CPlayer *pPlayer, vec2 Pos)
 	else
 	{
 		// m_apWeapon[0] = GameServer()->NewWeapon(GetStaticWeapon(SW_CLUSTER));
-		// m_apWeapon[1] = GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(4, 2), 10));
-		// m_apWeapon[1] = GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(1, 3), 15));
+		// m_apWeapon[1] = GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GRENADE2, SW_GUN2), 10));
+		// m_apWeapon[1] = GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GUN1, SW_GRENADE1), 15));
 	}
 
-	// m_apWeapon[0] = GameServer()->NewWeapon(GetModularWeapon(5, 9));
-	// m_apWeapon[1] = GameServer()->NewWeapon(GetModularWeapon(5, 9));
+	// m_apWeapon[0] = GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE3, SW_FLAMER));
+	// m_apWeapon[1] = GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE3, SW_FLAMER));
 	// m_apWeapon[2] = GameServer()->NewWeapon(GetModularWeapon(6, 9));
 
 	/*
-	m_apWeapon[0] = GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(1, 2), 10));
+	m_apWeapon[0] = GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GUN1, SW_GUN2), 10));
 	*/
 
 	// m_apWeapon[2] = GameServer()->NewWeapon(GetStaticWeapon(SW_ELECTROWALL));
@@ -221,23 +221,14 @@ bool CCharacter::Spawn(CPlayer *pPlayer, vec2 Pos)
 
 	// m_apWeapon[1] = GameServer()->NewWeapon(GetStaticWeapon(SW_BALL));
 	// m_apWeapon[2] = GameServer()->NewWeapon(GetStaticWeapon(SW_MASK5));
-	// m_apWeapon[1] = GameServer()->NewWeapon(GetModularWeapon(5, 6));
+	// m_apWeapon[1] = GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE3, SW_BAZOOKA));
 	// m_apWeapon[3] = GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(6, 9), 4));
 
 	GiveStartWeapon();
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(GetChargedWeapon(SW_FLAMER, 3))));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
-	GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_UPGRADE)));
+	GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_BAZOOKA, SW_FLAMER), 1)));
+	GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_BAZOOKA, SW_FLAMER), 2)));
+	GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_BAZOOKA, SW_FLAMER), 3)));
+	GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_BAZOOKA, SW_FLAMER), 4)));
 	SendInventory();
 
 	return true;
@@ -609,7 +600,7 @@ void CCharacter::SwapItem(int Item1, int Item2)
 	}
 
 	// combine melee
-	if (IsModularWeapon(w1) && IsModularWeapon(w2) && GetPart(w1, 0) == 5 && GetPart(w2, 0) == 5 && GetPart(w1, 1) == GetPart(w2, 1))
+	if (IsModularWeapon(w1) && IsModularWeapon(w2) && GetPart(w1, GROUP_PART1) == SW_GRENADE3 && GetPart(w2, GROUP_PART1) == SW_GRENADE3 && GetPart(w1, GROUP_PART2) == GetPart(w2, GROUP_PART2))
 	{
 		if (!m_apWeapon[Item1]->CanSwitch() || !m_apWeapon[Item2]->CanSwitch())
 			return;
@@ -618,7 +609,7 @@ void CCharacter::SwapItem(int Item1, int Item2)
 		m_apWeapon[Item1] = NULL;
 		m_apWeapon[Item2]->m_DestructionTick = 1;
 		m_apWeapon[Item2] = NULL;
-		m_apWeapon[Item2] = new CWeapon(&GameServer()->m_World, GetChargedWeapon(GetModularWeapon(6, GetPart(w1, 1)), max(GetWeaponCharge(w1), GetWeaponCharge(w2))));
+		m_apWeapon[Item2] = new CWeapon(&GameServer()->m_World, GetChargedWeapon(GetModularWeapon(SW_BAZOOKA, GetPart(w1, GROUP_PART2)), max(GetWeaponCharge(w1), GetWeaponCharge(w2))));
 
 		GameServer()->CreateSound(m_Pos, SOUND_UPGRADE);
 		SendInventory();
@@ -641,10 +632,10 @@ void CCharacter::CombineItem(int Item1, int Item2)
 	int w1 = GetWeaponType(Item1);
 	int w2 = GetWeaponType(Item2);
 
-	int p1_1 = GetPart(w1, 0);
-	int p1_2 = GetPart(w1, 1);
-	int p2_1 = GetPart(w2, 0);
-	int p2_2 = GetPart(w2, 1);
+	int p1_1 = GetPart(w1, GROUP_PART1);
+	int p1_2 = GetPart(w1, GROUP_PART2);
+	int p2_1 = GetPart(w2, GROUP_PART1);
+	int p2_2 = GetPart(w2, GROUP_PART2);
 
 	if (!p1_1 || !p1_2)
 	{
@@ -694,10 +685,10 @@ void CCharacter::TakePart(int Item1, int Slot, int Item2)
 	if (IsStaticWeapon(w1) || IsStaticWeapon(w2))
 		return;
 
-	int p1_1 = GetPart(w1, 0);
-	int p1_2 = GetPart(w1, 1);
-	int p2_1 = GetPart(w2, 0);
-	int p2_2 = GetPart(w2, 1);
+	int p1_1 = GetPart(w1, GROUP_PART1);
+	int p1_2 = GetPart(w1, GROUP_PART2);
+	int p2_1 = GetPart(w2, GROUP_PART1);
+	int p2_2 = GetPart(w2, GROUP_PART2);
 
 	if (Slot == 0)
 	{
@@ -1267,7 +1258,7 @@ void CCharacter::GiveStartWeapon()
 	}
 	if (g_Config.m_SvLaserWeapon)
 	{
-		m_apWeapon[w++] = GameServer()->NewWeapon(GetModularWeapon(3, 3));
+		m_apWeapon[w++] = GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE1, SW_GRENADE1));
 	}
 }
 

@@ -2443,8 +2443,8 @@ void CRenderTools::RenderWeapon(int Weapon, vec2 Pos, vec2 Dir, float Size, bool
 	
 	
 	// modular weapons
-	int Part1 = GetPart(Weapon, 0)-1;
-	int Part2 = GetPart(Weapon, 1)-1;
+	int Part1 = GetPart(Weapon, GROUP_PART1)-1;
+	int Part2 = GetPart(Weapon, GROUP_PART2)-1;
 	
 	//if (Part1 < 0 || Part2 < 0)
 	//	return;

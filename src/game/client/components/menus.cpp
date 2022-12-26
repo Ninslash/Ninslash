@@ -550,7 +550,7 @@ int CMenus::RenderMenubar(CUIRect r)
 			Box.VSplitLeft(30.0f, 0, &Box);
 		}
 
-		if (m_ActivePage != PAGE_SETTINGS)
+		if (m_ActivePage != PAGE_SETTINGS && m_ActivePage != PAGE_SERVER)
 		{
 			Box.VSplitLeft(100.0f, &Button, &Box);
 			static int s_InternetButton=0;
@@ -854,6 +854,15 @@ void CMenus::RenderFront(CUIRect MainView)
 		ServerBrowser()->Refresh(IServerBrowser::TYPE_INTERNET);
 		g_Config.m_UiPage = PAGE_INTERNET;
 	}
+
+	TabBar.HSplitTop(10, &Button, &TabBar);
+	TabBar.HSplitTop(30, &Button, &TabBar);
+	static int s_SrvButton=0;
+	if(DoButton_Menu(&s_SrvButton, Localize("Start Local Server"), 0, &Button))
+	{
+		ServerBrowser()->Refresh(IServerBrowser::TYPE_LAN);
+		g_Config.m_UiPage = PAGE_SERVER;
+	}
 	
 	TabBar.HSplitTop(10, &Button, &TabBar);
 	TabBar.HSplitTop(30, &Button, &TabBar);
@@ -980,8 +989,8 @@ int CMenus::Render()
 			RenderServerbrowser(MainView);
 		else if(g_Config.m_UiPage == PAGE_LAN)
 			RenderServerbrowser(MainView);
-		/*else if(g_Config.m_UiPage == PAGE_SERVER)
-			ServerCreatorProcess(MainView);*/
+		else if(g_Config.m_UiPage == PAGE_SERVER)
+			ServerCreatorProcess(MainView);
 		else if(g_Config.m_UiPage == PAGE_DEMOS)
 			RenderDemoList(MainView);
 		else if(g_Config.m_UiPage == PAGE_FAVORITES)

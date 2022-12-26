@@ -39,7 +39,7 @@ void CAIbunny1::OnCharacterSpawn(CCharacter *pChr)
 		
 	if (m_Skin == SKIN_FOXY1)
 	{
-		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(4, 1), 2)));
+		pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GRENADE2, SW_GUN1), 2)));
 		pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_SHIELD)));
 		
 		pChr->SetHealth(80+min(Level*5.0f, 320.0f));
@@ -49,9 +49,9 @@ void CAIbunny1::OnCharacterSpawn(CCharacter *pChr)
 	else if (m_Skin == SKIN_BUNNY3)
 	{
 		if (frandom() < 0.5f)
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 3)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GRENADE1)));
 		else
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(3, 1)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE1, SW_GUN1)));
 		
 		pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_SHIELD)));
 		
@@ -62,9 +62,9 @@ void CAIbunny1::OnCharacterSpawn(CCharacter *pChr)
 	else if (m_Skin == SKIN_BUNNY4)
 	{
 		if (frandom() < 0.5f)
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(6, 6)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_BAZOOKA, SW_BAZOOKA)));
 		else
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(6, 7)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_BAZOOKA, SW_BOUNCER)));
 		
 		m_AttackOnDamage = true;
 		
@@ -79,9 +79,9 @@ void CAIbunny1::OnCharacterSpawn(CCharacter *pChr)
 	else if (m_Skin == SKIN_BUNNY2)
 	{
 		if (frandom() < 0.5f)
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 4)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GRENADE2)));
 		else
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(5, 6)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE3, SW_BAZOOKA)));
 		
 		pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GRENADE2)));
 		pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_SHIELD)));
@@ -93,9 +93,9 @@ void CAIbunny1::OnCharacterSpawn(CCharacter *pChr)
 	else
 	{
 		if (frandom() < 0.5f)
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 4)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GRENADE2)));
 		else
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(5, 6)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE3, SW_BAZOOKA)));
 		
 		pChr->SetHealth(40+min(Level*3.0f, 220.0f));
 	}

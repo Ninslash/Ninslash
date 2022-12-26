@@ -77,7 +77,7 @@ void CWeapons::RenderWeapon(const CNetObj_Weapon *pPrev, const CNetObj_Weapon *p
 	}
 	
 	if (GetStaticType(pCurrent->m_WeaponType) == SW_BALL)
-		ChargeLevel = 0;
+		ChargeLevel = 3;
 		
 	//Graphics()->ShaderBegin(SHADER_COLORSWAP, 1.0f, 0.0f, ChargeLevel);
 	RenderTools()->SetShadersForWeapon(pCurrent->m_WeaponType, ChargeLevel);

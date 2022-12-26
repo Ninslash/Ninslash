@@ -138,11 +138,11 @@ void CGameControllerBase::OnCharacterSpawn(CCharacter *pChr, bool RequestAI)
 			{
 				case 1:
 					if (frandom() < 0.7f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GUN1)));
-					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 1)));
+					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GUN1)));
 					break;
 				
 				case 2:
-					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(3, 1)));
+					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE1, SW_GUN1)));
 					else
 					{
 						pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GUN2)));
@@ -151,35 +151,35 @@ void CGameControllerBase::OnCharacterSpawn(CCharacter *pChr, bool RequestAI)
 					break;
 				
 				case 3:
-					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(5, 6)));
-					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(5, 7)));
+					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE3, SW_BAZOOKA)));
+					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE3, SW_BOUNCER)));
 					break;
 					
 				case 4:
-					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 1)));
-					else if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(3, 4)));
-					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(3, 2)));
+					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GUN1)));
+					else if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE1, SW_GRENADE2)));
+					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GRENADE1, SW_GUN2)));
 					break;
 					
 				case 5:
 					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_CHAINSAW)));
-					else if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 2)));
-					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 4)));
+					else if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GUN2)));
+					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GRENADE2)));
 					if (frandom() < 0.2f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GRENADE2)));
 					break;
 					
 				case 6:
 					if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetStaticWeapon(SW_CLUSTER), 1)));
 					else if (frandom() < 0.5f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_BOUNCER)));
-					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(1, 1), 2)));
+					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GUN1, SW_GUN1), 2)));
 					if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GRENADE1)));
 					if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_SHIELD)));
 					break;
 					
 				case 7:
-					if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(4, 3), 3)));
-					if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(6, 7)));
-					else if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(4, 4), 3)));
+					if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GRENADE2, SW_GRENADE1), 3)));
+					if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_BAZOOKA, SW_BOUNCER)));
+					else if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetChargedWeapon(GetModularWeapon(SW_GRENADE2, SW_GRENADE2), 3)));
 					else if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_FLAMER)));
 					else				  pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_BAZOOKA)));
 					if (frandom() < 0.3f) pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GRENADE1)));
@@ -191,7 +191,7 @@ void CGameControllerBase::OnCharacterSpawn(CCharacter *pChr, bool RequestAI)
 			};
 			
 			/*
-			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(1, 1)));
+			pChr->GiveWeapon(GameServer()->NewWeapon(GetModularWeapon(SW_GUN1, SW_GUN1)));
 			pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GRENADE1)));
 			pChr->GiveWeapon(GameServer()->NewWeapon(GetStaticWeapon(SW_GRENADE1)));
 			*/

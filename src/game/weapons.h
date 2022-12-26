@@ -21,19 +21,19 @@ enum PlayerItems
 enum WeaponBits
 {
 	// 4 first bits of weapon int are flags / statuses, 5 in case of droids
-	BIT_WEAPON = 1<<0,
-	BIT_TURRET = 1<<1,
-	BIT_BUILDING = 1<<2,
-	BIT_STATICWEAPON = 1<<3,
-	BIT_DROID = 1<<3,
-	BIT_ONDEATH = 1<<4,
-	
+	BIT_WEAPON = 1 << 0,
+	BIT_TURRET = 1 << 1,
+	BIT_BUILDING = 1 << 2,
+	BIT_STATICWEAPON = 1 << 3,
+	BIT_DROID = 1 << 3,
+	BIT_ONDEATH = 1 << 4,
+
 	// game / world
 	WEAPON_NONE = 0,
-	_WEAPON_GAME = 1<<1,
-	_WEAPON_WORLD = 1<<2,
-	WEAPON_ACID = 1<<3,
-	
+	_WEAPON_GAME = 1 << 1,
+	_WEAPON_WORLD = 1 << 2,
+	WEAPON_ACID = 1 << 3,
+
 	// static / non-modular weapons - needs to have the sprites in same order
 	SW_TOOL = 0, // Repair tool
 	SW_GUN1,
@@ -43,47 +43,48 @@ enum WeaponBits
 	SW_GRENADE3, // Supply grenade
 	SW_BAZOOKA,
 	SW_BOUNCER,
-	SW_CHAINSAW, // Chainsaw
-	SW_FLAMER, // Fire flamer
-	SW_UPGRADE, // Weapon upgrade
-	SW_SHIELD, // Energy shield
-	SW_RESPAWNER, // Respawner device
-	SW_MASK1, // Mask of regeneration
-	SW_MASK2, // Mask of speed
-	SW_MASK3, // Mask of protection
-	SW_MASK4, // Mask of plenty
-	SW_MASK5, // Mask of melee
-	SW_INVIS, // Invisibility device
+	SW_CHAINSAW,	// Chainsaw
+	SW_FLAMER,		// Fire flamer
+	SW_UPGRADE,		// Weapon upgrade
+	SW_SHIELD,		// Energy shield
+	SW_RESPAWNER,	// Respawner device
+	SW_MASK1,		// Mask of regeneration
+	SW_MASK2,		// Mask of speed
+	SW_MASK3,		// Mask of protection
+	SW_MASK4,		// Mask of plenty
+	SW_MASK5,		// Mask of melee
+	SW_INVIS,		// Invisibility device
 	SW_ELECTROWALL, // Electrowall
-	SW_AREASHIELD, // Area Shield
-	SW_SYRINGE, // The Cure
+	SW_AREASHIELD,	// Area Shield
+	SW_SYRINGE,		// The Cure
 	SW_CLUSTER,
 	SW_SHURIKEN,
 	SW_CLAW, // Zombie claw
 	SW_BOMB, // Bomb (for destroying reactors)
 	SW_BALL,
 	NUM_SW,
-	
-	
+
 	// weapon rendering types
-	WRT_NONE=0,
+	WRT_NONE = 0,
 	WRT_WEAPON1, // rifles, shotguns etc.
 	WRT_WEAPON2, // gun
 	WRT_ITEM1,
 	WRT_MELEE,
 	WRT_MELEESMALL,
 	WRT_SPIN,
-	
-	// weapon firing types
-	WFT_NONE=0,
-	WFT_MELEE, // swords
-	WFT_PROJECTILE, // rifles, shotguns etc.
-	WFT_CHARGE, // gun 2 & charge weapons
-	WFT_HOLD, // chainsaw & flamer
-	WFT_THROW, // grenades
-	WFT_ACTIVATE // some items
-};
 
+	// weapon firing types
+	WFT_NONE = 0,
+	WFT_MELEE,		// swords
+	WFT_PROJECTILE, // rifles, shotguns etc.
+	WFT_CHARGE,		// gun 2 & charge weapons
+	WFT_HOLD,		// chainsaw & flamer
+	WFT_THROW,		// grenades
+	WFT_ACTIVATE,	// some items
+
+	GROUP_PART1 = 0,
+	GROUP_PART2,
+};
 
 static const char *s_TipText[NUM_SW] = {
 	"Repair tool",
@@ -112,33 +113,91 @@ static const char *s_TipText[NUM_SW] = {
 	"",
 	"Zombie claw",
 	"Bomb (for destroying reactors)",
-	""
-};
- 
+	""};
 
 #define WEAPON_GAME_SIZE 15
 
-inline const bool IsWeapon(int Weapon) { return (Weapon & BIT_WEAPON) ? true : false; }
-inline const bool IsTurret(int Weapon) { return (IsWeapon(Weapon) && (Weapon & BIT_TURRET)) ? true : false; }
-inline const bool IsBuilding(int Weapon) { return (!IsWeapon(Weapon) && (Weapon & BIT_BUILDING)) ? true : false; }
-inline const bool IsDroid(int Weapon) { return (!IsWeapon(Weapon) && (Weapon & BIT_DROID)) ? true : false; }
-inline const bool IsStaticWeapon(int Weapon) { return (IsWeapon(Weapon) && (Weapon & BIT_STATICWEAPON)) ? true : false; }
-inline bool const IsModularWeapon(int Weapon) { return (IsWeapon(Weapon) && !(Weapon & BIT_STATICWEAPON)) ? true : false; }
+inline const bool IsWeapon(int Weapon)
+{
+	return (Weapon & BIT_WEAPON) ? true : false;
+}
 
-inline const int GetPart(int Weapon, int Group){ return (Weapon & (15<<(4+Group*4)))>>(4+Group*4); }
-inline const int GetModularWeapon(int Part1, int Part2){ return (!Part1 && !Part2) ? 0 : (Part2<<8 | Part1<<4 | BIT_WEAPON); }
-inline const int GetStaticWeapon(int Weapon){ return (Weapon<<4 | BIT_STATICWEAPON | BIT_WEAPON); }
-inline const int GetStaticType(int Weapon){ return IsStaticWeapon(Weapon) ? 255 & (Weapon>>4) : 0; }
+inline const bool IsTurret(int Weapon)
+{
+	return (IsWeapon(Weapon) && (Weapon & BIT_TURRET)) ? true : false;
+}
 
-inline const int GetChargedWeapon(int Weapon, int Charge){ return (Weapon & (15<<4 | 15<<8 | 15)) | Charge<<12; }
-inline const int GetWeaponCharge(int Weapon){ return (Weapon & (15<<12))>>12; }
+inline const bool IsBuilding(int Weapon)
+{
+	return (!IsWeapon(Weapon) && (Weapon & BIT_BUILDING)) ? true : false;
+}
 
-inline const bool IsOnDeath(int Weapon) { return Weapon & BIT_ONDEATH ? true : false; }
+inline const bool IsDroid(int Weapon)
+{
+	return (!IsWeapon(Weapon) && (Weapon & BIT_DROID)) ? true : false;
+}
 
-inline const int GetBuildingType(int Weapon) { return IsBuilding(Weapon) ? (Weapon & (1023<<6))>>6 : 0; }
-inline const int GetBuildingWeapon(int Building) { return BIT_BUILDING | Building<<6; }
-inline const int GetDroidType(int Weapon) { return IsDroid(Weapon) ? (Weapon & (1023<<6))>>6 : 0; }
-inline const int GetDroidWeapon(int Droid, bool OnDeath = false) { return BIT_DROID | (OnDeath ? BIT_ONDEATH : 0) | Droid<<6; }
+inline const bool IsStaticWeapon(int Weapon)
+{
+	return (IsWeapon(Weapon) && (Weapon & BIT_STATICWEAPON)) ? true : false;
+}
+
+inline bool const IsModularWeapon(int Weapon)
+{
+	return (IsWeapon(Weapon) && !(Weapon & BIT_STATICWEAPON)) ? true : false;
+}
+
+inline const int GetPart(int Weapon, int Group)
+{
+	return (Weapon & (15 << (4 + Group * 4))) >> (4 + Group * 4);
+}
+
+inline const int GetModularWeapon(int Part1, int Part2)
+{
+	return (!Part1 && !Part2) ? 0 : (Part2 << 8 | Part1 << 4 | BIT_WEAPON);
+}
+inline const int GetStaticWeapon(int Weapon)
+
+{
+	return (Weapon << 4 | BIT_STATICWEAPON | BIT_WEAPON);
+}
+inline const int GetStaticType(int Weapon)
+{
+
+	return IsStaticWeapon(Weapon) ? 255 & (Weapon >> 4) : 0;
+}
+
+inline const int GetChargedWeapon(int Weapon, int Charge)
+{
+	return (Weapon & (15 << 4 | 15 << 8 | 15)) | Charge << 12;
+}
+
+inline const int GetWeaponCharge(int Weapon)
+{
+	return (Weapon & (15 << 12)) >> 12;
+}
+
+inline const bool IsOnDeath(int Weapon)
+{
+	return Weapon & BIT_ONDEATH ? true : false;
+}
+
+inline const int GetBuildingType(int Weapon)
+{
+	return IsBuilding(Weapon) ? (Weapon & (1023 << 6)) >> 6 : 0;
+}
+inline const int GetBuildingWeapon(int Building)
+{
+	return BIT_BUILDING | Building << 6;
+}
+inline const int GetDroidType(int Weapon)
+{
+	return IsDroid(Weapon) ? (Weapon & (1023 << 6)) >> 6 : 0;
+}
+inline const int GetDroidWeapon(int Droid, bool OnDeath = false)
+{
+	return BIT_DROID | (OnDeath ? BIT_ONDEATH : 0) | Droid << 6;
+}
 
 const bool ValidForTurret(int Weapon);
 

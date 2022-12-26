@@ -1437,11 +1437,11 @@ void CEffects::Explosion(vec2 Pos, int Weapon)
 	}
 	
 	// weapons
-	int Part1 = GetPart(Weapon, 0);
-	//int Part2 = GetPart(Weapon, 1);
+	int Part1 = GetPart(Weapon, GROUP_PART1);
+	//int Part2 = GetPart(Weapon, GROUP_PART2);
 
 	// launcher
-	if (Part1 == 2)
+	if (Part1 == SW_GUN2)
 	{
 		// add explosion
 		CParticle p;
@@ -1478,7 +1478,7 @@ void CEffects::Explosion(vec2 Pos, int Weapon)
 	}
 	
 	// basic / rifle
-	if (Part1 == 1)
+	if (Part1 == SW_GUN1)
 	{
 		// add sparks
 		for(int i = 0; i < 6*GetProjectileSize(Weapon); i++)
@@ -1499,7 +1499,7 @@ void CEffects::Explosion(vec2 Pos, int Weapon)
 	}
 	
 	// sniper
-	if (Part1 == 4)
+	if (Part1 == SW_GRENADE2)
 	{
 		for(int i = 0; i < 4*GetProjectileSize(Weapon); i++)
 		{
@@ -1521,7 +1521,7 @@ void CEffects::Explosion(vec2 Pos, int Weapon)
 	}
 	
 	// electro
-	if (Part1 == 3)
+	if (Part1 == SW_GRENADE1)
 	{
 		// add sparks
 		for(int i = 0; i < 6*GetProjectileSize(Weapon); i++)

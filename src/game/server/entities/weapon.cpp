@@ -340,7 +340,7 @@ bool CWeapon::Fire(float *pKnockback)
 
 int CWeapon::Reflect()
 {
-	if (m_TriggerTick && m_TriggerTick > Server()->Tick() && IsModularWeapon(m_WeaponType) && GetPart(m_WeaponType, 0) == 6)
+	if (m_TriggerTick && m_TriggerTick > Server()->Tick() && IsModularWeapon(m_WeaponType) && GetPart(m_WeaponType, GROUP_PART1) == SW_BAZOOKA)
 		return 80;
 	
 	return 0;
@@ -420,7 +420,7 @@ bool CWeapon::ReleaseCharge(float *pKnockback)
 	{
 		if (GetWeaponFiringType(m_WeaponType) == WFT_CHARGE)
 		{
-			if (IsModularWeapon(m_WeaponType) && GetPart(m_WeaponType, 0) == 1)
+			if (IsModularWeapon(m_WeaponType) && GetPart(m_WeaponType, GROUP_PART1) == SW_GUN1)
 			{
 				m_TriggerCount = GetWeaponCharge(m_WeaponType);
 				

@@ -265,9 +265,9 @@ void CInventory::DrawCrafting(int Type, vec2 Pos, float Size)
 
 	if (!IsModularWeapon(Type))
 		return;
-	int Part1 = GetPart(Type, 0) - 1;
+	int Part1 = GetPart(Type, GROUP_PART1) - 1;
 
-	int Part2 = GetPart(Type, 1) - 1;
+	int Part2 = GetPart(Type, GROUP_PART2) - 1;
 
 	Pos.x -= Size / 4;
 
@@ -320,7 +320,7 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 	if (m_Tab == 1)
 	{
 		float s = 16 * s_Fade * (m_Scale * 0.75f + 0.25f);
-		int w = GetModularWeapon(1, 4);
+		int w = GetModularWeapon(SW_GUN1, SW_GRENADE2);
 		RenderTools()->SetShadersForWeapon(w);
 		RenderTools()->RenderWeapon(w, Tab1Pos, vec2(1, 0), s, true);
 		Graphics()->ShaderEnd();
@@ -368,7 +368,7 @@ void CInventory::DrawInventory(vec2 Pos, vec2 Size)
 	if (m_Tab == 0)
 	{
 		float s = 16 * s_Fade * (m_Scale * 0.75f + 0.25f);
-		int w = GetModularWeapon(1, 4);
+		int w = GetModularWeapon(SW_GUN1, SW_GRENADE2);
 		RenderTools()->SetShadersForWeapon(w);
 		RenderTools()->RenderWeapon(w, Tab1Pos, vec2(1, 0), s, true);
 		Graphics()->ShaderEnd();
@@ -1405,7 +1405,7 @@ void CInventory::Swap(int Item1, int Item2)
 	if (Item1 < 0 || Item2 < 0 || Item1 >= NUM_SLOTS || Item2 >= NUM_SLOTS)
 		return;
 
-	std::swap(CustomStuff()->m_aItem[Item1],CustomStuff()->m_aItem[Item2]);
+	std::swap(CustomStuff()->m_aItem[Item1], CustomStuff()->m_aItem[Item2]);
 
 	CNetMsg_Cl_InventoryAction Msg;
 	Msg.m_Type = INVENTORYACTION_SWAP;
@@ -1428,10 +1428,10 @@ void CInventory::TakePart(int Item1, int Slot, int Item2)
 	if (IsStaticWeapon(w1) || IsStaticWeapon(w2))
 		return;
 
-	int p1_1 = GetPart(w1, 0);
-	int p1_2 = GetPart(w1, 1);
-	int p2_1 = GetPart(w2, 0);
-	int p2_2 = GetPart(w2, 1);
+	int p1_1 = GetPart(w1, GROUP_PART1);
+	int p1_2 = GetPart(w1, GROUP_PART2);
+	int p2_1 = GetPart(w2, GROUP_PART1);
+	int p2_2 = GetPart(w2, GROUP_PART2);
 
 	if (Slot == 0)
 	{
@@ -1478,10 +1478,10 @@ void CInventory::Combine(int Item1, int Item2)
 	if (IsStaticWeapon(w1) || IsStaticWeapon(w2))
 		return;
 
-	int p1_1 = GetPart(w1, 0);
-	int p1_2 = GetPart(w1, 1);
-	int p2_1 = GetPart(w2, 0);
-	int p2_2 = GetPart(w2, 1);
+	int p1_1 = GetPart(w1, GROUP_PART1);
+	int p1_2 = GetPart(w1, GROUP_PART2);
+	int p2_1 = GetPart(w2, GROUP_PART1);
+	int p2_2 = GetPart(w2, GROUP_PART2);
 
 	if (!p1_1 || !p1_2)
 	{

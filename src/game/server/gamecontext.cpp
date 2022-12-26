@@ -535,7 +535,7 @@ void CGameContext::CreateMeleeHit(int DamageOwner, int Weapon, float Dmg, vec2 P
 				else if (GetWeaponRenderType(Weapon) != WRT_SPIN)
 				{
 					// hammer
-					if (GetPart(Weapon, 1) == 9)
+					if (GetPart(Weapon, GROUP_PART2) == SW_FLAMER)
 						CreateEffect(FX_BLOOD3, (Pos + pTarget->m_Pos) / 2.0f + vec2(0, -4));
 					// swords
 					else
@@ -670,7 +670,7 @@ void CGameContext::CreateProjectile(int DamageOwner, int Weapon, int Charge, vec
 	// sword hit
 	if (IsModularWeapon(Weapon))
 	{
-		if (GetPart(Weapon, 0) > 4)
+		if (GetPart(Weapon, GROUP_PART1) > SW_GRENADE2)
 		{
 			CreateMeleeHit(DamageOwner, Weapon, Dmg, Pos, Direction, WeaponPos);
 			//CreateMeleeHit(DamageOwner, Weapon, Dmg, Pos+GetProjectileOffset(Weapon)*Direction, Direction);

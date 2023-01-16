@@ -48,7 +48,7 @@ public:
 	
 	void Init(int CID);
 
-	void SaveData();	
+	void SaveData();
 	void NewRound();
 	
 	bool ForceRespawn(vec2 Pos);

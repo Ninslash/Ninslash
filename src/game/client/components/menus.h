@@ -122,7 +122,6 @@ class CMenus : public CComponent
 		PAGE_INTERNET,
 		PAGE_LAN,
 		PAGE_FAVORITES,
-		PAGE_SERVER,
 		PAGE_DEMOS,
 		PAGE_SETTINGS,
 		PAGE_CUSTOMIZE,
@@ -247,10 +246,6 @@ class CMenus : public CComponent
 	// found in menus_demo.cpp
 	void RenderDemoPlayer(CUIRect MainView);
 	void RenderDemoList(CUIRect MainView);
-
-	// found in menus_server.cpp
-	void ServerCreatorInit();
-	void ServerCreatorProcess(CUIRect MainView);
 	
 	// found in menus_ingame.cpp
 	void RenderGame(CUIRect MainView);
@@ -291,6 +286,9 @@ class CMenus : public CComponent
 	
 	void SaveSkin();
 	
+	bool m_ServerStarted;
+	void StartServer();
+	void StopServer();
 public:
 	void RenderBackground();
 

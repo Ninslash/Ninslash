@@ -336,7 +336,7 @@ void CCharacter::SaveData()
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "Character", aBuf);
 }
 
-bool CCharacter::GiveWeapon(class CWeapon *pWeapon)
+bool CCharacter::GiveWeapon(CWeapon *pWeapon)
 {
 	if (!pWeapon)
 		return false;

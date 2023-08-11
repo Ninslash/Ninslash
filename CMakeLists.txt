@@ -257,10 +257,10 @@ find_package(Freetype)
 find_package(Git)
 find_package(Pnglite)
 find_package(PythonInterp)
-find_package(SDL)
+find_package(SDL2)
 find_package(Threads)
 find_package(Wavpack)
-
+find_package(GLEW REQUIRED)
 
 if(TARGET_OS AND TARGET_OS STREQUAL "mac")
   find_program(DMG dmg)
@@ -302,7 +302,7 @@ if(TARGET_OS AND TARGET_OS STREQUAL "mac")
 endif()
 show_dependency_status("Pnglite" PNGLITE)
 show_dependency_status("PythonInterp" PYTHONINTERP)
-show_dependency_status("SDL" SDL)
+show_dependency_status("SDL2" SDL2)
 show_dependency_status("Wavpack" WAVPACK)
 show_dependency_status("Zlib" ZLIB)
 
@@ -311,10 +311,11 @@ if(NOT(PYTHONINTERP_FOUND))
 endif()
 
 if(CLIENT AND NOT(FREETYPE_FOUND))
-  message(SEND_ERROR "You must install Freetype to compile the Teeworlds client")
+  message(SEND_ERROR "You must install Freetype to compile the Ninslash client")
 endif()
-if(CLIENT AND NOT(SDL_FOUND))
-  message(SEND_ERROR "You must install SDL to compile the Teeworlds client")
+
+if(CLIENT AND NOT(SDL2_FOUND))
+  message(SEND_ERROR "You must install SDL2 to compile the Ninslash client")
 endif()
 
 if(TARGET_OS STREQUAL "windows")
@@ -345,10 +346,14 @@ endif()
 # DEPENDENCY COMPILATION
 ########################################################################
 
+set_glob(DEP_JSON_SRC GLOB src/engine/external/json-parser json.c json.h)
+add_library(json EXCLUDE_FROM_ALL OBJECT ${DEP_JSON_SRC})
+
 set_glob(DEP_MD5_SRC GLOB src/engine/external/md5 md5.c md5.h)
 add_library(md5 EXCLUDE_FROM_ALL OBJECT ${DEP_MD5_SRC})
 
-list(APPEND TARGETS_DEP md5)
+list(APPEND TARGETS_DEP json md5)
+set(DEP_JSON $<TARGET_OBJECTS:json>)
 set(DEP_MD5 $<TARGET_OBJECTS:md5>)
 
 ########################################################################
@@ -358,7 +363,7 @@ set(DEP_MD5 $<TARGET_OBJECTS:md5>)
 file(COPY data DESTINATION .)
 set(COPY_FILES
   ${FREETYPE_COPY_FILES}
-  ${SDL_COPY_FILES}
+  ${SDL2_COPY_FILES}
 )
 file(COPY ${COPY_FILES} DESTINATION .)
 
@@ -459,7 +464,7 @@ set(GAME_GENERATED_SHARED
   src/game/generated/protocol.h
 )
 
-set(DEPS ${DEP_MD5} ${ZLIB_DEP})
+set(DEPS ${DEP_JSON} ${DEP_MD5} ${ZLIB_DEP})
 
 # Libraries
 set(LIBS ${CMAKE_THREAD_LIBS_INIT} ${ZLIB_LIBRARIES} ${PLATFORM_LIBS})
@@ -477,7 +482,7 @@ list(APPEND TARGETS_OWN engine-shared game-shared)
 if(CLIENT)
   # Sources
   file(GLOB ENGINE_CLIENT "src/engine/client/*.cpp" "src/engine/client/*.h")
-  file(GLOB_RECURSE GAME_CLIENT "src/game/client/*.cpp" "src/game/client/*.h")
+  file(GLOB_RECURSE GAME_CLIENT "src/game/client/*.cpp" "src/game/client/*.h" "src/game/client/components/*.cpp" "src/game/client/components/*.h" "src/game/client/customstuff/*.cpp" "src/game/client/customstuff/*.h")
   file(GLOB GAME_EDITOR "src/game/editor/*.cpp" "src/game/editor/*.h")
   set(GAME_GENERATED_CLIENT
     src/game/generated/client_data.cpp
@@ -492,7 +497,7 @@ if(CLIENT)
     ${LIBS}
     ${FREETYPE_LIBRARIES}
     ${PNGLITE_LIBRARIES}
-    ${SDL_LIBRARIES}
+    ${SDL2_LIBRARIES}
     ${WAVPACK_LIBRARIES}
     ${PLATFORM_CLIENT_LIBS}
   )
@@ -514,11 +519,12 @@ if(CLIENT)
     $<TARGET_OBJECTS:game-shared>
   )
   target_link_libraries(${TARGET_CLIENT} ${LIBS_CLIENT})
+  target_link_libraries(${TARGET_CLIENT} PRIVATE GLEW::glew)
 
   target_include_directories(${TARGET_CLIENT} PRIVATE
     ${FREETYPE_INCLUDE_DIRS}
     ${PNGLITE_INCLUDE_DIRS}
-    ${SDL_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
     ${WAVPACK_INCLUDE_DIRS}
   )
 
@@ -551,7 +557,7 @@ endif()
 file(GLOB_RECURSE ENGINE_SERVER "src/engine/server/*.cpp" "src/engine/server/*.h")
 file(GLOB_RECURSE GAME_SERVER "src/game/server/*.cpp" "src/game/server/*.h")
 file(GLOB LOCALIZED_SERVER "src/teeuniverses/components/*.cpp" "src/teeuniverses/components/*.h" "src/teeuniverses/tl/*.h" "src/teeuniverses/system/*.h")
-set(GAME_GENERATED_SERVER src/generated/server_data.cpp src/generated/server_data.h)
+set(GAME_GENERATED_SERVER src/game/generated/server_data.cpp src/game/generated/server_data.h)
 set(SERVER_SRC ${ENGINE_SERVER} ${GAME_SERVER} ${GAME_GENERATED_SERVER} ${LOCALIZED_SERVER})
 
 set(SERVER_SRC ${ENGINE_SERVER} ${GAME_SERVER} ${GAME_GENERATED_SERVER})
@@ -851,11 +857,7 @@ if(CLIENT AND (DMGTOOLS_FOUND OR HDIUTIL))
     # CLIENT
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/data ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/Resources/data
     COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/other/icons/${TARGET_CLIENT}.icns ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/Resources/
-    COMMAND ${CMAKE_COMMAND} -E copy bundle/client/Info.plist ${PROJECT_SOURCE_DIR}/other/bundle/client/PkgInfo ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${TARGET_CLIENT}> ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/MacOS/
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/other/sdl/mac/lib64/SDL.framework ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/Frameworks/SDL.framework
-    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/other/freetype/mac/lib64/libfreetype.6.dylib ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/Frameworks/
-    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/scripts/darwin_change_dylib.py change --tools ${CMAKE_INSTALL_NAME_TOOL} ${CMAKE_OTOOL} ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/MacOS/${TARGET_CLIENT} SDL @executable_path/../Frameworks/SDL.framework/SDL
+    COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/scripts/darwin_change_dylib.py change --tools ${CMAKE_INSTALL_NAME_TOOL} ${CMAKE_OTOOL} ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/MacOS/${TARGET_CLIENT} SDL2 @executable_path/../Frameworks/SDL2.framework/SDL2
     COMMAND ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/scripts/darwin_change_dylib.py change --tools ${CMAKE_INSTALL_NAME_TOOL} ${CMAKE_OTOOL} ${DMG_TMPDIR}/${TARGET_CLIENT}.app/Contents/MacOS/${TARGET_CLIENT} libfreetype @executable_path/../Frameworks/libfreetype.6.dylib
 
     # SERVER

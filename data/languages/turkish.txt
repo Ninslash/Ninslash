@@ -690,6 +690,9 @@ Borderless window
 Bots
 == 
 
+Build menu
+== 
+
 Change color of
 == 
 
@@ -700,6 +703,9 @@ Chat & Misc.
 == 
 
 Customize
+== 
+
+Drop weapon
 == 
 
 Dynamic lighting
@@ -759,7 +765,31 @@ Head
 Heads
 == 
 
+Inventory
+== 
+
+Inventory roll
+== 
+
 Invisibility device
+== 
+
+Item slot 1
+== 
+
+Item slot 2
+== 
+
+Item slot 3
+== 
+
+Item slot 4
+== 
+
+Item slot 5
+== 
+
+Item slot 6
 == 
 
 Join server
@@ -832,6 +862,9 @@ Show only chat messages from friends
 == 
 
 Skin
+== 
+
+Slide / down
 == 
 
 Stop server

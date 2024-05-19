@@ -109,6 +109,9 @@ Borderless window
 Bots
 == 机器人
 
+Build menu
+== 建筑菜单
+
 Call vote
 == 发起投票
 
@@ -201,6 +204,9 @@ Downloading map
 
 Draw!
 == 平局!
+
+Drop weapon
+== 丢武器
 
 Dynamic Camera
 == 动态镜头
@@ -329,7 +335,7 @@ Hard block
 == 坚硬方块
 
 Has people playing
-== 有人在玩
+== 存在游玩的玩家
 
 Head
 == 头
@@ -338,7 +344,7 @@ Heads
 == 头部
 
 High Detail
-== 高细节
+== 显示地图细节
 
 Hook
 == 钩子
@@ -358,8 +364,32 @@ Internet
 Invalid Demo
 == 无效的回放
 
+Inventory
+== 物品栏
+
+Inventory roll
+== 滚动物品栏
+
 Invisibility device
 == 隐身科技
+
+Item slot 1
+== 物品1
+
+Item slot 2
+== 物品2
+
+Item slot 3
+== 物品3
+
+Item slot 4
+== 物品4
+
+Item slot 5
+== 物品5
+
+Item slot 6
+== 物品6
 
 Join blue
 == 加入蓝队
@@ -392,7 +422,7 @@ Lht.
 == 亮度
 
 Loading
-== 载入中
+== 加载中
 
 Local server
 == 本地服务器
@@ -461,13 +491,13 @@ Multi framebuffering (requires restart)
 == 多帧缓冲（需要重新启动游戏）
 
 Mute when not active
-== 不活动的时候静音
+== 在后台时静音
 
 Name
 == 名字
 
 Name plates size
-== 名字板尺寸
+== 昵称大小
 
 Netversion:
 == 网络协议版本
@@ -703,6 +733,9 @@ Skin
 Skins
 == 皮肤
 
+Slide / down
+== 滑铲/向下
+
 Sound
 == 声音
 
@@ -743,7 +776,7 @@ Strict gametype filter
 == 严格过滤游戏类型
 
 Sudden Death
-== 出乎意料的死亡
+== 决胜
 
 Supply grenade
 == 手榴弹
@@ -785,10 +818,10 @@ There's an unsaved map in the editor, you might want to save it before you quit 
 == 编辑器中的地图尚未保存, 或许你应该在退出游戏之前保存一下.
 
 Threaded rendering
-== 渲染线程
+== 多线程渲染
 
 Threaded sound loading
-== 音效线程加载中
+== 多线程音效加载
 
 Time limit
 == 时间限制

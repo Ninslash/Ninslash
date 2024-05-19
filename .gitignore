@@ -12,6 +12,8 @@ other/icons/*.res
 /freetype.dll
 /autoexec.cfg
 
+.vscode
+
 /crapnet*
 /dilate*
 /fake_server*

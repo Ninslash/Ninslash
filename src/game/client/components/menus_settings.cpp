@@ -1479,6 +1479,8 @@ static CKeyInfo gs_aKeys[] =
 	Localize("Pistol");Localize("Shotgun");Localize("Grenade");Localize("Rifle");Localize("Next weapon");Localize("Prev. weapon");
 	Localize("Vote yes");Localize("Vote no");Localize("Chat");Localize("Team chat");Localize("Show chat");Localize("Emoticon");
 	Localize("Spectator mode");Localize("Spectate next");Localize("Spectate previous");Localize("Console");Localize("Remote console");Localize("Screenshot");Localize("Scoreboard");Localize("Respawn");
+	Localize("Item slot 1");Localize("Item slot 2");Localize("Item slot 3");Localize("Item slot 4");Localize("Item slot 5");Localize("Item slot 6");
+	Localize("Inventory");Localize("Build menu");Localize("Slide / down");Localize("Drop weapon");Localize("Inventory roll");
 */
 
 const int g_KeyCount = sizeof(gs_aKeys) / sizeof(CKeyInfo);
@@ -1618,7 +1620,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 			TextRender()->Text(0, WeaponSettings.x, WeaponSettings.y, 14.0f*UI()->Scale(), Localize("Weapons & Items"), -1);
 
 			WeaponSettings.HSplitTop(14.0f+5.0f+10.0f, 0, &WeaponSettings);
-			UiDoGetButtons(6, 16, WeaponSettings);
+			UiDoGetButtons(6, 18, WeaponSettings);
 		}
 	}
 	else
@@ -1642,7 +1644,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 			TextRender()->Text(0, VotingSettings.x, VotingSettings.y, 14.0f*UI()->Scale(), Localize("Voting"), -1);
 
 			VotingSettings.HSplitTop(14.0f+5.0f+10.0f, 0, &VotingSettings);
-			UiDoGetButtons(16, 18, VotingSettings);
+			UiDoGetButtons(18, 20, VotingSettings);
 		}
 
 		// chat settings
@@ -1655,7 +1657,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 			TextRender()->Text(0, ChatSettings.x, ChatSettings.y, 14.0f*UI()->Scale(), Localize("Chat"), -1);
 
 			ChatSettings.HSplitTop(14.0f+5.0f+10.0f, 0, &ChatSettings);
-			UiDoGetButtons(18, 22, ChatSettings);
+			UiDoGetButtons(20, 24, ChatSettings);
 		}
 
 		// misc settings
@@ -1668,7 +1670,7 @@ void CMenus::RenderSettingsControls(CUIRect MainView)
 			TextRender()->Text(0, MiscSettings.x, MiscSettings.y, 14.0f*UI()->Scale(), Localize("Miscellaneous"), -1);
 
 			MiscSettings.HSplitTop(14.0f+5.0f+10.0f, 0, &MiscSettings);
-			UiDoGetButtons(21, 29, MiscSettings);
+			UiDoGetButtons(24, 31, MiscSettings);
 		}
 	}
 	

@@ -879,5 +879,38 @@ xbox 360 controller support
 
 ##### needs translation #####
 
+Build menu
+== 
+
+Drop weapon
+== 
+
+Inventory
+== 
+
+Inventory roll
+== 
+
+Item slot 1
+== 
+
+Item slot 2
+== 
+
+Item slot 3
+== 
+
+Item slot 4
+== 
+
+Item slot 5
+== 
+
+Item slot 6
+== 
+
+Slide / down
+== 
+
 ##### old translations #####
 
